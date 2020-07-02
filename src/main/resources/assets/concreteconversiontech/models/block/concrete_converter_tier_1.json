@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/cube_all",
+	"parent": "concreteconversiontech:block/concrete_converter",
 	"textures": {
-		"all": "concreteconversiontech:block/concrete_converter_tier_1"
+		"base": "minecraft:block/oak_planks"
 	}
 }
