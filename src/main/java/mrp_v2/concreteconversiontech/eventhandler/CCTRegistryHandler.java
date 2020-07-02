@@ -13,12 +13,12 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public class CCTRegistryHandler {
 
 	@SubscribeEvent
-	public static void registerBlocks(RegistryEvent.Register<Block> event) {
+	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		event.getRegistry().registerAll(new ConcreteConverterTier1());
 	}
 
 	@SubscribeEvent
-	public static void registerItems(RegistryEvent.Register<Item> event) {
+	public static void registerItems(final RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1.createBlockItem());
 	}
 }
