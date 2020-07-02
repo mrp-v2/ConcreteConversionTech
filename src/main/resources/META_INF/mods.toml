@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[32,)"
+[[mods]]
+	modId="concreteconversiontech"
+	version="1.16.1-1.0.0.0"
+	displayName="Redstone Quit"
+	#logoFile="ConcreteConversionTechLogo.png"
+	updateJSONURL="https://raw.githubusercontent.com/mrp-v2/ModUpdateFiles/master/ConcreteConversionTech.json"
+	issueTrackerURL="https://www.curseforge.com/minecraft/mc-mods/concrete-conversion-tech/issues"
+	displayURL="https://minecraft.curseforge.com/projects/concrete-conversion-tech"
+	authors="mrp_v2"
+	description='''Adds a way to exit the world with redstone.'''
+[[dependencies.concreteconversiontech]]
+    modId="forge"
+    mandatory=true
+    versionRange="[32,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.concreteconversiontech]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.1]"
+    ordering="NONE"
+    side="BOTH"
