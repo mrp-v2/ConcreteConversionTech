@@ -12,6 +12,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 abstract public class ConcreteConverterBase extends Block {
+	
+	public static final String ID_STEM = "concrete_converter_";
 
 	public ConcreteConverterBase(Properties properties, String blockID) {
 		super(properties);
