@@ -3,12 +3,12 @@ package mrp_v2.concreteconversiontech.config;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 
-import mrp_v2.concreteconversiontech.ConcreteConversionTech;
+import mrp_v2.concreteconversiontech.util.CCTConstants;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.config.ModConfig;
 
-public class ConcreteConversionTechConfig {
+public class CCTechConfig {
 
 	public static class Server {
 
@@ -19,7 +19,7 @@ public class ConcreteConversionTechConfig {
 		}
 	}
 
-	private static final String TRANSLATION_STEM = ConcreteConversionTech.TRANSLATION_STEM + "configgui.";
+	private static final String TRANSLATION_STEM = CCTConstants.TRANSLATION_STEM + "configgui.";
 
 	public static final ForgeConfigSpec SERVER_SPEC;
 	public static final Server SERVER;
@@ -33,7 +33,7 @@ public class ConcreteConversionTechConfig {
 	public static void onLoad(final ModConfig.Loading configEvent) {
 		// LogManager.getLogger().debug(FORGEMOD, "Loaded forge config file {}",
 		// configEvent.getConfig().getFileName());
-		LogManager.getLogger().debug("Loaded " + ConcreteConversionTech.DISPLAY_NAME + " config file {}",
+		LogManager.getLogger().debug("Loaded " + CCTConstants.DISPLAY_NAME + " config file {}",
 				configEvent.getConfig().getFileName());
 	}
 
@@ -42,6 +42,6 @@ public class ConcreteConversionTechConfig {
 		// LogManager.getLogger().debug(FORGEMOD, "Forge config just got changed on the
 		// file system!");
 		LogManager.getLogger()
-				.debug(ConcreteConversionTech.DISPLAY_NAME + " config just got changed on the file system!");
+				.debug(CCTConstants.DISPLAY_NAME + " config just got changed on the file system!");
 	}
 }
