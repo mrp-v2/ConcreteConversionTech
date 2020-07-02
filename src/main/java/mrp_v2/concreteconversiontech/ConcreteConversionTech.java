@@ -9,6 +9,7 @@ public class ConcreteConversionTech {
 
 	public static final String MODID = "concreteconversiontech";
 	public static final String TRANSLATION_STEM = "mrp_v2." + MODID + ".";
+	public static final String DISPLAY_NAME = "Concrete Conversion Tech";
 
 	public ConcreteConversionTech() {
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
