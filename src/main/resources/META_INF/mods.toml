@@ -3,13 +3,13 @@ loaderVersion="[32,)"
 [[mods]]
 	modId="concreteconversiontech"
 	version="1.16.1-1.0.0.0"
-	displayName="Redstone Quit"
+	displayName="Concrete Conversion Tech"
 	#logoFile="ConcreteConversionTechLogo.png"
 	updateJSONURL="https://raw.githubusercontent.com/mrp-v2/ModUpdateFiles/master/ConcreteConversionTech.json"
 	issueTrackerURL="https://www.curseforge.com/minecraft/mc-mods/concrete-conversion-tech/issues"
 	displayURL="https://minecraft.curseforge.com/projects/concrete-conversion-tech"
 	authors="mrp_v2"
-	description='''Adds a way to exit the world with redstone.'''
+	description='''Adds simple machines for automating conversion of concrete powder into concrete.'''
 [[dependencies.concreteconversiontech]]
     modId="forge"
     mandatory=true
