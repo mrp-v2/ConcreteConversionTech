@@ -30,6 +30,5 @@ abstract public class ConcreteConverterBase extends Block {
 		return new BlockItem(this,
 				new Item.Properties().addToolType(this.getHarvestTool(defaultState), this.getHarvestLevel(defaultState))
 						.group(CONCRETE_CONVERSION_TECH_ITEM_GROUP)).setRegistryName(this.getRegistryName());
-
 	}
 }
