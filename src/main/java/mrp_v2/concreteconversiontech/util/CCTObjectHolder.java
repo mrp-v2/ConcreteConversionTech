@@ -3,7 +3,6 @@ package mrp_v2.concreteconversiontech.util;
 import mrp_v2.concreteconversiontech.block.ConcreteConverterBase;
 import mrp_v2.concreteconversiontech.block.ConcreteConverterTier1;
 import net.minecraft.item.BlockItem;
-import net.minecraftforge.registries.ObjectHolder;
 
 public class CCTObjectHolder {
 
