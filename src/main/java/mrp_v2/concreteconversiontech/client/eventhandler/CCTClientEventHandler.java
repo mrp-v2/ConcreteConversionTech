@@ -9,8 +9,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@EventBusSubscriber(modid = CCTConstants.MODID, value = Dist.CLIENT)
-public class ClientEventHandler {
+@EventBusSubscriber(modid = CCTConstants.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+public class CCTClientEventHandler {
 
 	@SubscribeEvent
 	public static void clientSetup(final FMLClientSetupEvent event) {
