@@ -7,9 +7,10 @@ import net.minecraftforge.registries.ObjectHolder;
 
 public class CCTObjectHolder {
 
-	@ObjectHolder(CCTConstants.MODID + ":" + ConcreteConverterTier1.ID)
-	public static final ConcreteConverterBase CONCRETE_CONVERTER_TIER_1 = null;
-
-	@ObjectHolder(CCTConstants.MODID + ":" + ConcreteConverterTier1.ID)
-	public static final BlockItem CONCRETE_CONVERTER_TIER_1_ITEM = null;
+	public static final ConcreteConverterBase CONCRETE_CONVERTER_TIER_1;
+	public static final BlockItem CONCRETE_CONVERTER_TIER_1_ITEM;
+	static {
+		CONCRETE_CONVERTER_TIER_1 = new ConcreteConverterTier1();
+		CONCRETE_CONVERTER_TIER_1_ITEM = CONCRETE_CONVERTER_TIER_1.createBlockItem();
+	}
 }
