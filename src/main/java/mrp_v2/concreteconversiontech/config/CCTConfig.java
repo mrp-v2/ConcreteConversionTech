@@ -6,8 +6,10 @@ import org.apache.logging.log4j.LogManager;
 import mrp_v2.concreteconversiontech.util.CCTConstants;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.config.ModConfig;
 
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = CCTConstants.MODID)
 public class CCTConfig {
 
 	public static class Server {
