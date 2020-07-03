@@ -7,6 +7,6 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 	public static final String ID = ID_STEM + "tier_1";
 
 	public ConcreteConverterTileEntityTier1() {
-		super(CCTObjectHolder.CONCRETE_CONVERTER_TILE_ENTITY_TYPE_TIER_1);
+		super(CCTObjectHolder.CONCRETE_CONVERTER_TILE_ENTITY_TYPE_TIER_1, 16);
 	}
 }
