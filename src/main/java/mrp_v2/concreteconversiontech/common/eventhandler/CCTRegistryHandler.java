@@ -1,9 +1,10 @@
-package mrp_v2.concreteconversiontech.eventhandler;
+package mrp_v2.concreteconversiontech.common.eventhandler;
 
-import mrp_v2.concreteconversiontech.util.CCTConstants;
-import mrp_v2.concreteconversiontech.util.CCTObjectHolder;
+import mrp_v2.concreteconversiontech.common.util.CCTConstants;
+import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -19,5 +20,10 @@ public class CCTRegistryHandler {
 	@SubscribeEvent
 	public static void registerItems(final RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_ITEM);
+	}
+
+	@SubscribeEvent
+	public static void registerTileEntities(final RegistryEvent.Register<TileEntityType<?>> event) {
+		
 	}
 }
