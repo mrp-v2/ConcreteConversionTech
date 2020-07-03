@@ -14,16 +14,16 @@ public class CCTRegistryHandler {
 
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
-		event.getRegistry().registerAll(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1);
+		event.getRegistry().registerAll(CCTObjectHolder.CONCRETE_CONVERTER_BLOCK_TIER_1);
 	}
 
 	@SubscribeEvent
 	public static void registerItems(final RegistryEvent.Register<Item> event) {
-		event.getRegistry().registerAll(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_ITEM);
+		event.getRegistry().registerAll(CCTObjectHolder.CONCRETE_CONVERTER_BLOCK_TIER_1_ITEM);
 	}
 
 	@SubscribeEvent
 	public static void registerTileEntities(final RegistryEvent.Register<TileEntityType<?>> event) {
-		
+		event.getRegistry().register(CCTObjectHolder.CONCRETE_CONVERTER_TILE_ENTITY_TYPE_TIER_1);
 	}
 }
