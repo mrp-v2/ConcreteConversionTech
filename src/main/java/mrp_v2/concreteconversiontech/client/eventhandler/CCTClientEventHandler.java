@@ -1,7 +1,7 @@
 package mrp_v2.concreteconversiontech.client.eventhandler;
 
-import mrp_v2.concreteconversiontech.util.CCTConstants;
-import mrp_v2.concreteconversiontech.util.CCTObjectHolder;
+import mrp_v2.concreteconversiontech.common.util.CCTConstants;
+import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;

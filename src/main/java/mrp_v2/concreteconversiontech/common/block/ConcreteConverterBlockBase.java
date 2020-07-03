@@ -1,7 +1,7 @@
-package mrp_v2.concreteconversiontech.block;
+package mrp_v2.concreteconversiontech.common.block;
 
-import mrp_v2.concreteconversiontech.util.CCTConstants;
-import mrp_v2.concreteconversiontech.util.CCTObjectHolder;
+import mrp_v2.concreteconversiontech.common.util.CCTConstants;
+import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -15,18 +15,18 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
 
-abstract public class ConcreteConverterBase extends Block {
+abstract public class ConcreteConverterBlockBase extends Block {
 
 	public static final String ID_STEM = "concrete_converter_";
 
-	public ConcreteConverterBase(Material material, MaterialColor color, ToolType harvestTool, int harvestLevel,
+	public ConcreteConverterBlockBase(Material material, MaterialColor color, ToolType harvestTool, int harvestLevel,
 			float hardness, float resistance, SoundType sound, String blockID) {
 		super(Properties.create(material, color).harvestTool(harvestTool).harvestLevel(harvestLevel)
 				.hardnessAndResistance(hardness, resistance).sound(sound));
 		this.setRegistryName(CCTConstants.MODID, blockID);
 	}
 
-	public ConcreteConverterBase(Block base, String blockID) {
+	public ConcreteConverterBlockBase(Block base, String blockID) {
 		super(Properties.from(base));
 		this.setRegistryName(CCTConstants.MODID, blockID);
 	}

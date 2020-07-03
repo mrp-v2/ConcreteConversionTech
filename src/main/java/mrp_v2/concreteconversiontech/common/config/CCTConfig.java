@@ -1,9 +1,9 @@
-package mrp_v2.concreteconversiontech.config;
+package mrp_v2.concreteconversiontech.common.config;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 
-import mrp_v2.concreteconversiontech.util.CCTConstants;
+import mrp_v2.concreteconversiontech.common.util.CCTConstants;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
