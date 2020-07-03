@@ -18,13 +18,13 @@ public class CCTClientRegistryHandler {
 	public static void registerBlockColors(final ColorHandlerEvent.Block event) {
 		event.getBlockColors().register((state, reader, pos, tint) -> {
 			return reader != null && pos != null ? BiomeColors.getWaterColor(reader, pos) : -1;
-		}, CCTObjectHolder.CONCRETE_CONVERTER_TIER_1);
+		}, CCTObjectHolder.CONCRETE_CONVERTER_BLOCK_TIER_1);
 	}
 
 	@SubscribeEvent
 	public static void registerItemColors(final ColorHandlerEvent.Item event) {
 		event.getItemColors().register((itemStack, tint) -> {
 			return Biomes.PLAINS.getWaterColor();
-		}, CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_ITEM);
+		}, CCTObjectHolder.CONCRETE_CONVERTER_BLOCK_TIER_1_ITEM);
 	}
 }

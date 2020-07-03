@@ -17,7 +17,7 @@ import net.minecraftforge.common.ToolType;
 
 abstract public class ConcreteConverterBlockBase extends Block {
 
-	public static final String ID_STEM = "concrete_converter_";
+	protected static final String ID_STEM = "concrete_converter_block_";
 
 	public ConcreteConverterBlockBase(Material material, MaterialColor color, ToolType harvestTool, int harvestLevel,
 			float hardness, float resistance, SoundType sound, String blockID) {
@@ -34,7 +34,7 @@ abstract public class ConcreteConverterBlockBase extends Block {
 	public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(2, "concreteConversionTech") {
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
-			return new ItemStack(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1);
+			return new ItemStack(CCTObjectHolder.CONCRETE_CONVERTER_BLOCK_TIER_1);
 		}
 	};
 

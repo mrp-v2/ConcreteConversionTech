@@ -7,7 +7,7 @@ import net.minecraft.block.Blocks;
  */
 public class ConcreteConverterBlockTier1 extends ConcreteConverterBlockBase {
 
-	public static final String ID = ConcreteConverterBlockBase.ID_STEM + "tier_1";
+	public static final String ID = ID_STEM + "tier_1";
 
 	public ConcreteConverterBlockTier1() {
 		// super(Material.WOOD, MaterialColor.WOOD, ToolType.AXE, 2.0F, 3.0F,
