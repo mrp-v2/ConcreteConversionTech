@@ -53,6 +53,22 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 				contentsChanged();
 				markDirty();
 			}
+
+			@Override
+			public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+				if (slot >= stacks.size() / 2 || !isConcretePowder(stack)) {
+					return stack;
+				}
+				return super.insertItem(slot, stack, simulate);
+			}
+
+			@Override
+			public ItemStack extractItem(int slot, int amount, boolean simulate) {
+				if (slot < stacks.size()) {
+					return ItemStack.EMPTY;
+				}
+				return super.extractItem(slot, amount, simulate);
+			}
 		};
 	}
 
