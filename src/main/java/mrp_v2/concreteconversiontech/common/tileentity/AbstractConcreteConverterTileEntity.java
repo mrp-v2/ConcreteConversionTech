@@ -21,12 +21,13 @@ import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.common.util.NonNullSupplier;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 abstract public class AbstractConcreteConverterTileEntity extends TileEntity
-		implements ICapabilityProvider, ITickableTileEntity {
+		implements ICapabilityProvider, ITickableTileEntity, NonNullSupplier<IItemHandler> {
 
 	protected static final String ID_STEM = "concrete_converter_tile_entity_";
 
@@ -34,7 +35,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	private static final String TICKS_SPENT_CONVERTING_NBT_ID = "TicksSpentConverting";
 	private static final String CURRENT_CONVERSION_NBT_ID = "ConversionInfo";
 
-	private final ItemStackHandler inventory;
+	private final IItemHandler inventory;
 	private final int ticksPerItem;
 
 	private int ticksSpentConverting;
@@ -56,9 +57,14 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	}
 
 	@Override
+	public IItemHandler get() {
+		return inventory;
+	}
+
+	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		super.write(compound);
-		compound.put(INVENTORY_NBT_ID, inventory.serializeNBT());
+		compound.put(INVENTORY_NBT_ID, ((ItemStackHandler) inventory).serializeNBT());
 		compound.putInt(TICKS_SPENT_CONVERTING_NBT_ID, ticksSpentConverting);
 		compound.put(CURRENT_CONVERSION_NBT_ID, currentConversion.write());
 		return compound;
@@ -67,7 +73,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	@Override
 	public void func_230337_a_(BlockState state, CompoundNBT nbt) {
 		super.func_230337_a_(state, nbt);
-		inventory.deserializeNBT(nbt.getCompound(INVENTORY_NBT_ID));
+		((ItemStackHandler) inventory).deserializeNBT(nbt.getCompound(INVENTORY_NBT_ID));
 		ticksSpentConverting = nbt.getInt(TICKS_SPENT_CONVERTING_NBT_ID);
 		currentConversion = new ConversionInfo(nbt.getCompound(CURRENT_CONVERSION_NBT_ID));
 	}
@@ -160,7 +166,8 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
 		// TODO Auto-generated method stub
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return (LazyOptional<T>) (IItemHandler) inventory;
+			// non null supplier of IItemHandler
+			return (LazyOptional<T>) LazyOptional.of(this);
 		}
 		return super.getCapability(cap, side);
 	}

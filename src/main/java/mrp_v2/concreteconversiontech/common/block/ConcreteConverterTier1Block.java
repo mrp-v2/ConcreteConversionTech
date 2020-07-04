@@ -33,7 +33,7 @@ public class ConcreteConverterTier1Block extends AbstractConcreteConverterBlock 
 		// TODO Auto-generated method stub
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof ConcreteConverterTier1TileEntity) {
-			player.openContainer((INamedContainerProvider) tileEntity);
+			//player.openContainer((INamedContainerProvider) tileEntity);
 		}
 	}
 }
