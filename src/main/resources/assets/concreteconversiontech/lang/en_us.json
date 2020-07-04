@@ -1,3 +1,4 @@
 {
-	"block.concreteconversiontech.concrete_converter_block_tier_1": "Concrete Converter Tier 1"
+	"block.concreteconversiontech.concrete_converter_block_tier_1": "Concrete Converter Tier 1",
+	"itemGroup.concreteConversionTech": "Concrete Conversion Tech"
 }
