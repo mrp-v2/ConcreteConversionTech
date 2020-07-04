@@ -24,7 +24,8 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 	private NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
 
 	private static final int TICKS_PER_ITEM = 16;
-	private static final String CONVERSION_TICKS_NBT_ID = "TickProgress";
+	private static final String TICKS_SPENT_CONVERTING_NBT_ID = "TicksSpentConverting";
+	private static final String CURRENT_CONVERSION_NBT_ID = "ConversionInfo";
 
 	private int ticksSpentConverting;
 	private ConversionInfo currentConversion;
@@ -40,8 +41,8 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 		super.func_230337_a_(state, nbt);
 		items = NonNullList.withSize(items.size(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(nbt, items);
-		ticksSpentConverting = nbt.getInt(CONVERSION_TICKS_NBT_ID);
-		currentConversion = new ConversionInfo(nbt);
+		ticksSpentConverting = nbt.getInt(TICKS_SPENT_CONVERTING_NBT_ID);
+		currentConversion = new ConversionInfo(nbt.getCompound(CURRENT_CONVERSION_NBT_ID));
 	}
 
 	@Override
@@ -182,30 +183,27 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 		}
 
 		@SuppressWarnings("deprecation")
-		public CompoundNBT write(CompoundNBT nbt) {
+		public CompoundNBT write() {
 			CompoundNBT sub = new CompoundNBT();
 			ResourceLocation resourceLocation = Registry.ITEM.getKey(itemConverting);
 			sub.putString(ITEM_ID_NBT_ID, resourceLocation == null ? "minecraft:air" : resourceLocation.toString());
 			sub.putBoolean(CAN_CONVERT_NBT_ID, canConvert);
 			sub.putInt(SOURCE_INDEX_NBT_ID, sourceIndex);
 			sub.putInt(DESTINATION_INDEX_NBT_ID, destinationIndex);
-			nbt.put(CONVERSION_INFO_NBT_ID, sub);
-			return nbt;
+			return sub;
 		}
 
-		private static final String ITEM_ID_NBT_ID = "id";
+		private static final String ITEM_ID_NBT_ID = "ItemId";
 		private static final String CAN_CONVERT_NBT_ID = "CanConvert";
 		private static final String SOURCE_INDEX_NBT_ID = "SourceIndex";
 		private static final String DESTINATION_INDEX_NBT_ID = "DestinationIndex";
-		private static final String CONVERSION_INFO_NBT_ID = "ConversionInfo";
 
 		@SuppressWarnings("deprecation")
 		public ConversionInfo(CompoundNBT nbt) {
-			CompoundNBT sub = nbt.getCompound(CONVERSION_INFO_NBT_ID);
-			itemConverting = Registry.ITEM.getOrDefault(new ResourceLocation(sub.getString(ITEM_ID_NBT_ID)));
-			canConvert = sub.getBoolean(CAN_CONVERT_NBT_ID);
-			sourceIndex = sub.getInt(SOURCE_INDEX_NBT_ID);
-			destinationIndex = sub.getInt(DESTINATION_INDEX_NBT_ID);
+			itemConverting = Registry.ITEM.getOrDefault(new ResourceLocation(nbt.getString(ITEM_ID_NBT_ID)));
+			canConvert = nbt.getBoolean(CAN_CONVERT_NBT_ID);
+			sourceIndex = nbt.getInt(SOURCE_INDEX_NBT_ID);
+			destinationIndex = nbt.getInt(DESTINATION_INDEX_NBT_ID);
 		}
 	}
 
@@ -217,8 +215,8 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 	public CompoundNBT write(CompoundNBT compound) {
 		super.write(compound);
 		ItemStackHelper.saveAllItems(compound, items);
-		compound.putInt(CONVERSION_TICKS_NBT_ID, ticksSpentConverting);
-		currentConversion.write(compound);
+		compound.putInt(TICKS_SPENT_CONVERTING_NBT_ID, ticksSpentConverting);
+		compound.put(CURRENT_CONVERSION_NBT_ID, currentConversion.write());
 		return compound;
 	}
 
