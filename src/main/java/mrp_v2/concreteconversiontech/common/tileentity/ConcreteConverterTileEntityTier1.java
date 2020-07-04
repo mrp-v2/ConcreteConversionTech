@@ -199,6 +199,7 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 		private static final String DESTINATION_INDEX_NBT_ID = "DestinationIndex";
 		private static final String CONVERSION_INFO_NBT_ID = "ConversionInfo";
 
+		@SuppressWarnings("deprecation")
 		public ConversionInfo(CompoundNBT nbt) {
 			CompoundNBT sub = nbt.getCompound(CONVERSION_INFO_NBT_ID);
 			itemConverting = Registry.ITEM.getOrDefault(new ResourceLocation(sub.getString(ITEM_ID_NBT_ID)));
