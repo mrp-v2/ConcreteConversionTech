@@ -27,11 +27,12 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 	private static final String CONVERSION_TICKS_NBT_ID = "TickProgress";
 
 	private int ticksSpentConverting;
-	private boolean isConverting;
 	private ConversionInfo currentConversion;
 
 	public ConcreteConverterTileEntityTier1() {
 		super(CCTObjectHolder.CONCRETE_CONVERTER_TILE_ENTITY_TYPE_TIER_1);
+		ticksSpentConverting = 0;
+		currentConversion = new ConversionInfo(false);
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 
 	@Override
 	public void tick() {
-		if (isConverting) {
+		if (currentConversion.canConvert) {
 			ticksSpentConverting++;
 			if (ticksSpentConverting >= TICKS_PER_ITEM) {
 				convertItem(currentConversion.sourceIndex, currentConversion.destinationIndex);
@@ -57,16 +58,14 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 
 	private void contentsChanged() {
 		ConversionInfo conversionInfo = calculateConversionInfo();
-		if (isConverting && !conversionInfo.canConvert) {
+		if (currentConversion.canConvert && !conversionInfo.canConvert) {
 			ticksSpentConverting = 0;
 			currentConversion = conversionInfo;
-			isConverting = conversionInfo.canConvert;
 			this.markDirty();
-		} else if (!isConverting && conversionInfo.canConvert) {
+		} else if (!currentConversion.canConvert && conversionInfo.canConvert) {
 			currentConversion = conversionInfo;
-			isConverting = conversionInfo.canConvert;
 			this.markDirty();
-		} else if (isConverting && conversionInfo.canConvert) {
+		} else if (currentConversion.canConvert && conversionInfo.canConvert) {
 			if (!currentConversion.equals(conversionInfo)) {
 				if (!isValid(currentConversion)) {
 					ticksSpentConverting = 0;
@@ -186,26 +185,26 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 		public CompoundNBT write(CompoundNBT nbt) {
 			CompoundNBT sub = new CompoundNBT();
 			ResourceLocation resourceLocation = Registry.ITEM.getKey(itemConverting);
-			sub.putString(ID_ID, resourceLocation == null ? "minecraft:air" : resourceLocation.toString());
-			sub.putBoolean(CAN_CONVERT_ID, canConvert);
-			sub.putInt(SOURCE_INDEX_ID, sourceIndex);
-			sub.putInt(DESTINATION_INDEX_ID, destinationIndex);
-			nbt.put(CONVERSION_INFO_ID, sub);
+			sub.putString(ITEM_ID_NBT_ID, resourceLocation == null ? "minecraft:air" : resourceLocation.toString());
+			sub.putBoolean(CAN_CONVERT_NBT_ID, canConvert);
+			sub.putInt(SOURCE_INDEX_NBT_ID, sourceIndex);
+			sub.putInt(DESTINATION_INDEX_NBT_ID, destinationIndex);
+			nbt.put(CONVERSION_INFO_NBT_ID, sub);
 			return nbt;
 		}
 
-		private static final String ID_ID = "id";
-		private static final String CAN_CONVERT_ID = "CanConvert";
-		private static final String SOURCE_INDEX_ID = "SourceIndex";
-		private static final String DESTINATION_INDEX_ID = "DestinationIndex";
-		private static final String CONVERSION_INFO_ID = "ConversionInfo";
+		private static final String ITEM_ID_NBT_ID = "id";
+		private static final String CAN_CONVERT_NBT_ID = "CanConvert";
+		private static final String SOURCE_INDEX_NBT_ID = "SourceIndex";
+		private static final String DESTINATION_INDEX_NBT_ID = "DestinationIndex";
+		private static final String CONVERSION_INFO_NBT_ID = "ConversionInfo";
 
 		public ConversionInfo(CompoundNBT nbt) {
-			CompoundNBT sub = nbt.getCompound(CONVERSION_INFO_ID);
-			itemConverting = Registry.ITEM.getOrDefault(new ResourceLocation(sub.getString(ID_ID)));
-			canConvert = sub.getBoolean(CAN_CONVERT_ID);
-			sourceIndex = sub.getInt(SOURCE_INDEX_ID);
-			destinationIndex = sub.getInt(DESTINATION_INDEX_ID);
+			CompoundNBT sub = nbt.getCompound(CONVERSION_INFO_NBT_ID);
+			itemConverting = Registry.ITEM.getOrDefault(new ResourceLocation(sub.getString(ITEM_ID_NBT_ID)));
+			canConvert = sub.getBoolean(CAN_CONVERT_NBT_ID);
+			sourceIndex = sub.getInt(SOURCE_INDEX_NBT_ID);
+			destinationIndex = sub.getInt(DESTINATION_INDEX_NBT_ID);
 		}
 	}
 
@@ -275,14 +274,16 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 
 	@Override
 	public ItemStack decrStackSize(int index, int count) {
+		ItemStack stack = ItemStackHelper.getAndSplit(items, index, count);
 		contentsChanged();
-		return ItemStackHelper.getAndSplit(items, index, count);
+		return stack;
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
+		ItemStack stack = ItemStackHelper.getAndRemove(items, index);
 		contentsChanged();
-		return ItemStackHelper.getAndRemove(items, index);
+		return stack;
 	}
 
 	@Override
@@ -291,6 +292,7 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 		if (stack.getCount() > this.getInventoryStackLimit()) {
 			stack.setCount(this.getInventoryStackLimit());
 		}
+		contentsChanged();
 		this.markDirty();
 	}
 
@@ -308,5 +310,6 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 	public void clear() {
 		items.clear();
 		contentsChanged();
+		this.markDirty();
 	}
 }
