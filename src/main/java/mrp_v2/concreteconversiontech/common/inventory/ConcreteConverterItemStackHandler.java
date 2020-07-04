@@ -18,7 +18,7 @@ public class ConcreteConverterItemStackHandler extends ItemStackHandler {
 
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate) {
-		if (slot < stacks.size()) {
+		if (slot < stacks.size() / 2) {
 			return ItemStack.EMPTY;
 		}
 		return super.extractItem(slot, amount, simulate);
