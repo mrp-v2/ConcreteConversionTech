@@ -4,7 +4,6 @@ import mrp_v2.concreteconversiontech.common.tileentity.ConcreteConverterTier1Til
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -33,7 +32,7 @@ public class ConcreteConverterTier1Block extends AbstractConcreteConverterBlock 
 		// TODO Auto-generated method stub
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof ConcreteConverterTier1TileEntity) {
-			//player.openContainer((INamedContainerProvider) tileEntity);
+			// player.openContainer((INamedContainerProvider) tileEntity);
 		}
 	}
 }
