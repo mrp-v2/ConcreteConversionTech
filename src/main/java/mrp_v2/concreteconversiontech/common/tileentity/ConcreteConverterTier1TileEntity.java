@@ -17,7 +17,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 
-public class ConcreteConverterTileEntityTier1 extends AbstractConcreteConverterTileEntity {
+public class ConcreteConverterTier1TileEntity extends AbstractConcreteConverterTileEntity {
 
 	public static final String ID = ID_STEM + "tier_1";
 
@@ -30,8 +30,8 @@ public class ConcreteConverterTileEntityTier1 extends AbstractConcreteConverterT
 	private int ticksSpentConverting;
 	private ConversionInfo currentConversion;
 
-	public ConcreteConverterTileEntityTier1() {
-		super(CCTObjectHolder.CONCRETE_CONVERTER_TILE_ENTITY_TYPE_TIER_1);
+	public ConcreteConverterTier1TileEntity() {
+		super(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_TILE_ENTITY_TYPE);
 		ticksSpentConverting = 0;
 		currentConversion = new ConversionInfo(false);
 	}

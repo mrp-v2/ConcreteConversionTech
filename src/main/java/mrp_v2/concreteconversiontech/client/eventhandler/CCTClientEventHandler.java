@@ -14,6 +14,6 @@ public class CCTClientEventHandler {
 
 	@SubscribeEvent
 	public static void clientSetup(final FMLClientSetupEvent event) {
-		RenderTypeLookup.setRenderLayer(CCTObjectHolder.CONCRETE_CONVERTER_BLOCK_TIER_1, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK, RenderType.getCutout());
 	}
 }
