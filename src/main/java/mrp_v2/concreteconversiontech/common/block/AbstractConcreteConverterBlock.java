@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
 
-abstract public class ConcreteConverterBlockBase extends Block {
+abstract public class AbstractConcreteConverterBlock extends Block {
 
 	protected static final String ID_STEM = "concrete_converter_block_";
 
@@ -28,12 +28,12 @@ abstract public class ConcreteConverterBlockBase extends Block {
 		}
 	};
 
-	public ConcreteConverterBlockBase(Block base, String blockID) {
+	public AbstractConcreteConverterBlock(Block base, String blockID) {
 		super(Properties.from(base));
 		this.setRegistryName(CCTConstants.MODID, blockID);
 	}
 
-	public ConcreteConverterBlockBase(Material material, MaterialColor color, ToolType harvestTool, int harvestLevel,
+	public AbstractConcreteConverterBlock(Material material, MaterialColor color, ToolType harvestTool, int harvestLevel,
 			float hardness, float resistance, SoundType sound, String blockID) {
 		super(Properties.create(material, color).harvestTool(harvestTool).harvestLevel(harvestLevel)
 				.hardnessAndResistance(hardness, resistance).sound(sound));

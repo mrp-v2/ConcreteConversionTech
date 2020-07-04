@@ -9,7 +9,7 @@ import net.minecraft.world.IBlockReader;
 /**
  * Wooden
  */
-public class ConcreteConverterBlockTier1 extends ConcreteConverterBlockBase {
+public class ConcreteConverterBlockTier1 extends AbstractConcreteConverterBlock {
 
 	public static final String ID = ID_STEM + "tier_1";
 

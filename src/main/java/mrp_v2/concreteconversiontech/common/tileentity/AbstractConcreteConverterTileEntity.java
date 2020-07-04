@@ -11,12 +11,12 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
-abstract public class ConcreteConverterTileEntityBase extends TileEntity
+abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 		implements ITickableTileEntity, ISidedInventory {
 
 	protected static final String ID_STEM = "concrete_converter_tile_entity_";
 
-	public ConcreteConverterTileEntityBase(TileEntityType<?> tileEntityTypeIn) {
+	public AbstractConcreteConverterTileEntity(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
 	}
 

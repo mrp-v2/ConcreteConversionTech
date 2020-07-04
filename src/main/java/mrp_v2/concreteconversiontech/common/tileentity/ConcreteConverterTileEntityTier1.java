@@ -17,7 +17,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 
-public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntityBase {
+public class ConcreteConverterTileEntityTier1 extends AbstractConcreteConverterTileEntity {
 
 	public static final String ID = ID_STEM + "tier_1";
 
@@ -184,13 +184,13 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 
 		@SuppressWarnings("deprecation")
 		public CompoundNBT write() {
-			CompoundNBT sub = new CompoundNBT();
+			CompoundNBT nbt = new CompoundNBT();
+			nbt.putBoolean(CAN_CONVERT_NBT_ID, canConvert);
+			nbt.putInt(SOURCE_INDEX_NBT_ID, sourceIndex);
+			nbt.putInt(DESTINATION_INDEX_NBT_ID, destinationIndex);
 			ResourceLocation resourceLocation = Registry.ITEM.getKey(itemConverting);
-			sub.putString(ITEM_ID_NBT_ID, resourceLocation == null ? "minecraft:air" : resourceLocation.toString());
-			sub.putBoolean(CAN_CONVERT_NBT_ID, canConvert);
-			sub.putInt(SOURCE_INDEX_NBT_ID, sourceIndex);
-			sub.putInt(DESTINATION_INDEX_NBT_ID, destinationIndex);
-			return sub;
+			nbt.putString(ITEM_ID_NBT_ID, resourceLocation == null ? "minecraft:air" : resourceLocation.toString());
+			return nbt;
 		}
 
 		private static final String ITEM_ID_NBT_ID = "ItemId";
@@ -200,10 +200,10 @@ public class ConcreteConverterTileEntityTier1 extends ConcreteConverterTileEntit
 
 		@SuppressWarnings("deprecation")
 		public ConversionInfo(CompoundNBT nbt) {
-			itemConverting = Registry.ITEM.getOrDefault(new ResourceLocation(nbt.getString(ITEM_ID_NBT_ID)));
 			canConvert = nbt.getBoolean(CAN_CONVERT_NBT_ID);
 			sourceIndex = nbt.getInt(SOURCE_INDEX_NBT_ID);
 			destinationIndex = nbt.getInt(DESTINATION_INDEX_NBT_ID);
+			itemConverting = Registry.ITEM.getOrDefault(new ResourceLocation(nbt.getString(ITEM_ID_NBT_ID)));
 		}
 	}
 
