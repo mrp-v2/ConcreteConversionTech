@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 abstract public class AbstractConcreteConverterBlock extends Block {
 
@@ -72,6 +73,19 @@ abstract public class AbstractConcreteConverterBlock extends Block {
 			this.interactWith(worldIn, pos, player);
 			return ActionResultType.CONSUME;
 		}
+	}
+
+	@Override
+	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+		if (state.hasTileEntity() && (state.getBlock() != newState.getBlock() || !newState.hasTileEntity())) {
+			worldIn.getTileEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+					.ifPresent(itemHandler -> {
+						for (int i = 0; i < itemHandler.getSlots(); i++) {
+							Block.spawnAsEntity(worldIn, pos, itemHandler.getStackInSlot(i));
+						}
+					});
+		}
+		super.onReplaced(state, worldIn, pos, newState, isMoving);
 	}
 
 	abstract protected void interactWith(World worldIn, BlockPos pos, PlayerEntity player);
