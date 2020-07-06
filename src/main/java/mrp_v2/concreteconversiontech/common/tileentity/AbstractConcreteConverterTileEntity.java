@@ -10,6 +10,7 @@ import mrp_v2.concreteconversiontech.common.inventory.IConcreteConverter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ConcretePowderBlock;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -27,7 +28,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 abstract public class AbstractConcreteConverterTileEntity extends TileEntity
-		implements ICapabilityProvider, ITickableTileEntity, IConcreteConverter {
+		implements ICapabilityProvider, ITickableTileEntity, IConcreteConverter, INamedContainerProvider {
 
 	private class ConversionInfo {
 		private static final String ITEM_ID_NBT_ID = "ItemId";
