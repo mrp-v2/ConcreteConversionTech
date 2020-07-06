@@ -23,13 +23,11 @@ import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.common.util.NonNullSupplier;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 abstract public class AbstractConcreteConverterTileEntity extends TileEntity
-		implements ICapabilityProvider, ITickableTileEntity, NonNullSupplier<IItemHandler>, IConcreteConverter {
+		implements ICapabilityProvider, ITickableTileEntity, IConcreteConverter {
 
 	private class ConversionInfo {
 		private static final String ITEM_ID_NBT_ID = "ItemId";
@@ -218,16 +216,11 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 		currentConversion = new ConversionInfo(nbt.getCompound(CURRENT_CONVERSION_NBT_ID));
 	}
 
-	@Override
-	public IItemHandler get() {
-		return inventory;
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return (LazyOptional<T>) LazyOptional.of(this);
+			return (LazyOptional<T>) LazyOptional.of(inventory);
 		}
 		return super.getCapability(cap, side);
 	}
