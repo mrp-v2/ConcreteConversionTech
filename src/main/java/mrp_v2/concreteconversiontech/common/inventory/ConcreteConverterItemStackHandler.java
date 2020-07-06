@@ -1,9 +1,11 @@
 package mrp_v2.concreteconversiontech.common.inventory;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.NonNullSupplier;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class ConcreteConverterItemStackHandler extends ItemStackHandler {
+public class ConcreteConverterItemStackHandler extends ItemStackHandler implements NonNullSupplier<IItemHandler> {
 
 	private final IConcreteConverter concreteConverter;
 
@@ -22,6 +24,11 @@ public class ConcreteConverterItemStackHandler extends ItemStackHandler {
 			return ItemStack.EMPTY;
 		}
 		return super.extractItem(slot, amount, simulate);
+	}
+
+	@Override
+	public IItemHandler get() {
+		return this;
 	}
 
 	public ItemStack insertItem(int slot, ItemStack stack) {
