@@ -29,7 +29,7 @@ abstract public class AbstractConcreteConverterBlock extends Block {
 
 	protected static final String ID_STEM = "concrete_converter_block_";
 
-	public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(2, "concreteConversionTech") {
+	public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(CCTConstants.TRANSLATION_STEM + "main_item_group") {
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
 			return new ItemStack(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK);
