@@ -17,7 +17,7 @@ public class ConcreteConverterTier1TileEntity extends AbstractConcreteConverterT
 
 	@Override
 	public ITextComponent getDisplayName() {
-		return MessageHelper.makeTranslation(ID, "displayName");
+		return MessageHelper.makeTranslation(ID, "display_name");
 	}
 
 	@Override

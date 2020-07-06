@@ -27,18 +27,20 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 abstract public class AbstractConcreteConverterBlock extends Block {
 
-	protected static final String ID_STEM = "concrete_converter_block_";
+	protected static final String ID_STEM_PRE = "concrete_converter_";
+	protected static final String ID_STEM_POST = "_block";
 
-	public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(CCTConstants.TRANSLATION_STEM + "main_item_group") {
+	public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(
+			CCTConstants.MODID + ".main_item_group") {
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
 			return new ItemStack(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK);
 		}
 	};
 
-	public AbstractConcreteConverterBlock(Block base, String blockID) {
+	public AbstractConcreteConverterBlock(Block base, String id) {
 		super(Properties.from(base));
-		this.setRegistryName(CCTConstants.MODID, blockID);
+		this.setRegistryName(CCTConstants.MODID, id);
 	}
 
 	public AbstractConcreteConverterBlock(Material material, MaterialColor color, ToolType harvestTool,
@@ -73,7 +75,7 @@ abstract public class AbstractConcreteConverterBlock extends Block {
 		} else {
 			TileEntity tileEntity = worldIn.getTileEntity(pos);
 			if (tileEntity instanceof AbstractConcreteConverterTileEntity) {
-				//player.openContainer((INamedContainerProvider)tileEntity);
+				// player.openContainer((INamedContainerProvider)tileEntity);
 			}
 			return ActionResultType.CONSUME;
 		}

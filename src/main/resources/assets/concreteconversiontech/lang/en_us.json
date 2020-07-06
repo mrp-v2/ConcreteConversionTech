@@ -1,4 +1,5 @@
 {
-	"block.concreteconversiontech.concrete_converter_block_tier_1": "Concrete Converter Tier 1",
-	"itemGroup.concreteConversionTech": "Concrete Conversion Tech"
+	"block.concreteconversiontech.concrete_converter_tier_1_block": "Concrete Converter Tier 1",
+	"itemGroup.concreteconversiontech.main_item_group": "Concrete Conversion Tech",
+	"concreteconversiontech.concrete_converter_tier_1_tile_entity.display_name": "Concrete Converter Tier 1"
 }
