@@ -26,13 +26,4 @@ public class ConcreteConverterTier1Block extends AbstractConcreteConverterBlock 
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new ConcreteConverterTier1TileEntity();
 	}
-
-	@Override
-	protected void interactWith(World worldIn, BlockPos pos, PlayerEntity player) {
-		// TODO Auto-generated method stub
-		TileEntity tileEntity = worldIn.getTileEntity(pos);
-		if (tileEntity instanceof ConcreteConverterTier1TileEntity) {
-			// player.openContainer((INamedContainerProvider) tileEntity);
-		}
-	}
 }

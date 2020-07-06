@@ -1,5 +1,6 @@
 package mrp_v2.concreteconversiontech.common.block;
 
+import mrp_v2.concreteconversiontech.common.tileentity.AbstractConcreteConverterTileEntity;
 import mrp_v2.concreteconversiontech.common.util.CCTConstants;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.block.Block;
@@ -70,7 +71,10 @@ abstract public class AbstractConcreteConverterBlock extends Block {
 		if (worldIn.isRemote) {
 			return ActionResultType.SUCCESS;
 		} else {
-			this.interactWith(worldIn, pos, player);
+			TileEntity tileEntity = worldIn.getTileEntity(pos);
+			if (tileEntity instanceof AbstractConcreteConverterTileEntity) {
+				//player.openContainer((INamedContainerProvider)tileEntity);
+			}
 			return ActionResultType.CONSUME;
 		}
 	}
@@ -88,6 +92,4 @@ abstract public class AbstractConcreteConverterBlock extends Block {
 		}
 		super.onReplaced(state, worldIn, pos, newState, isMoving);
 	}
-
-	abstract protected void interactWith(World worldIn, BlockPos pos, PlayerEntity player);
 }
