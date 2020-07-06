@@ -3,6 +3,7 @@ package mrp_v2.concreteconversiontech.common.eventhandler;
 import mrp_v2.concreteconversiontech.common.util.CCTConstants;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.block.Block;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
@@ -25,5 +26,9 @@ public class CCTRegistryHandler {
 	@SubscribeEvent
 	public static void registerTileEntities(final RegistryEvent.Register<TileEntityType<?>> event) {
 		event.getRegistry().register(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_TILE_ENTITY_TYPE);
+	}
+
+	public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {
+		event.getRegistry().register(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE);
 	}
 }
