@@ -21,6 +21,14 @@ public class ConcreteConverterTier1Screen extends ContainerScreen<ConcreteConver
 			"textures/gui/container/concrete_converter_tier_1.png");
 
 	@Override
+	public void func_230430_a_(MatrixStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
+		this.func_230446_a_(p_230430_1_);
+		super.func_230430_a_(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
+		this.func_230459_a_(p_230430_1_, p_230430_2_, p_230430_3_);
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
 	protected void func_230450_a_(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
 		// TODO Auto-generated method stub
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
