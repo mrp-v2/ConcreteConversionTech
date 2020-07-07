@@ -1,13 +1,12 @@
 package mrp_v2.concreteconversiontech.common.block;
 
+import java.util.function.Supplier;
+
 import mrp_v2.concreteconversiontech.common.tileentity.AbstractConcreteConverterTileEntity;
 import mrp_v2.concreteconversiontech.common.util.CCTConstants;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItem;
@@ -23,12 +22,11 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-abstract public class AbstractConcreteConverterBlock extends Block {
+public class ConcreteConverterBlock extends Block {
 
-	protected static final String ID_STEM_PRE = "concrete_converter_";
+	protected static final String ID_STEM_PRE = "concrete_converter_tier_";
 	protected static final String ID_STEM_POST = "_block";
 
 	public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(
@@ -39,16 +37,13 @@ abstract public class AbstractConcreteConverterBlock extends Block {
 		}
 	};
 
-	public AbstractConcreteConverterBlock(Block base, String id) {
-		super(Properties.from(base));
-		this.setRegistryName(CCTConstants.MODID, id);
-	}
+	private final Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier;
 
-	public AbstractConcreteConverterBlock(Material material, MaterialColor color, ToolType harvestTool,
-			int harvestLevel, float hardness, float resistance, SoundType sound, String blockID) {
-		super(Properties.create(material, color).harvestTool(harvestTool).harvestLevel(harvestLevel)
-				.hardnessAndResistance(hardness, resistance).sound(sound));
-		this.setRegistryName(CCTConstants.MODID, blockID);
+	public ConcreteConverterBlock(Block base, int tier,
+			Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier) {
+		super(Properties.from(base));
+		this.setRegistryName(CCTConstants.MODID, ID_STEM_PRE + tier + ID_STEM_POST);
+		this.tileEntitySupplier = tileEntitySupplier;
 	}
 
 	public BlockItem createBlockItem() {
@@ -61,7 +56,9 @@ abstract public class AbstractConcreteConverterBlock extends Block {
 	}
 
 	@Override
-	abstract public TileEntity createTileEntity(BlockState state, IBlockReader world);
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+		return tileEntitySupplier.get();
+	}
 
 	@Override
 	public boolean hasTileEntity(BlockState state) {
