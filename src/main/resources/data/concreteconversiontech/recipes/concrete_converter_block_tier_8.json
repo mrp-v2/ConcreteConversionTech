@@ -1,0 +1,29 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"BPB",
+		"WCW",
+		"BQB"
+	],
+	"key": {
+		"C": {
+			"item": "concreteconversiontech:concrete_converter_tier_7_block"
+		},
+		"W": {
+			"item": "minecraft:water_bucket"
+		},
+		"B": {
+			"item": "minecraft:netherite_ingot"
+		},
+		"P": {
+			"item": "minecraft:netherite_pickaxe"
+		},
+		"Q": {
+			"tag": "forge:nether_stars"
+		}
+	},
+	"result": {
+		"item": "concreteconversiontech:concrete_converter_tier_8_block",
+		"count": 1
+	}
+}

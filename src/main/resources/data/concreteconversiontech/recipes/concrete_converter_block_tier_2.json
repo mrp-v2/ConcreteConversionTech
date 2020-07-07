@@ -1,18 +1,18 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
-		"WPW",
-		"BGB",
-		"WPW"
+		"BPB",
+		"WCW",
+		"BPB"
 	],
 	"key": {
-		"G": {
-			"tag": "forge:glass"
-		},
-		"B": {
-			"item": "minecraft:water_bucket"
+		"C": {
+			"item": "concreteconversiontech:concrete_converter_tier_1_block"
 		},
 		"W": {
+			"item": "minecraft:water_bucket"
+		},
+		"B": {
 			"tag": "forge:stone"
 		},
 		"P": {

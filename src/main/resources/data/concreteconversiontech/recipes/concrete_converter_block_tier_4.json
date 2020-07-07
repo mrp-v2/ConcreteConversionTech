@@ -7,20 +7,20 @@
 	],
 	"key": {
 		"C": {
-			"tag": "forge:glass"
+			"item": "concreteconversiontech:concrete_converter_tier_3_block"
 		},
 		"W": {
 			"item": "minecraft:water_bucket"
 		},
 		"B": {
-			"tag": "minecraft:planks"
+			"tag": "forge:ingots/gold"
 		},
 		"P": {
-			"item": "minecraft:wooden_pickaxe"
+			"item": "minecraft:gold_pickaxe"
 		}
 	},
 	"result": {
-		"item": "concreteconversiontech:concrete_converter_tier_1_block",
+		"item": "concreteconversiontech:concrete_converter_tier_4_block",
 		"count": 1
 	}
 }
