@@ -9,6 +9,9 @@ import mrp_v2.concreteconversiontech.common.inventory.ConcreteConverterItemStack
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ConcretePowderBlock;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -140,11 +143,15 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 		POWDER_TO_CONCRETE = Collections.unmodifiableMap(temp);
 	}
 
+	public static boolean isConcretePowder(ItemStack stack) {
+		return Block.getBlockFromItem(stack.getItem()) instanceof ConcretePowderBlock;
+	}
+
 	protected final ConcreteConverterItemStackHandler inventory;
 
 	private final int ticksPerItem;
-
 	private int ticksSpentConverting;
+
 	private ConversionInfo currentConversion;
 
 	public AbstractConcreteConverterTileEntity(TileEntityType<?> tileEntityTypeIn, int ioSlots, int ticksPerItem) {
@@ -210,6 +217,9 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	}
 
 	@Override
+	public abstract Container createMenu(int id, PlayerInventory playerInventoryIn, PlayerEntity playerIn);
+
+	@Override
 	public void func_230337_a_(BlockState state, CompoundNBT nbt) {
 		super.func_230337_a_(state, nbt);
 		((ItemStackHandler) inventory).deserializeNBT(nbt.getCompound(INVENTORY_NBT_ID));
@@ -224,10 +234,6 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 			return (LazyOptional<T>) LazyOptional.of(inventory);
 		}
 		return super.getCapability(cap, side);
-	}
-
-	public static boolean isConcretePowder(ItemStack stack) {
-		return Block.getBlockFromItem(stack.getItem()) instanceof ConcretePowderBlock;
 	}
 
 	private boolean isValid(ConversionInfo conversionInfo) {

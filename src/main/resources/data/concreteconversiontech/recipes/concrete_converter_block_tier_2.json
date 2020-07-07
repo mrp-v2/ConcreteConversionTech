@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"WPW",
+		"BGB",
+		"WPW"
+	],
+	"key": {
+		"G": {
+			"tag": "forge:glass"
+		},
+		"B": {
+			"item": "minecraft:water_bucket"
+		},
+		"W": {
+			"tag": "minecraft:stone"
+		},
+		"P": {
+			"item": "minecraft:stone_pickaxe"
+		}
+	},
+	"result": {
+		"item": "concreteconversiontech:concrete_converter_tier_2_block",
+		"count": 1
+	}
+}

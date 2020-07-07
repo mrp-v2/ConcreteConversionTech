@@ -15,21 +15,25 @@ public class CCTRegistryHandler {
 
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
-		event.getRegistry().registerAll(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK);
+		event.getRegistry().registerAll(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK);
 	}
 
 	@SubscribeEvent
 	public static void registerItems(final RegistryEvent.Register<Item> event) {
-		event.getRegistry().registerAll(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK_ITEM);
+		event.getRegistry().registerAll(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK_ITEM,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK_ITEM);
 	}
 
 	@SubscribeEvent
 	public static void registerTileEntities(final RegistryEvent.Register<TileEntityType<?>> event) {
-		event.getRegistry().register(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_TILE_ENTITY_TYPE);
+		event.getRegistry().registerAll(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_TILE_ENTITY_TYPE,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_2_TILE_ENTITY_TYPE);
 	}
 
 	@SubscribeEvent
 	public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {
-		event.getRegistry().register(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE);
+		event.getRegistry().registerAll(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_2_CONTAINER_TYPE);
 	}
 }

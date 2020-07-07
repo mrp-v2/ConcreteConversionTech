@@ -1,5 +1,7 @@
 {
 	"block.concreteconversiontech.concrete_converter_tier_1_block": "Concrete Converter Tier 1",
-	"itemGroup.concreteconversiontech.main_item_group": "Concrete Conversion Tech",
-	"concreteconversiontech.concrete_converter_tier_1_tile_entity.display_name": "Concrete Converter Tier 1"
+	"block.concreteconversiontech.concrete_converter_tier_2_block": "Concrete Converter Tier 2",
+	"concreteconversiontech.concrete_converter_tier_1_tile_entity.display_name": "Concrete Converter Tier 1",
+	"concreteconversiontech.concrete_converter_tier_2_tile_entity.display_name": "Concrete Converter Tier 2",
+	"itemGroup.concreteconversiontech.main_item_group": "Concrete Conversion Tech"
 }

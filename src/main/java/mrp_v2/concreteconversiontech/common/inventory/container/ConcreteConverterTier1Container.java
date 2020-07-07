@@ -1,9 +1,12 @@
 package mrp_v2.concreteconversiontech.common.inventory.container;
 
 import mrp_v2.concreteconversiontech.common.inventory.ConcreteConverterItemStackHandler;
+import mrp_v2.concreteconversiontech.common.tileentity.ConcreteConverterTier1TileEntity;
+import mrp_v2.concreteconversiontech.common.util.CCTConstants;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 
 public class ConcreteConverterTier1Container extends AbstractConcreteConverterContainer {
@@ -11,7 +14,8 @@ public class ConcreteConverterTier1Container extends AbstractConcreteConverterCo
 	public static final String ID = ID_STEM_PRE + "tier_1" + ID_STEM_POST;
 
 	public ConcreteConverterTier1Container(int id, PlayerInventory playerInventoryIn) {
-		this(id, playerInventoryIn, new ConcreteConverterItemStackHandler(2, null));
+		this(id, playerInventoryIn,
+				new ConcreteConverterItemStackHandler(ConcreteConverterTier1TileEntity.TOTAL_SLOTS, null));
 	}
 
 	public ConcreteConverterTier1Container(int id, PlayerInventory playerInventoryIn,
@@ -28,5 +32,12 @@ public class ConcreteConverterTier1Container extends AbstractConcreteConverterCo
 		for (int k = 0; k < 9; ++k) {
 			this.addSlot(new Slot(playerInventoryIn, k, 8 + k * 18, 142));
 		}
+	}
+
+	public static ContainerType<ConcreteConverterTier1Container> createContainerType() {
+		ContainerType<ConcreteConverterTier1Container> containerType = new ContainerType<ConcreteConverterTier1Container>(
+				ConcreteConverterTier1Container::new);
+		containerType.setRegistryName(CCTConstants.MODID, ID);
+		return containerType;
 	}
 }
