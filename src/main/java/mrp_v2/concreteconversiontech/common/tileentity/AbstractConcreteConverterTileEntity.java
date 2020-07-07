@@ -111,7 +111,8 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 		}
 	}
 
-	protected static final String ID_STEM = "concrete_converter_tile_entity_";
+	protected static final String ID_STEM_PRE = "concrete_converter_";
+	protected static final String ID_STEM_POST = "_tile_entity";
 	private static final String INVENTORY_NBT_ID = "Inventory";
 	private static final String TICKS_SPENT_CONVERTING_NBT_ID = "TicksSpentConverting";
 

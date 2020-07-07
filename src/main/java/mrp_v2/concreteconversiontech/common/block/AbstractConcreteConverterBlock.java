@@ -9,6 +9,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -75,7 +76,7 @@ abstract public class AbstractConcreteConverterBlock extends Block {
 		} else {
 			TileEntity tileEntity = worldIn.getTileEntity(pos);
 			if (tileEntity instanceof AbstractConcreteConverterTileEntity) {
-				// player.openContainer((INamedContainerProvider)tileEntity);
+				player.openContainer((INamedContainerProvider) tileEntity);
 			}
 			return ActionResultType.CONSUME;
 		}
