@@ -28,6 +28,7 @@ public class CCTRegistryHandler {
 		event.getRegistry().register(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_TILE_ENTITY_TYPE);
 	}
 
+	@SubscribeEvent
 	public static void registerContainers(final RegistryEvent.Register<ContainerType<?>> event) {
 		event.getRegistry().register(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE);
 	}
