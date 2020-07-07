@@ -22,15 +22,15 @@ public class ConcreteConverterTier1Container extends AbstractConcreteConverterCo
 			ConcreteConverterItemStackHandler inventoryIn) {
 		super(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE, id, inventoryIn);
 		Container.assertInventorySize(this.inventory, 2);
-		this.addSlot(new ConcreteConverterInputSlot(this.inventory, 0, 53, 35));
-		this.addSlot(new ConcreteConverterOutputSlot(this.inventory, 1, 107, 35));
+		this.addSlot(new ConcreteConverterInputSlot(this.inventory, 0, 53, 18));
+		this.addSlot(new ConcreteConverterOutputSlot(this.inventory, 1, 107, 18));
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				this.addSlot(new Slot(playerInventoryIn, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				this.addSlot(new Slot(playerInventoryIn, j + i * 9 + 9, 8 + j * 18, 50 + i * 18));
 			}
 		}
 		for (int k = 0; k < 9; ++k) {
-			this.addSlot(new Slot(playerInventoryIn, k, 8 + k * 18, 142));
+			this.addSlot(new Slot(playerInventoryIn, k, 8 + k * 18, 108));
 		}
 	}
 
