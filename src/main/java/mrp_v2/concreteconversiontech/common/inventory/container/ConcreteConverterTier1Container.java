@@ -8,11 +8,9 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ConcreteConverterTier1Container extends Container {
+public class ConcreteConverterTier1Container extends AbstractConcreteConverterContainer {
 
-	public static String ID = "concrete_converter_tier_1_container";
-
-	private final ConcreteConverterItemStackHandler inventory;
+	public static final String ID = ID_STEM_PRE + "tier_1" + ID_STEM_POST;
 
 	public ConcreteConverterTier1Container(int id, PlayerInventory playerInventoryIn) {
 		this(id, playerInventoryIn, new ConcreteConverterItemStackHandler(2, null));
@@ -20,11 +18,10 @@ public class ConcreteConverterTier1Container extends Container {
 
 	public ConcreteConverterTier1Container(int id, PlayerInventory playerInventoryIn,
 			ConcreteConverterItemStackHandler inventoryIn) {
-		super(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE, id);
-		Container.assertInventorySize(inventoryIn, 2);
-		this.inventory = inventoryIn;
-		this.addSlot(new ConcreteConverterInputSlot(inventoryIn, 0, 53, 35));
-		this.addSlot(new ConcreteConverterOutputSlot(inventoryIn, 1, 107, 35));
+		super(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE, id, inventoryIn);
+		Container.assertInventorySize(this.inventory, 2);
+		this.addSlot(new ConcreteConverterInputSlot(this.inventory, 0, 53, 35));
+		this.addSlot(new ConcreteConverterOutputSlot(this.inventory, 1, 107, 35));
 
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
@@ -36,31 +33,5 @@ public class ConcreteConverterTier1Container extends Container {
 		}
 	}
 
-	@Override
-	public boolean canInteractWith(PlayerEntity playerIn) {
-		return this.inventory.isUsableByPlayer(playerIn);
-	}
-
-	@Override
-	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-		ItemStack itemStack = ItemStack.EMPTY;
-		Slot slot = this.inventorySlots.get(index);
-		if (slot != null && slot.getHasStack()) {
-			ItemStack itemStack1 = slot.getStack();
-			itemStack = itemStack1.copy();
-			if (index < this.inventory.getSlots()) {
-				if (!this.mergeItemStack(itemStack1, this.inventory.getSlots(), this.inventorySlots.size(), true)) {
-					return ItemStack.EMPTY;
-				}
-			} else if (!this.mergeItemStack(itemStack1, 0, this.inventory.getSlots() / 2, false)) {
-				return ItemStack.EMPTY;
-			}
-			if (itemStack1.isEmpty()) {
-				slot.putStack(ItemStack.EMPTY);
-			} else {
-				slot.onSlotChanged();
-			}
-		}
-		return itemStack;
-	}
+	
 }
