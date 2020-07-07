@@ -2,11 +2,9 @@ package mrp_v2.concreteconversiontech.common.inventory.container;
 
 import mrp_v2.concreteconversiontech.common.inventory.ConcreteConverterItemStackHandler;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
 
 public class ConcreteConverterTier1Container extends AbstractConcreteConverterContainer {
 
@@ -22,7 +20,6 @@ public class ConcreteConverterTier1Container extends AbstractConcreteConverterCo
 		Container.assertInventorySize(this.inventory, 2);
 		this.addSlot(new ConcreteConverterInputSlot(this.inventory, 0, 53, 35));
 		this.addSlot(new ConcreteConverterOutputSlot(this.inventory, 1, 107, 35));
-
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
 				this.addSlot(new Slot(playerInventoryIn, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
@@ -32,6 +29,4 @@ public class ConcreteConverterTier1Container extends AbstractConcreteConverterCo
 			this.addSlot(new Slot(playerInventoryIn, k, 8 + k * 18, 142));
 		}
 	}
-
-	
 }
