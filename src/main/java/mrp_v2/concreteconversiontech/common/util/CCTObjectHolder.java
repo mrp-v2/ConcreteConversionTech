@@ -22,5 +22,4 @@ public class CCTObjectHolder {
 				.build(null).setRegistryName(CCTConstants.MODID, ConcreteConverterTier1TileEntity.ID);
 		CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE = new ContainerType<>(ConcreteConverterTier1Container::new);
 	}
-
 }
