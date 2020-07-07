@@ -13,7 +13,7 @@
 			"item": "minecraft:water_bucket"
 		},
 		"W": {
-			"tag": "minecraft:stone"
+			"tag": "forge:stone"
 		},
 		"P": {
 			"item": "minecraft:stone_pickaxe"
