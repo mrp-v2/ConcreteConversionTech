@@ -96,7 +96,9 @@ public class ConcreteConverterItemStackHandler extends ItemStackHandler
 
 	@Override
 	public void markDirty() {
-		concreteConverter.markDirty();
+		if (concreteConverter != null) {
+			concreteConverter.markDirty();
+		}
 	}
 
 	@Override
