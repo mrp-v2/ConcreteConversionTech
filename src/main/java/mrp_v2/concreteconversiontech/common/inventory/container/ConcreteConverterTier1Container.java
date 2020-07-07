@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ConcreteConverterTier1Container extends Container {
 
@@ -40,4 +41,26 @@ public class ConcreteConverterTier1Container extends Container {
 		return this.inventory.isUsableByPlayer(playerIn);
 	}
 
+	@Override
+	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+		ItemStack itemStack = ItemStack.EMPTY;
+		Slot slot = this.inventorySlots.get(index);
+		if (slot != null && slot.getHasStack()) {
+			ItemStack itemStack1 = slot.getStack();
+			itemStack = itemStack1.copy();
+			if (index < this.inventory.getSlots()) {
+				if (!this.mergeItemStack(itemStack1, this.inventory.getSlots(), this.inventorySlots.size(), true)) {
+					return ItemStack.EMPTY;
+				}
+			} else if (!this.mergeItemStack(itemStack1, 0, this.inventory.getSlots() / 2, false)) {
+				return ItemStack.EMPTY;
+			}
+			if (itemStack1.isEmpty()) {
+				slot.putStack(ItemStack.EMPTY);
+			} else {
+				slot.onSlotChanged();
+			}
+		}
+		return itemStack;
+	}
 }
