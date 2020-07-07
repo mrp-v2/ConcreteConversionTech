@@ -250,6 +250,12 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	}
 
 	@Override
+	public void remove() {
+		super.remove();
+		inventoryLazyOptional.invalidate();
+	}
+
+	@Override
 	public void tick() {
 		if (currentConversion.canConvert) {
 			ticksSpentConverting++;
