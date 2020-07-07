@@ -148,6 +148,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	}
 
 	protected final ConcreteConverterItemStackHandler inventory;
+	private LazyOptional<ConcreteConverterItemStackHandler> inventoryLazyOptional;
 
 	private final int ticksPerItem;
 	private int ticksSpentConverting;
@@ -160,6 +161,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 		this.ticksSpentConverting = 0;
 		this.currentConversion = new ConversionInfo(false);
 		this.inventory = new ConcreteConverterItemStackHandler(ioSlots * 2, this);
+		this.inventoryLazyOptional = LazyOptional.of(() -> inventory);
 	}
 
 	private ConversionInfo calculateConversionInfo() {
@@ -230,7 +232,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return LazyOptional.of(inventory).cast();
+			return inventoryLazyOptional.cast();
 		}
 		return super.getCapability(cap, side);
 	}
