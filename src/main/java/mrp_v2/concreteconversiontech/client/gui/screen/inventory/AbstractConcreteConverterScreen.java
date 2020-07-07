@@ -4,20 +4,34 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrp_v2.concreteconversiontech.common.inventory.container.AbstractConcreteConverterContainer;
+import mrp_v2.concreteconversiontech.common.util.CCTConstants;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public abstract class AbstractConcreteConverterScreen<T extends AbstractConcreteConverterContainer>
 		extends ContainerScreen<T> {
 
 	private final ResourceLocation guiTexture;
 
-	public AbstractConcreteConverterScreen(T screenContainer, PlayerInventory inv, ITextComponent titleIn,
-			ResourceLocation guiTexture) {
+	protected AbstractConcreteConverterScreen(T screenContainer, PlayerInventory inv, ITextComponent titleIn, int tier,
+			int ySize) {
 		super(screenContainer, inv, titleIn);
-		this.guiTexture = guiTexture;
+		this.guiTexture = new ResourceLocation(CCTConstants.MODID,
+				"textures/gui/container/concrete_converter_tier_" + tier + ".png");
+		this.field_230711_n_ = false;
+		this.ySize = ySize;
+		this.field_238745_s_ = this.ySize - 94;
+	}
+
+	protected AbstractConcreteConverterScreen(T screenContainer, PlayerInventory inv, ITextComponent titleIn, int tier,
+			int ySize, int playerInventoryXShift) {
+		this(screenContainer, inv, titleIn, tier, ySize);
+		this.field_238744_r_ += playerInventoryXShift;
 	}
 
 	@Override
