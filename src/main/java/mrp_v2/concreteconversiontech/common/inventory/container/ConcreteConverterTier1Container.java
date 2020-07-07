@@ -22,8 +22,8 @@ public class ConcreteConverterTier1Container extends Container {
 		super(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE, id);
 		Container.assertInventorySize(inventoryIn, 2);
 		this.inventory = inventoryIn;
-		this.addSlot(new ConcreteConverterInputSlot(inventoryIn, 0, 56, 35));
-		this.addSlot(new ConcreteConverterOutputSlot(inventoryIn, 1, 116, 35));
+		this.addSlot(new ConcreteConverterInputSlot(inventoryIn, 0, 53, 35));
+		this.addSlot(new ConcreteConverterOutputSlot(inventoryIn, 1, 107, 35));
 
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
