@@ -1,7 +1,9 @@
 package mrp_v2.concreteconversiontech.client.eventhandler;
 
+import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConverterTier1Screen;
 import mrp_v2.concreteconversiontech.common.util.CCTConstants;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.api.distmarker.Dist;
@@ -26,5 +28,10 @@ public class CCTClientRegistryHandler {
 		event.getItemColors().register((itemStack, tint) -> {
 			return Biomes.PLAINS.getWaterColor();
 		}, CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK_ITEM);
+	}
+
+	static {
+		ScreenManager.registerFactory(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE,
+				ConcreteConverterTier1Screen::new);
 	}
 }
