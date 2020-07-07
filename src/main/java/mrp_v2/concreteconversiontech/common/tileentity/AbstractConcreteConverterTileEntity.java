@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mrp_v2.concreteconversiontech.common.inventory.ConcreteConverterItemStackHandler;
-import mrp_v2.concreteconversiontech.common.inventory.IConcreteConverter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ConcretePowderBlock;
@@ -28,7 +27,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 abstract public class AbstractConcreteConverterTileEntity extends TileEntity
-		implements ICapabilityProvider, ITickableTileEntity, IConcreteConverter, INamedContainerProvider {
+		implements ICapabilityProvider, ITickableTileEntity, INamedContainerProvider {
 
 	private class ConversionInfo {
 		private static final String ITEM_ID_NBT_ID = "ItemId";
@@ -139,12 +138,12 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 		temp.put(Items.YELLOW_CONCRETE_POWDER, Items.YELLOW_CONCRETE);
 		POWDER_TO_CONCRETE = Collections.unmodifiableMap(temp);
 	}
-	private final ConcreteConverterItemStackHandler inventory;
+
+	protected final ConcreteConverterItemStackHandler inventory;
 
 	private final int ticksPerItem;
 
 	private int ticksSpentConverting;
-
 	private ConversionInfo currentConversion;
 
 	public AbstractConcreteConverterTileEntity(TileEntityType<?> tileEntityTypeIn, int ioSlots, int ticksPerItem) {
@@ -152,7 +151,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 		this.ticksPerItem = ticksPerItem;
 		this.ticksSpentConverting = 0;
 		this.currentConversion = new ConversionInfo(false);
-		this.inventory = new ConcreteConverterItemStackHandler(ioSlots, this);
+		this.inventory = new ConcreteConverterItemStackHandler(ioSlots * 2, this);
 	}
 
 	private ConversionInfo calculateConversionInfo() {
@@ -226,7 +225,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 		return super.getCapability(cap, side);
 	}
 
-	public boolean isConcretePowder(ItemStack stack) {
+	public static boolean isConcretePowder(ItemStack stack) {
 		return Block.getBlockFromItem(stack.getItem()) instanceof ConcretePowderBlock;
 	}
 

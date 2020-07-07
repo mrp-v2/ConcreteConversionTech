@@ -1,5 +1,6 @@
 package mrp_v2.concreteconversiontech.common.tileentity;
 
+import mrp_v2.concreteconversiontech.common.inventory.container.ConcreteConverterTier1Container;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import mrp_v2.concreteconversiontech.common.util.MessageHelper;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,8 +22,7 @@ public class ConcreteConverterTier1TileEntity extends AbstractConcreteConverterT
 	}
 
 	@Override
-	public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
-		// TODO Auto-generated method stub
-		return null;
+	public Container createMenu(int id, PlayerInventory playerInventoryIn, PlayerEntity playerIn) {
+		return new ConcreteConverterTier1Container(id, playerInventoryIn, this.inventory);
 	}
 }
