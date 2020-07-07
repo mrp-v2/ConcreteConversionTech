@@ -227,11 +227,10 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 		currentConversion = new ConversionInfo(nbt.getCompound(CURRENT_CONVERSION_NBT_ID));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return (LazyOptional<T>) LazyOptional.of(inventory);
+			return LazyOptional.of(inventory).cast();
 		}
 		return super.getCapability(cap, side);
 	}
