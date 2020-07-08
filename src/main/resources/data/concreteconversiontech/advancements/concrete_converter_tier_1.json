@@ -2,7 +2,7 @@
 	"parent": "minecraft:recipes/root",
 	"rewards": {
 		"recipes": [
-			"concreteconversiontech:concrete_converter_tier_1"
+			"concreteconversiontech:concrete_converter_tier_1_block"
 		]
 	},
 	"criteria": {
@@ -19,7 +19,7 @@
 		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions": {
-				"recipe": "concreteconversiontech:concrete_converter_tier_1"
+				"recipe": "concreteconversiontech:concrete_converter_tier_1_block"
 			}
 		}
 	},
