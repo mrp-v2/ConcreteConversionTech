@@ -137,6 +137,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 		if (!inventory.isInputEmpty()) {
 			this.ticksSpentConverting++;
 			if (this.ticksSpentConverting >= TICKS_PER_ITEM) {
+				this.ticksSpentConverting = 0;
 				attemptConversions();
 			} else {
 				this.markDirty();
