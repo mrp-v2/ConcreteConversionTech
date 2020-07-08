@@ -2,6 +2,7 @@ package mrp_v2.concreteconversiontech.common.inventory.container;
 
 import mrp_v2.concreteconversiontech.common.inventory.ConcreteConverterItemStackHandler;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
@@ -14,11 +15,29 @@ public abstract class AbstractConcreteConverterContainer extends Container {
 
 	protected final ConcreteConverterItemStackHandler inventory;
 
-	protected AbstractConcreteConverterContainer(ContainerType<?> type, int id,
-			ConcreteConverterItemStackHandler inventoryIn) {
-		super(type, id);
-		this.inventory = inventoryIn;
+	protected AbstractConcreteConverterContainer(ContainerType<?> type, int id, PlayerInventory playerInventoryIn,
+			ConcreteConverterItemStackHandler inventoryIn, int expectedSlots, int ySize) {
+		this(type, id, playerInventoryIn, inventoryIn, expectedSlots, ySize, 0);
 	}
+
+	protected AbstractConcreteConverterContainer(ContainerType<?> type, int id, PlayerInventory playerInventoryIn,
+			ConcreteConverterItemStackHandler inventoryIn, int expectedSlots, int ySize, int playerInventoryXOffset) {
+		super(type, id);
+		Container.assertInventorySize(inventoryIn, expectedSlots);
+		this.inventory = inventoryIn;
+		addSlots();
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < 9; ++j) {
+				this.addSlot(new Slot(playerInventoryIn, j + i * 9 + 9, playerInventoryXOffset + 8 + j * 18,
+						ySize - 82 + i * 18));
+			}
+		}
+		for (int k = 0; k < 9; ++k) {
+			this.addSlot(new Slot(playerInventoryIn, k, playerInventoryXOffset + 8 + k * 18, ySize - 24));
+		}
+	}
+
+	abstract protected void addSlots();
 
 	@Override
 	public boolean canInteractWith(PlayerEntity playerIn) {
