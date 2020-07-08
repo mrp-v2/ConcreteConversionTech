@@ -16,7 +16,7 @@
 			"tag": "forge:ingots/gold"
 		},
 		"P": {
-			"item": "minecraft:gold_pickaxe"
+			"item": "minecraft:golden_pickaxe"
 		}
 	},
 	"result": {
