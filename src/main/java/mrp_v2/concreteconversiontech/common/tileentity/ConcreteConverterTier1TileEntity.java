@@ -16,7 +16,7 @@ public class ConcreteConverterTier1TileEntity extends AbstractConcreteConverterT
 	public static final int TOTAL_SLOTS = IO_SLOTS * 2;
 
 	public ConcreteConverterTier1TileEntity() {
-		super(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_TILE_ENTITY_TYPE, IO_SLOTS, 16, ID);
+		super(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_TILE_ENTITY_TYPE, IO_SLOTS, ID);
 	}
 
 	@Override
