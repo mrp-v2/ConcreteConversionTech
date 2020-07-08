@@ -16,5 +16,11 @@ public class CCTClientEventHandler {
 	public static void clientSetup(final FMLClientSetupEvent event) {
 		RenderTypeLookup.setRenderLayer(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(CCTObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(CCTObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(CCTObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(CCTObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(CCTObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(CCTObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(CCTObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK, RenderType.getCutout());
 	}
 }

@@ -3,6 +3,12 @@ package mrp_v2.concreteconversiontech.client.eventhandler;
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConverterTier1Screen;
 import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConverterTier2Screen;
+import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConverterTier3Screen;
+import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConverterTier4Screen;
+import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConverterTier5Screen;
+import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConverterTier6Screen;
+import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConverterTier7Screen;
+import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConverterTier8Screen;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.world.biome.BiomeColors;
@@ -45,5 +51,17 @@ public class CCTClientRegistryHandler {
 				ConcreteConverterTier1Screen::new);
 		ScreenManager.registerFactory(CCTObjectHolder.CONCRETE_CONVERTER_TIER_2_CONTAINER_TYPE,
 				ConcreteConverterTier2Screen::new);
+		ScreenManager.registerFactory(CCTObjectHolder.CONCRETE_CONVERTER_TIER_3_CONTAINER_TYPE,
+				ConcreteConverterTier3Screen::new);
+		ScreenManager.registerFactory(CCTObjectHolder.CONCRETE_CONVERTER_TIER_4_CONTAINER_TYPE,
+				ConcreteConverterTier4Screen::new);
+		ScreenManager.registerFactory(CCTObjectHolder.CONCRETE_CONVERTER_TIER_5_CONTAINER_TYPE,
+				ConcreteConverterTier5Screen::new);
+		ScreenManager.registerFactory(CCTObjectHolder.CONCRETE_CONVERTER_TIER_6_CONTAINER_TYPE,
+				ConcreteConverterTier6Screen::new);
+		ScreenManager.registerFactory(CCTObjectHolder.CONCRETE_CONVERTER_TIER_7_CONTAINER_TYPE,
+				ConcreteConverterTier7Screen::new);
+		ScreenManager.registerFactory(CCTObjectHolder.CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE,
+				ConcreteConverterTier8Screen::new);
 	}
 }
