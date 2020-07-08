@@ -152,14 +152,14 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	protected final ConcreteConverterItemStackHandler inventory;
 	private LazyOptional<ConcreteConverterItemStackHandler> inventoryLazyOptional;
 
-	private final int ticksPerItem;
-	private int ticksSpentConverting;
+	private final float ticksPerItem;
+	private float ticksSpentConverting;
 
 	private ConversionInfo currentConversion;
 
 	private String id;
 
-	public AbstractConcreteConverterTileEntity(TileEntityType<?> tileEntityTypeIn, int ioSlots, int ticksPerItem,
+	public AbstractConcreteConverterTileEntity(TileEntityType<?> tileEntityTypeIn, int ioSlots, float ticksPerItem,
 			String id) {
 		super(tileEntityTypeIn);
 		this.ticksPerItem = ticksPerItem;
@@ -233,7 +233,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	public void func_230337_a_(BlockState state, CompoundNBT nbt) {
 		super.func_230337_a_(state, nbt);
 		((ItemStackHandler) inventory).deserializeNBT(nbt.getCompound(INVENTORY_NBT_ID));
-		ticksSpentConverting = nbt.getInt(TICKS_SPENT_CONVERTING_NBT_ID);
+		ticksSpentConverting = nbt.getFloat(TICKS_SPENT_CONVERTING_NBT_ID);
 		currentConversion = new ConversionInfo(nbt.getCompound(CURRENT_CONVERSION_NBT_ID));
 	}
 
@@ -284,7 +284,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	public CompoundNBT write(CompoundNBT compound) {
 		super.write(compound);
 		compound.put(INVENTORY_NBT_ID, ((ItemStackHandler) inventory).serializeNBT());
-		compound.putInt(TICKS_SPENT_CONVERTING_NBT_ID, ticksSpentConverting);
+		compound.putFloat(TICKS_SPENT_CONVERTING_NBT_ID, ticksSpentConverting);
 		compound.put(CURRENT_CONVERSION_NBT_ID, currentConversion.write());
 		return compound;
 	}
