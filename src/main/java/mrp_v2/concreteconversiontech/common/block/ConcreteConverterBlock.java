@@ -2,8 +2,8 @@ package mrp_v2.concreteconversiontech.common.block;
 
 import java.util.function.Supplier;
 
+import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.common.tileentity.AbstractConcreteConverterTileEntity;
-import mrp_v2.concreteconversiontech.common.util.CCTConstants;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -30,7 +30,7 @@ public class ConcreteConverterBlock extends Block {
 	protected static final String ID_STEM_POST = "_block";
 
 	public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(
-			CCTConstants.MODID + ".main_item_group") {
+			ConcreteConversionTech.MODID + ".main_item_group") {
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
 			return new ItemStack(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK);
@@ -42,7 +42,7 @@ public class ConcreteConverterBlock extends Block {
 	public ConcreteConverterBlock(Block base, int tier,
 			Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier) {
 		super(Properties.from(base));
-		this.setRegistryName(CCTConstants.MODID, ID_STEM_PRE + tier + ID_STEM_POST);
+		this.setRegistryName(ConcreteConversionTech.MODID, ID_STEM_PRE + tier + ID_STEM_POST);
 		this.tileEntitySupplier = tileEntitySupplier;
 	}
 

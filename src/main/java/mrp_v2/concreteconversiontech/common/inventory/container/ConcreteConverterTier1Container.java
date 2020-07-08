@@ -1,9 +1,9 @@
 package mrp_v2.concreteconversiontech.common.inventory.container;
 
+import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConverterTier1Screen;
 import mrp_v2.concreteconversiontech.common.inventory.ConcreteConverterItemStackHandler;
 import mrp_v2.concreteconversiontech.common.tileentity.ConcreteConverterTier1TileEntity;
-import mrp_v2.concreteconversiontech.common.util.CCTConstants;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ContainerType;
@@ -15,7 +15,7 @@ public class ConcreteConverterTier1Container extends AbstractConcreteConverterCo
 	public static ContainerType<ConcreteConverterTier1Container> createContainerType() {
 		ContainerType<ConcreteConverterTier1Container> containerType = new ContainerType<ConcreteConverterTier1Container>(
 				ConcreteConverterTier1Container::new);
-		containerType.setRegistryName(CCTConstants.MODID, ID);
+		containerType.setRegistryName(ConcreteConversionTech.MODID, ID);
 		return containerType;
 	}
 

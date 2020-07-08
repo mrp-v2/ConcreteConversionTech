@@ -1,6 +1,6 @@
 package mrp_v2.concreteconversiontech.client.eventhandler;
 
-import mrp_v2.concreteconversiontech.common.util.CCTConstants;
+import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@EventBusSubscriber(modid = CCTConstants.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ConcreteConversionTech.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class CCTClientEventHandler {
 
 	@SubscribeEvent

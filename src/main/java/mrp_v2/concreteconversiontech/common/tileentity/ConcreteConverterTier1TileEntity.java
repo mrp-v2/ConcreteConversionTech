@@ -1,7 +1,7 @@
 package mrp_v2.concreteconversiontech.common.tileentity;
 
+import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.common.inventory.container.ConcreteConverterTier1Container;
-import mrp_v2.concreteconversiontech.common.util.CCTConstants;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -28,7 +28,7 @@ public class ConcreteConverterTier1TileEntity extends AbstractConcreteConverterT
 		TileEntityType<ConcreteConverterTier1TileEntity> tileEntityType = TileEntityType.Builder
 				.create(ConcreteConverterTier1TileEntity::new, CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK)
 				.build(null);
-		tileEntityType.setRegistryName(CCTConstants.MODID, ID);
+		tileEntityType.setRegistryName(ConcreteConversionTech.MODID, ID);
 		return tileEntityType;
 	}
 }
