@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.16.1-1.0.0.0'
+version = '1.16.1-1.0.0.0-rc1'
 group = 'mrp_v2.concreteconversiontech' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'concreteconversiontech'
 
@@ -144,4 +144,17 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
+}
+
+processResources {
+	inputs.property 'version', project.version
+	
+	from(sourceSets.main.resources.srcDirs) {
+		include 'META-INF/mods.toml'
+		expand 'version': project.version
+	}
+	
+	from(sourceSets.main.resources.srcDirs) {
+		exclude 'META-INF/mods.toml'
+	}
 }

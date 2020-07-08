@@ -2,7 +2,7 @@ modLoader="javafml"
 loaderVersion="[32,)"
 [[mods]]
 	modId="concreteconversiontech"
-	version="1.16.1-1.0.0.0"
+	version="${version}"
 	displayName="Concrete Conversion Tech"
 	#logoFile="ConcreteConversionTechLogo.png"
 	updateJSONURL="https://raw.githubusercontent.com/mrp-v2/ModUpdateFiles/master/ConcreteConversionTech.json"
