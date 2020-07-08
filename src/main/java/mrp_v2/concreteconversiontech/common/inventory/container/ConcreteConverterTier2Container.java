@@ -32,9 +32,9 @@ public class ConcreteConverterTier2Container extends AbstractConcreteConverterCo
 
 	@Override
 	protected void addSlots() {
-		this.addSlot(new ConcreteConverterInputSlot(this.inventory, 0, 35, 35));
-		this.addSlot(new ConcreteConverterInputSlot(this.inventory, 1, 53, 35));
-		this.addSlot(new ConcreteConverterOutputSlot(this.inventory, 2, 107, 35));
-		this.addSlot(new ConcreteConverterOutputSlot(this.inventory, 3, 125, 35));
+		this.addSlot(new ConcreteConverterInputSlot(this.inventory, 0, 35, 18));
+		this.addSlot(new ConcreteConverterInputSlot(this.inventory, 1, 53, 18));
+		this.addSlot(new ConcreteConverterOutputSlot(this.inventory, 2, 107, 18));
+		this.addSlot(new ConcreteConverterOutputSlot(this.inventory, 3, 125, 18));
 	}
 }
