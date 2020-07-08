@@ -13,9 +13,12 @@ public class ConcreteConverterItemStackHandler extends ItemStackHandler
 
 	private final AbstractConcreteConverterTileEntity concreteConverter;
 
+	private boolean suppressingCalls;
+
 	public ConcreteConverterItemStackHandler(int slots, AbstractConcreteConverterTileEntity concreteConverter) {
 		super(slots);
 		this.concreteConverter = concreteConverter;
+		this.suppressingCalls = false;
 	}
 
 	public ItemStack extractItem(int slot, int amount) {
@@ -47,9 +50,27 @@ public class ConcreteConverterItemStackHandler extends ItemStackHandler
 		return super.insertItem(slot, stack, simulate);
 	}
 
+	/** Starts suppressing {@code onContentsChanged} calls. */
+	public void beginUpdate() {
+		this.suppressingCalls = true;
+	}
+
+	/** Stops suppressing and generates an {@code onContentsChanged} call. */
+	public void endUpdate() {
+		this.suppressingCalls = false;
+		onContentsChanged();
+	}
+
 	@Override
 	protected void onContentsChanged(int slot) {
+		if (this.suppressingCalls) {
+			return;
+		}
 		super.onContentsChanged(slot);
+		onContentsChanged();
+	}
+
+	private void onContentsChanged() {
 		if (concreteConverter != null) {
 			concreteConverter.contentsChanged();
 		}
