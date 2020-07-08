@@ -16,28 +16,42 @@ public abstract class AbstractConcreteConverterContainer extends Container {
 	protected final ConcreteConverterItemStackHandler inventory;
 
 	protected AbstractConcreteConverterContainer(ContainerType<?> type, int id, PlayerInventory playerInventoryIn,
-			ConcreteConverterItemStackHandler inventoryIn, int expectedSlots, int ySize) {
-		this(type, id, playerInventoryIn, inventoryIn, expectedSlots, ySize, 0);
-	}
-
-	protected AbstractConcreteConverterContainer(ContainerType<?> type, int id, PlayerInventory playerInventoryIn,
-			ConcreteConverterItemStackHandler inventoryIn, int expectedSlots, int ySize, int playerInventoryXOffset) {
+			ConcreteConverterItemStackHandler inventoryIn, int expectedSlots, int ySize, int playerInventoryXOffset,
+			int inputSlotsXStart, int outputSlotsXStart, int slotsYStart, int slotsWidth, int slotsHeight) {
 		super(type, id);
 		Container.assertInventorySize(inventoryIn, expectedSlots);
 		this.inventory = inventoryIn;
-		addSlots();
+		addSlots(inputSlotsXStart, outputSlotsXStart, slotsYStart, slotsWidth, slotsHeight, playerInventoryIn,
+				playerInventoryXOffset, ySize);
+	}
+
+	protected void addSlots(int inputSlotsXStart, int outputSlotsXStart, int slotsYStart, int width, int height,
+			PlayerInventory playerInventory, int playerInventoryXOffset, int ySize) {
+		// converter input slots
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				this.addSlot(new ConcreteConverterInputSlot(this.inventory, j + i * 2, inputSlotsXStart + j * 18,
+						slotsYStart + i * 18));
+			}
+		}
+		// converter outputs slots
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				this.addSlot(new ConcreteConverterOutputSlot(this.inventory, width * height + j + i * 2,
+						outputSlotsXStart + j * 18, slotsYStart + i * 18));
+			}
+		}
+		// player inventory slots
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				this.addSlot(new Slot(playerInventoryIn, j + i * 9 + 9, playerInventoryXOffset + 8 + j * 18,
+				this.addSlot(new Slot(playerInventory, j + i * 9 + 9, playerInventoryXOffset + 8 + j * 18,
 						ySize - 82 + i * 18));
 			}
 		}
-		for (int k = 0; k < 9; ++k) {
-			this.addSlot(new Slot(playerInventoryIn, k, playerInventoryXOffset + 8 + k * 18, ySize - 24));
+		for (int i = 0; i < 9; ++i) {
+			this.addSlot(new Slot(playerInventory, i, playerInventoryXOffset + 8 + i * 18, ySize - 24));
 		}
 	}
-
-	abstract protected void addSlots();
 
 	@Override
 	public boolean canInteractWith(PlayerEntity playerIn) {

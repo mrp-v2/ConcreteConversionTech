@@ -27,12 +27,7 @@ public class ConcreteConverterTier1Container extends AbstractConcreteConverterCo
 	public ConcreteConverterTier1Container(int id, PlayerInventory playerInventoryIn,
 			ConcreteConverterItemStackHandler inventoryIn) {
 		super(CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE, id, playerInventoryIn, inventoryIn,
-				ConcreteConverterTier1TileEntity.TOTAL_SLOTS, ConcreteConverterTier1Screen.Y_SIZE);
-	}
-
-	@Override
-	protected void addSlots() {
-		this.addSlot(new ConcreteConverterInputSlot(this.inventory, 0, 53, 18));
-		this.addSlot(new ConcreteConverterOutputSlot(this.inventory, 1, 107, 18));
+				ConcreteConverterTier1TileEntity.TOTAL_SLOTS, ConcreteConverterTier1Screen.Y_SIZE, 0, 53, 107, 18, 1,
+				1);
 	}
 }
