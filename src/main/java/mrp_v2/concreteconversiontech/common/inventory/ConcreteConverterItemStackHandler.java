@@ -13,21 +13,19 @@ public class ConcreteConverterItemStackHandler extends ItemStackHandler
 
 	private final AbstractConcreteConverterTileEntity concreteConverter;
 
-	private boolean suppressingCalls;
-
 	public ConcreteConverterItemStackHandler(int slots, AbstractConcreteConverterTileEntity concreteConverter) {
 		super(slots);
 		this.concreteConverter = concreteConverter;
-		this.suppressingCalls = false;
 	}
 
+	/** Ignores slot limitations */
 	public ItemStack extractItem(int slot, int amount) {
 		return super.extractItem(slot, amount, false);
 	}
 
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate) {
-		if (slot < stacks.size() / 2) {
+		if (slot < this.stacks.size() / 2) {
 			return ItemStack.EMPTY;
 		}
 		return super.extractItem(slot, amount, simulate);
@@ -38,42 +36,31 @@ public class ConcreteConverterItemStackHandler extends ItemStackHandler
 		return this;
 	}
 
+	/** Ignores slot limitations */
 	public ItemStack insertItem(int slot, ItemStack stack) {
 		return super.insertItem(slot, stack, false);
 	}
 
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-		if (slot >= stacks.size() / 2 || !AbstractConcreteConverterTileEntity.isConcretePowder(stack)) {
+		if (slot >= this.stacks.size() / 2 || !AbstractConcreteConverterTileEntity.isConcretePowder(stack)) {
 			return stack;
 		}
 		return super.insertItem(slot, stack, simulate);
 	}
 
-	/** Starts suppressing {@code onContentsChanged} calls. */
-	public void beginUpdate() {
-		this.suppressingCalls = true;
-	}
-
-	/** Stops suppressing and generates an {@code onContentsChanged} call. */
-	public void endUpdate() {
-		this.suppressingCalls = false;
-		onContentsChanged();
-	}
-
 	@Override
 	protected void onContentsChanged(int slot) {
-		if (this.suppressingCalls) {
-			return;
-		}
 		super.onContentsChanged(slot);
-		onContentsChanged();
 	}
 
-	private void onContentsChanged() {
-		if (concreteConverter != null) {
-			concreteConverter.contentsChanged();
+	public boolean isInputEmpty() {
+		for (int i = 0; i < this.stacks.size() / 2; i++) {
+			if (!this.stacks.get(i).isEmpty()) {
+				return false;
+			}
 		}
+		return true;
 	}
 
 	// start of IIventory code
