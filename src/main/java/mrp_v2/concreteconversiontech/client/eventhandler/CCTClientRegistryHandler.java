@@ -21,14 +21,23 @@ public class CCTClientRegistryHandler {
 	public static void registerBlockColors(final ColorHandlerEvent.Block event) {
 		event.getBlockColors().register((state, reader, pos, tint) -> {
 			return reader != null && pos != null ? BiomeColors.getWaterColor(reader, pos) : -1;
-		}, CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK, CCTObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK);
+		}, CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK, CCTObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK, CCTObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK, CCTObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK, CCTObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK);
 	}
 
 	@SubscribeEvent
 	public static void registerItemColors(final ColorHandlerEvent.Item event) {
 		event.getItemColors().register((itemStack, tint) -> {
 			return Biomes.PLAINS.getWaterColor();
-		}, CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK_ITEM, CCTObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK_ITEM);
+		}, CCTObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK_ITEM, CCTObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK_ITEM,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK_ITEM,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK_ITEM,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK_ITEM,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK_ITEM,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK_ITEM,
+				CCTObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK_ITEM);
 	}
 
 	static {
