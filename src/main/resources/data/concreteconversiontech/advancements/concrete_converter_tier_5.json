@@ -1,0 +1,32 @@
+{
+	"parent": "concreteconversiontech:recipes/concrete_converter_tier_4",
+	"rewards": {
+		"recipes": [
+			"concreteconversiontech:concrete_converter_tier_5"
+		]
+	},
+	"criteria": {
+		"has_tier_4": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "concreteconversiontech:concrete_converter_tier_5"
+					}
+				]
+			}
+		},
+		"has_the_recipe": {
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": {
+				"recipe": "concreteconversiontech:concrete_converter_tier_5"
+			}
+		}
+	},
+	"requirements": [
+		[
+			"has_tier_4",
+			"has_the_recipe"
+		]
+	]
+}
