@@ -80,6 +80,16 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 		this.id = id;
 	}
 
+	private void attemptConversions() {
+		for (int i = 0; i < inventory.getSlots() / 2; i++) {
+			int destination = this.calculateDestinationSlot(i);
+			if (destination < 0) {
+				continue;
+			}
+			convertItem(i, destination);
+		}
+	}
+
 	private int calculateDestinationSlot(int slot) {
 		Item powderItem = inventory.getStackInSlot(slot).getItem();
 		for (int i = inventory.getSlots() / 2; i < inventory.getSlots(); i++) {
@@ -139,22 +149,11 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 			if (this.ticksSpentConverting >= TICKS_PER_ITEM) {
 				this.ticksSpentConverting = 0;
 				attemptConversions();
-			} else {
-				this.markDirty();
 			}
+			this.markDirty();
 		} else if (this.ticksSpentConverting != 0) {
 			this.ticksSpentConverting = 0;
 			this.markDirty();
-		}
-	}
-
-	private void attemptConversions() {
-		for (int i = 0; i < inventory.getSlots() / 2; i++) {
-			int destination = this.calculateDestinationSlot(i);
-			if (destination < 0) {
-				continue;
-			}
-			convertItem(i, destination);
 		}
 	}
 
