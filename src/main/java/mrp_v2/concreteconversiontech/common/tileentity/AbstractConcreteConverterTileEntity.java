@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mrp_v2.concreteconversiontech.common.inventory.ConcreteConverterItemStackHandler;
+import mrp_v2.concreteconversiontech.common.util.MessageHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ConcretePowderBlock;
@@ -23,6 +24,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -155,13 +157,17 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 
 	private ConversionInfo currentConversion;
 
-	public AbstractConcreteConverterTileEntity(TileEntityType<?> tileEntityTypeIn, int ioSlots, int ticksPerItem) {
+	private String id;
+
+	public AbstractConcreteConverterTileEntity(TileEntityType<?> tileEntityTypeIn, int ioSlots, int ticksPerItem,
+			String id) {
 		super(tileEntityTypeIn);
 		this.ticksPerItem = ticksPerItem;
 		this.ticksSpentConverting = 0;
 		this.currentConversion = new ConversionInfo(false);
 		this.inventory = new ConcreteConverterItemStackHandler(ioSlots * 2, this);
 		this.inventoryLazyOptional = LazyOptional.of(() -> inventory);
+		this.id = id;
 	}
 
 	private ConversionInfo calculateConversionInfo() {
@@ -214,8 +220,10 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 
 	private void convertItem(int sourceIndex, int destinationIndex) {
 		Item sourceItem = inventory.getStackInSlot(sourceIndex).getItem();
+		inventory.beginUpdate();
 		inventory.extractItem(sourceIndex, 1);
 		inventory.insertItem(destinationIndex, new ItemStack(POWDER_TO_CONCRETE.get(sourceItem), 1));
+		inventory.endUpdate();
 	}
 
 	@Override
@@ -235,6 +243,11 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 			return inventoryLazyOptional.cast();
 		}
 		return super.getCapability(cap, side);
+	}
+
+	@Override
+	public ITextComponent getDisplayName() {
+		return MessageHelper.makeTranslation(this.id, "display_name");
 	}
 
 	private boolean isValid(ConversionInfo conversionInfo) {
@@ -259,11 +272,10 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	public void tick() {
 		if (currentConversion.canConvert) {
 			ticksSpentConverting++;
-			if (ticksSpentConverting >= ticksPerItem) {
+			this.markDirty();
+			while (ticksSpentConverting >= ticksPerItem && currentConversion.canConvert) {
 				convertItem(currentConversion.sourceIndex, currentConversion.destinationIndex);
-				ticksSpentConverting = 0;
-			} else {
-				this.markDirty();
+				ticksSpentConverting -= ticksPerItem;
 			}
 		}
 	}
