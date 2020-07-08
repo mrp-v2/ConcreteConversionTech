@@ -30,14 +30,14 @@ public abstract class AbstractConcreteConverterContainer extends Container {
 		// converter input slots
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				this.addSlot(new ConcreteConverterInputSlot(this.inventory, j + i * 2, inputSlotsXStart + j * 18,
+				this.addSlot(new ConcreteConverterInputSlot(this.inventory, j + i * width, inputSlotsXStart + j * 18,
 						slotsYStart + i * 18));
 			}
 		}
 		// converter outputs slots
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				this.addSlot(new ConcreteConverterOutputSlot(this.inventory, width * height + j + i * 2,
+				this.addSlot(new ConcreteConverterOutputSlot(this.inventory, width * height + j + i * width,
 						outputSlotsXStart + j * 18, slotsYStart + i * 18));
 			}
 		}
