@@ -36,9 +36,9 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	private static final String INVENTORY_NBT_ID = "Inventory";
 	private static final String TICKS_SPENT_CONVERTING_NBT_ID = "TicksSpentConverting";
 
-	private static final int TICKS_PER_ITEM = 16;
+	public static final int TICKS_PER_ITEM = 16;
 
-	protected static final Map<Item, Item> POWDER_TO_CONCRETE;
+	public static final Map<Item, Item> POWDER_TO_CONCRETE;
 
 	static {
 		HashMap<Item, Item> temp = new HashMap<Item, Item>();
