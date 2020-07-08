@@ -15,5 +15,6 @@ public class ConcreteConverterTier8Screen extends AbstractConcreteConverterScree
 	public ConcreteConverterTier8Screen(ConcreteConverterTier8Container screenContainer, PlayerInventory inv,
 			ITextComponent titleIn) {
 		super(screenContainer, inv, titleIn, 8, Y_SIZE, PLAYER_INVENTORY_X_OFFSET);
+		this.xSize += 18 * 2;
 	}
 }
