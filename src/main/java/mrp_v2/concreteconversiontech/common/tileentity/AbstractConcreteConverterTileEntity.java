@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mrp_v2.concreteconversiontech.common.inventory.ConcreteConverterItemStackHandler;
-import mrp_v2.concreteconversiontech.common.util.MessageHelper;
+import mrp_v2.concreteconversiontech.common.util.CCTUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ConcretePowderBlock;
@@ -133,7 +133,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 
 	@Override
 	public ITextComponent getDisplayName() {
-		return MessageHelper.makeTranslation(this.id, "display_name");
+		return CCTUtil.makeTranslation(this.id, "display_name");
 	}
 
 	@Override
