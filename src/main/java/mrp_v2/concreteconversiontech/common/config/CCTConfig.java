@@ -10,7 +10,6 @@ import com.google.common.collect.Sets;
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.config.ModConfig;
@@ -23,12 +22,10 @@ public class CCTConfig {
 		private static final String HARDER_CRAFTING_ID = "harder_crafting";
 		private static final String PROGRESSIVE_CRAFTING_ID = "progressive_crafting";
 
-		private static final Set<String> EMPTY_SET = Sets.newHashSet();
-
 		private final BooleanValue harder_crafting;
 		private final BooleanValue progressive_crafting;
 
-		private final LazyOptional<Set<String>> craftingConditions;
+		private final Set<String> craftingConditions;
 
 		Server(final ForgeConfigSpec.Builder builder) {
 			builder.comment("Server configuration settings.").push("server");
@@ -44,20 +41,19 @@ public class CCTConfig {
 
 			builder.pop();
 
-			craftingConditions = LazyOptional.of(() -> {
-				return Sets.newHashSet(
-						SERVER.harder_crafting.get() ? Server.HARDER_CRAFTING_ID : "!" + Server.HARDER_CRAFTING_ID,
-						SERVER.progressive_crafting.get() ? Server.PROGRESSIVE_CRAFTING_ID
-								: "!" + Server.PROGRESSIVE_CRAFTING_ID);
-			});
+			craftingConditions = Sets.newHashSet();
 		}
 
 		public Set<String> getCraftingConditions() {
-			return craftingConditions.orElse(EMPTY_SET);
+			return craftingConditions;
 		}
 
 		public void updateCraftingConditions() {
-			craftingConditions.invalidate();
+			craftingConditions.clear();
+			craftingConditions
+					.add(SERVER.harder_crafting.get() ? Server.HARDER_CRAFTING_ID : "!" + Server.HARDER_CRAFTING_ID);
+			craftingConditions.add(SERVER.progressive_crafting.get() ? Server.PROGRESSIVE_CRAFTING_ID
+					: "!" + Server.PROGRESSIVE_CRAFTING_ID);
 		}
 	}
 
