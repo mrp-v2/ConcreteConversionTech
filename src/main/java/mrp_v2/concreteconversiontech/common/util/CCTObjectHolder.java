@@ -9,6 +9,7 @@ import mrp_v2.concreteconversiontech.common.inventory.container.ConcreteConverte
 import mrp_v2.concreteconversiontech.common.inventory.container.ConcreteConverterTier6Container;
 import mrp_v2.concreteconversiontech.common.inventory.container.ConcreteConverterTier7Container;
 import mrp_v2.concreteconversiontech.common.inventory.container.ConcreteConverterTier8Container;
+import mrp_v2.concreteconversiontech.common.recipe.CCTShapedRecipe;
 import mrp_v2.concreteconversiontech.common.tileentity.ConcreteConverterTier1TileEntity;
 import mrp_v2.concreteconversiontech.common.tileentity.ConcreteConverterTier2TileEntity;
 import mrp_v2.concreteconversiontech.common.tileentity.ConcreteConverterTier3TileEntity;
@@ -56,6 +57,7 @@ public class CCTObjectHolder {
 	public static final ContainerType<ConcreteConverterTier6Container> CONCRETE_CONVERTER_TIER_6_CONTAINER_TYPE;
 	public static final ContainerType<ConcreteConverterTier7Container> CONCRETE_CONVERTER_TIER_7_CONTAINER_TYPE;
 	public static final ContainerType<ConcreteConverterTier8Container> CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE;
+	public static final CCTShapedRecipe.Serializer CCT_SHAPED_RECIPE_SERIALIZER;
 	static {
 		CONCRETE_CONVERTER_TIER_1_BLOCK = new ConcreteConverterBlock(Blocks.OAK_PLANKS, 1,
 				ConcreteConverterTier1TileEntity::new);
@@ -97,5 +99,6 @@ public class CCTObjectHolder {
 		CONCRETE_CONVERTER_TIER_6_CONTAINER_TYPE = ConcreteConverterTier6Container.createContainerType();
 		CONCRETE_CONVERTER_TIER_7_CONTAINER_TYPE = ConcreteConverterTier7Container.createContainerType();
 		CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE = ConcreteConverterTier8Container.createContainerType();
+		CCT_SHAPED_RECIPE_SERIALIZER = new CCTShapedRecipe.Serializer();
 	}
 }

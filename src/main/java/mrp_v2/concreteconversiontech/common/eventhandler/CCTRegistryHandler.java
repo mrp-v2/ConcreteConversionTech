@@ -5,6 +5,7 @@ import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -56,5 +57,9 @@ public class CCTRegistryHandler {
 				CCTObjectHolder.CONCRETE_CONVERTER_TIER_6_CONTAINER_TYPE,
 				CCTObjectHolder.CONCRETE_CONVERTER_TIER_7_CONTAINER_TYPE,
 				CCTObjectHolder.CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE);
+	}
+
+	public static void registerRecipeSerializers(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
+		event.getRegistry().registerAll(CCTObjectHolder.CCT_SHAPED_RECIPE_SERIALIZER);
 	}
 }
