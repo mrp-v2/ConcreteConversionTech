@@ -59,6 +59,7 @@ public class CCTRegistryHandler {
 				CCTObjectHolder.CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE);
 	}
 
+	@SubscribeEvent
 	public static void registerRecipeSerializers(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
 		event.getRegistry().registerAll(CCTObjectHolder.CCT_SHAPED_RECIPE_SERIALIZER);
 	}
