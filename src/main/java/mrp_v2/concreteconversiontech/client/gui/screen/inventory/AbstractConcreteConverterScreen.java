@@ -3,8 +3,8 @@ package mrp_v2.concreteconversiontech.client.gui.screen.inventory;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.common.inventory.container.AbstractConcreteConverterContainer;
+import mrp_v2.concreteconversiontech.common.util.CCTUtil;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -21,8 +21,7 @@ public abstract class AbstractConcreteConverterScreen<T extends AbstractConcrete
 	protected AbstractConcreteConverterScreen(T screenContainer, PlayerInventory inv, ITextComponent titleIn, int tier,
 			int ySize) {
 		super(screenContainer, inv, titleIn);
-		this.guiTexture = new ResourceLocation(ConcreteConversionTech.MODID,
-				"textures/gui/container/concrete_converter_tier_" + tier + ".png");
+		this.guiTexture = CCTUtil.resourceLocation("textures/gui/container/concrete_converter_tier_" + tier + ".png");
 		this.field_230711_n_ = false;
 		this.ySize = ySize;
 		this.field_238745_s_ = this.ySize - 94;

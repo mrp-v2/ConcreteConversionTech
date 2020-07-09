@@ -14,7 +14,7 @@ public class CCTUtil {
 		return makeTranslation(String.join(".", idParts));
 	}
 
-	public static ResourceLocation createLocation(String id) {
+	public static ResourceLocation resourceLocation(String id) {
 		return new ResourceLocation(ConcreteConversionTech.MODID, id);
 	}
 }
