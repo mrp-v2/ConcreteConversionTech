@@ -16,6 +16,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
+import mrp_v2.concreteconversiontech.common.config.CCTConfig;
 import mrp_v2.concreteconversiontech.common.util.CCTObjectHolder;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;
@@ -85,7 +86,11 @@ public class CCTShapedRecipe implements ICraftingRecipe, IShapedRecipe<CraftingI
 	}
 
 	public NonNullList<Ingredient> getIngredients() {
-		return this.recipeItems;
+		NonNullList<Ingredient> ingredients = this.recipeItems;
+		for (Override override : overrides) {
+			ingredients = override.apply(ingredients, pattern, CCTConfig.SERVER.getCraftingConditions());
+		}
+		return ingredients;
 	}
 
 	/**
@@ -126,9 +131,9 @@ public class CCTShapedRecipe implements ICraftingRecipe, IShapedRecipe<CraftingI
 				Ingredient ingredient = Ingredient.EMPTY;
 				if (k >= 0 && l >= 0 && k < this.recipeWidth && l < this.recipeHeight) {
 					if (p_77573_4_) {
-						ingredient = this.recipeItems.get(this.recipeWidth - k - 1 + l * this.recipeWidth);
+						ingredient = this.getIngredients().get(this.recipeWidth - k - 1 + l * this.recipeWidth);
 					} else {
-						ingredient = this.recipeItems.get(k + l * this.recipeWidth);
+						ingredient = this.getIngredients().get(k + l * this.recipeWidth);
 					}
 				}
 
