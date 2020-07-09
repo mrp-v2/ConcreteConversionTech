@@ -31,7 +31,7 @@ public class CCTConfig {
 		private final LazyOptional<Set<String>> craftingConditions;
 
 		Server(final ForgeConfigSpec.Builder builder) {
-			builder.comment("Server configuration settings.");
+			builder.comment("Server configuration settings.").push("server");
 
 			harder_crafting = builder.comment(
 					"Whether to increase the costs of crafting recipes by replacing ingots and gems with their compacted equivalents.",

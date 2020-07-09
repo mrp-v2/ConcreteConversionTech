@@ -16,6 +16,6 @@
 	"concreteconversiontech.concrete_converter_tier_7_tile_entity.display_name": "Quartz Concrete Converter",
 	"concreteconversiontech.concrete_converter_tier_8_tile_entity.display_name": "Netherite Concrete Converter",
 	"concreteconversiontech.configgui.harder_crafting": "Harder Crafting",
-	"concreteconversiontech.configgui.progressive_crafting": "Progressive Crafting"
+	"concreteconversiontech.configgui.progressive_crafting": "Progressive Crafting",
 	"itemGroup.concreteconversiontech.main_item_group": "Concrete Conversion Tech"
 }
