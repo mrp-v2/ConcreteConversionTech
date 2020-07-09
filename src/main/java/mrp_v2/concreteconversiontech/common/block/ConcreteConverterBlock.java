@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
@@ -42,7 +43,7 @@ public class ConcreteConverterBlock extends Block {
 	public ConcreteConverterBlock(Block base, int tier,
 			Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier) {
 		super(Properties.from(base));
-		this.setRegistryName(ConcreteConversionTech.MODID, ID_STEM_PRE + tier + ID_STEM_POST);
+		this.setRegistryName(new ResourceLocation(ConcreteConversionTech.MODID, ID_STEM_PRE + tier + ID_STEM_POST));
 		this.tileEntitySupplier = tileEntitySupplier;
 	}
 
