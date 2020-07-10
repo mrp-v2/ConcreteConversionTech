@@ -332,7 +332,15 @@ public class CCTShapedRecipe implements ICraftingRecipe, IShapedRecipe<CraftingI
 			List<Override> overrides = json.has(OVERRIDES_KEY)
 					? Override.deserializeOverrides(JSONUtils.getJsonArray(json, OVERRIDES_KEY))
 					: Lists.newArrayList();
-			return new CCTShapedRecipe(recipeId, group, i, j, ingredients, itemstack, pattern, overrides);
+			String[] splitPattern = new String[pattern.length * pattern[0].length()];
+			int k = 0;
+			for (String str : pattern) {
+				for (int l = 0; l < str.length(); l++) {
+					splitPattern[k] = str.substring(l, l + 1);
+					k++;
+				}
+			}
+			return new CCTShapedRecipe(recipeId, group, i, j, ingredients, itemstack, splitPattern, overrides);
 		}
 
 		public CCTShapedRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
@@ -403,9 +411,9 @@ public class CCTShapedRecipe implements ICraftingRecipe, IShapedRecipe<CraftingI
 			NonNullList<Ingredient> newList = NonNullList.create();
 			newList.addAll(original);
 			if (conditions.contains(condition)) {
-				for (int i = 0; i < newList.size(); i++) {
+				for (int i = 0; i < original.size(); i++) {
 					if (this.keyOverrides.containsKey(pattern[i])) {
-						original.set(i, this.keyOverrides.get(pattern[i]));
+						newList.set(i, this.keyOverrides.get(pattern[i]));
 					}
 				}
 			}
