@@ -25,5 +25,23 @@
 	"result": {
 		"item": "concreteconversiontech:concrete_converter_tier_8_block",
 		"count": 1
-	}
+	},
+	"overrides": [
+		{
+			"condition": "!progressive_crafting",
+			"key_overrides": {
+				"C": {
+					"tag": "forge:glass"
+				}
+			}
+		},
+		{
+			"condition": "harder_crafting",
+			"key_overrides": {
+				"B": {
+					"tag": "minecraft:netherite_block"
+				}
+			}
+		}
+	]
 }

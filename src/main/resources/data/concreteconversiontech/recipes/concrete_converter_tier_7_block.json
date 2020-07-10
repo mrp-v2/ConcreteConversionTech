@@ -22,5 +22,23 @@
 	"result": {
 		"item": "concreteconversiontech:concrete_converter_tier_7_block",
 		"count": 1
-	}
+	},
+	"overrides": [
+		{
+			"condition": "!progressive_crafting",
+			"key_overrides": {
+				"C": {
+					"tag": "forge:glass"
+				}
+			}
+		},
+		{
+			"condition": "harder_crafting",
+			"key_overrides": {
+				"B": {
+					"tag": "forge:storage_blocks/quartz"
+				}
+			}
+		}
+	]
 }

@@ -22,5 +22,15 @@
 	"result": {
 		"item": "concreteconversiontech:concrete_converter_tier_2_block",
 		"count": 1
-	}
+	},
+	"overrides": [
+		{
+			"condition": "!progressive_crafting",
+			"key_overrides": {
+				"C": {
+					"tag": "forge:glass"
+				}
+			}
+		}
+	]
 }
