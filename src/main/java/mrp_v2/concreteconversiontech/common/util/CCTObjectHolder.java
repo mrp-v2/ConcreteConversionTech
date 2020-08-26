@@ -73,7 +73,7 @@ public class CCTObjectHolder {
 				ConcreteConverterTier6TileEntity::new);
 		CONCRETE_CONVERTER_TIER_7_BLOCK = new ConcreteConverterBlock(Blocks.QUARTZ_BLOCK, 7,
 				ConcreteConverterTier7TileEntity::new);
-		CONCRETE_CONVERTER_TIER_8_BLOCK = new ConcreteConverterBlock(Blocks.field_235397_ng_, 8,
+		CONCRETE_CONVERTER_TIER_8_BLOCK = new ConcreteConverterBlock(Blocks.NETHERITE_BLOCK, 8,
 				ConcreteConverterTier8TileEntity::new);
 		CONCRETE_CONVERTER_TIER_1_BLOCK_ITEM = CONCRETE_CONVERTER_TIER_1_BLOCK.createBlockItem();
 		CONCRETE_CONVERTER_TIER_2_BLOCK_ITEM = CONCRETE_CONVERTER_TIER_2_BLOCK.createBlockItem();

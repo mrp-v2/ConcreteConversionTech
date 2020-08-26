@@ -1,9 +1,5 @@
 package mrp_v2.concreteconversiontech.common.tileentity;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import mrp_v2.concreteconversiontech.common.inventory.ConcreteConverterItemStackHandler;
 import mrp_v2.concreteconversiontech.common.util.CCTUtil;
 import net.minecraft.block.Block;
@@ -27,6 +23,10 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 		implements ICapabilityProvider, ITickableTileEntity, INamedContainerProvider {
@@ -117,8 +117,8 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 	public abstract Container createMenu(int id, PlayerInventory playerInventoryIn, PlayerEntity playerIn);
 
 	@Override
-	public void func_230337_a_(BlockState state, CompoundNBT nbt) {
-		super.func_230337_a_(state, nbt);
+	public void read(BlockState state, CompoundNBT nbt) {
+		super.read(state, nbt);
 		((ItemStackHandler) inventory).deserializeNBT(nbt.getCompound(INVENTORY_NBT_ID));
 		ticksSpentConverting = nbt.getInt(TICKS_SPENT_CONVERTING_NBT_ID);
 	}
