@@ -69,6 +69,7 @@ minecraft {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mcVersion}-${forgeVersion}"
+    implementation files('../ConfigurableRecipesLibrary/build/libs/configurablerecipeslibrary-1.16.2-1.0.0.0.jar')
 }
 
 jar {

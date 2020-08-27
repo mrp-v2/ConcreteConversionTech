@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
-import mrp_v2.concreteconversiontech.common.inventory.container.AbstractConcreteConverterContainer;
+import mrp_v2.concreteconversiontech.inventory.container.AbstractConcreteConverterContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;

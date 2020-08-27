@@ -1,6 +1,6 @@
 package mrp_v2.concreteconversiontech.client.gui.screen.inventory;
 
-import mrp_v2.concreteconversiontech.common.inventory.container.ConcreteConverterTier5Container;
+import mrp_v2.concreteconversiontech.inventory.container.ConcreteConverterTier5Container;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
