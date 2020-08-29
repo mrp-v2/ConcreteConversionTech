@@ -28,7 +28,7 @@ public class ConcreteConverterTier4TileEntity extends AbstractConcreteConverterT
 		TileEntityType<ConcreteConverterTier4TileEntity> tileEntityType = TileEntityType.Builder
 				.create(ConcreteConverterTier4TileEntity::new, ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK)
 				.build(null);
-		tileEntityType.setRegistryName(ConcreteConversionTech.MODID, ID);
+		tileEntityType.setRegistryName(ConcreteConversionTech.ID, ID);
 		return tileEntityType;
 	}
 }

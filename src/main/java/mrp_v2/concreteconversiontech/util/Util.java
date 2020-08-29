@@ -7,7 +7,7 @@ public class Util
 {
 
 	public static TranslationTextComponent makeTranslation(String id) {
-		return new TranslationTextComponent(ConcreteConversionTech.MODID + "." + id);
+		return new TranslationTextComponent(ConcreteConversionTech.ID + "." + id);
 	}
 
 	public static TranslationTextComponent makeTranslation(String... idParts) {

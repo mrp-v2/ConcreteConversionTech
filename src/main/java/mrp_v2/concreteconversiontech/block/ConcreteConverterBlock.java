@@ -1,7 +1,5 @@
 package mrp_v2.concreteconversiontech.block;
 
-import java.util.function.Supplier;
-
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.tileentity.AbstractConcreteConverterTileEntity;
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
@@ -25,13 +23,15 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.CapabilityItemHandler;
 
+import java.util.function.Supplier;
+
 public class ConcreteConverterBlock extends Block {
 
 	protected static final String ID_STEM_PRE = "concrete_converter_tier_";
 	protected static final String ID_STEM_POST = "_block";
 
 	public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(
-			ConcreteConversionTech.MODID + ".main_item_group") {
+			ConcreteConversionTech.ID + ".main_item_group") {
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
 			return new ItemStack(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK);
@@ -43,7 +43,7 @@ public class ConcreteConverterBlock extends Block {
 	public ConcreteConverterBlock(Block base, int tier,
 			Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier) {
 		super(Properties.from(base));
-		this.setRegistryName(new ResourceLocation(ConcreteConversionTech.MODID, ID_STEM_PRE + tier + ID_STEM_POST));
+		this.setRegistryName(new ResourceLocation(ConcreteConversionTech.ID, ID_STEM_PRE + tier + ID_STEM_POST));
 		this.tileEntitySupplier = tileEntitySupplier;
 	}
 

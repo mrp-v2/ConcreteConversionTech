@@ -21,7 +21,7 @@ public abstract class AbstractConcreteConverterScreen<T extends AbstractConcrete
 	protected AbstractConcreteConverterScreen(T screenContainer, PlayerInventory inv, ITextComponent titleIn, int tier,
 			int ySize) {
 		super(screenContainer, inv, titleIn);
-		this.guiTexture = new ResourceLocation(ConcreteConversionTech.MODID,
+		this.guiTexture = new ResourceLocation(ConcreteConversionTech.ID,
 				"textures/gui/container/concrete_converter_tier_" + tier + ".png");
 		this.passEvents = false;
 		this.ySize = ySize;

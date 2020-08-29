@@ -10,8 +10,6 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'maven-publish'
-
 def mcVersion = '1.16.2'
 def majorForgeVersion = '33'
 def forgeVersion = "${majorForgeVersion}.0.21"
@@ -22,6 +20,7 @@ archivesBaseName = modId
 group = "${author}.${archivesBaseName}"
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
 minecraft {
     mappings channel: 'snapshot', version: '20200723-1.16.1'
     runs {
@@ -38,7 +37,7 @@ minecraft {
         testClient {
             parent runs.client
             mods {
-                configurablerecipeslibrary {
+                concreteconversiontech {
                     sources sourceSets.main, sourceSets.test
                 }
             }
@@ -49,7 +48,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             mods {
                 concreteconversiontech {
-                    source sourceSets.main
+                    sources sourceSets.main
                 }
             }
         }
@@ -67,9 +66,13 @@ minecraft {
     }
 }
 
+repositories {
+    mavenLocal()
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${mcVersion}-${forgeVersion}"
-    implementation files('../ConfigurableRecipesLibrary/build/libs/configurablerecipeslibrary-1.16.2-1.0.0.0.jar')
+    compile "mrp_v2.configurablerecipeslibrary:ConfigurableRecipesLibrary:${mcVersion}-1.0.0.0:dev"
 }
 
 jar {

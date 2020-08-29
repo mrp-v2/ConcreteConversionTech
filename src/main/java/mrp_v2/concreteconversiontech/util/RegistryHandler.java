@@ -1,17 +1,15 @@
 package mrp_v2.concreteconversiontech.util;
 
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
-import mrp_v2.concreteconversiontech.util.ObjectHolder;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@EventBusSubscriber(modid = ConcreteConversionTech.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ConcreteConversionTech.ID, bus = EventBusSubscriber.Bus.MOD)
 public class RegistryHandler
 {
 
@@ -58,10 +56,5 @@ public class RegistryHandler
 				ObjectHolder.CONCRETE_CONVERTER_TIER_6_CONTAINER_TYPE,
 				ObjectHolder.CONCRETE_CONVERTER_TIER_7_CONTAINER_TYPE,
 				ObjectHolder.CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE);
-	}
-
-	@SubscribeEvent
-	public static void registerRecipeSerializers(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
-		event.getRegistry().registerAll(ObjectHolder.CCT_SHAPED_RECIPE_SERIALIZER);
 	}
 }

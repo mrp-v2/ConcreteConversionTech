@@ -15,7 +15,7 @@ public class ConcreteConverterTier3Container extends AbstractConcreteConverterCo
 	public static ContainerType<ConcreteConverterTier3Container> createContainerType() {
 		ContainerType<ConcreteConverterTier3Container> containerType = new ContainerType<ConcreteConverterTier3Container>(
 				ConcreteConverterTier3Container::new);
-		containerType.setRegistryName(ConcreteConversionTech.MODID, ID);
+		containerType.setRegistryName(ConcreteConversionTech.ID, ID);
 		return containerType;
 	}
 

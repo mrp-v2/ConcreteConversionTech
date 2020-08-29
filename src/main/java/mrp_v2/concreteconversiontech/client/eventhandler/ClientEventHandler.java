@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@EventBusSubscriber(modid = ConcreteConversionTech.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ConcreteConversionTech.ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ClientEventHandler
 {
 
