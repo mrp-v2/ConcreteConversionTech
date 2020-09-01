@@ -1,4 +1,4 @@
-package mrp_v2.concreteconversiontech.client.eventhandler;
+package mrp_v2.concreteconversiontech.client.util;
 
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.client.gui.screen.inventory.*;
@@ -9,16 +9,14 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraft.world.biome.BiomeRegistry;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(modid = ConcreteConversionTech.ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ClientRegistryHandler
+public class RegistryHandler
 {
-    static
+    public static void init()
     {
         ScreenManager.registerFactory(ObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE,
                 ConcreteConverterTier1Screen::new);

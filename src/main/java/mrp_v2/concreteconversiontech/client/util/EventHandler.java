@@ -1,4 +1,4 @@
-package mrp_v2.concreteconversiontech.client.eventhandler;
+package mrp_v2.concreteconversiontech.client.util;
 
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @EventBusSubscriber(modid = ConcreteConversionTech.ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
-public class ClientEventHandler
+public class EventHandler
 {
 
 	@SubscribeEvent

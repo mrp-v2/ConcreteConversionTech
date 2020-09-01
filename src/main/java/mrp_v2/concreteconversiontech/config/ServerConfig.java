@@ -9,7 +9,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = ConcreteConversionTech.ID) public class Config
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = ConcreteConversionTech.ID) public class ServerConfig
 {
     public static final ForgeConfigSpec SERVER_SPEC;
     public static final Server SERVER;
