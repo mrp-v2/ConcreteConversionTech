@@ -14,7 +14,7 @@ apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 def mcVersion = '1.16.2'
 def majorForgeVersion = '33'
-def forgeVersion = "${majorForgeVersion}.0.21"
+def forgeVersion = "${majorForgeVersion}.0.32"
 version = "${mcVersion}-2.0.0.0"
 def author = 'mrp_v2'
 def modId = 'concreteconversiontech'
