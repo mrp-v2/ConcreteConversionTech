@@ -6,13 +6,14 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
-public class ConcreteConverterTier6Screen extends AbstractConcreteConverterScreen<ConcreteConverterTier6Container> {
+@OnlyIn(Dist.CLIENT) public class ConcreteConverterTier6Screen
+        extends AbstractConcreteConverterScreen<ConcreteConverterTier6Container>
+{
+    public static final int Y_SIZE = 203;
 
-	public static final int Y_SIZE = 203;
-
-	public ConcreteConverterTier6Screen(ConcreteConverterTier6Container screenContainer, PlayerInventory inv,
-			ITextComponent titleIn) {
-		super(screenContainer, inv, titleIn, 6, Y_SIZE);
-	}
+    public ConcreteConverterTier6Screen(ConcreteConverterTier6Container screenContainer, PlayerInventory inv,
+            ITextComponent titleIn)
+    {
+        super(screenContainer, inv, titleIn, 6, Y_SIZE);
+    }
 }

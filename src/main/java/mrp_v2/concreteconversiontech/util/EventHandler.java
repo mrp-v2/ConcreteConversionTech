@@ -12,7 +12,8 @@ public class EventHandler
 {
     @SubscribeEvent public static void setup(final FMLCommonSetupEvent event)
     {
-        ConfigurableCraftingRecipe.addConditionMapping("progressive_crafting", ServerConfig.SERVER.progressive_crafting::get);
+        ConfigurableCraftingRecipe.addConditionMapping("progressive_crafting",
+                ServerConfig.SERVER.progressive_crafting::get);
         ConfigurableCraftingRecipe.addConditionMapping("harder_crafting", ServerConfig.SERVER.harder_crafting::get);
     }
 }

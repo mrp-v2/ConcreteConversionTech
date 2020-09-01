@@ -5,12 +5,13 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 public class Util
 {
+    public static TranslationTextComponent makeTranslation(String... idParts)
+    {
+        return makeTranslation(String.join(".", idParts));
+    }
 
-	public static TranslationTextComponent makeTranslation(String id) {
-		return new TranslationTextComponent(ConcreteConversionTech.ID + "." + id);
-	}
-
-	public static TranslationTextComponent makeTranslation(String... idParts) {
-		return makeTranslation(String.join(".", idParts));
-	}
+    public static TranslationTextComponent makeTranslation(String id)
+    {
+        return new TranslationTextComponent(ConcreteConversionTech.ID + "." + id);
+    }
 }

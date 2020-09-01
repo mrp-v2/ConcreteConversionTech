@@ -8,26 +8,28 @@ import mrp_v2.concreteconversiontech.util.ObjectHolder;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ContainerType;
 
-public class ConcreteConverterTier5Container extends AbstractConcreteConverterContainer {
+public class ConcreteConverterTier5Container extends AbstractConcreteConverterContainer
+{
+    public static final String ID = ID_STEM_PRE + "tier_5" + ID_STEM_POST;
 
-	public static final String ID = ID_STEM_PRE + "tier_5" + ID_STEM_POST;
+    public static ContainerType<ConcreteConverterTier5Container> createContainerType()
+    {
+        ContainerType<ConcreteConverterTier5Container> containerType =
+                new ContainerType<>(ConcreteConverterTier5Container::new);
+        containerType.setRegistryName(ConcreteConversionTech.ID, ID);
+        return containerType;
+    }
 
-	public static ContainerType<ConcreteConverterTier5Container> createContainerType() {
-		ContainerType<ConcreteConverterTier5Container> containerType = new ContainerType<ConcreteConverterTier5Container>(
-				ConcreteConverterTier5Container::new);
-		containerType.setRegistryName(ConcreteConversionTech.ID, ID);
-		return containerType;
-	}
+    public ConcreteConverterTier5Container(int id, PlayerInventory playerInventoryIn)
+    {
+        this(id, playerInventoryIn,
+                new ConcreteConverterItemStackHandler(ConcreteConverterTier5TileEntity.TOTAL_SLOTS, null));
+    }
 
-	public ConcreteConverterTier5Container(int id, PlayerInventory playerInventoryIn) {
-		this(id, playerInventoryIn,
-				new ConcreteConverterItemStackHandler(ConcreteConverterTier5TileEntity.TOTAL_SLOTS, null));
-	}
-
-	public ConcreteConverterTier5Container(int id, PlayerInventory playerInventoryIn,
-			ConcreteConverterItemStackHandler inventoryIn) {
-		super(ObjectHolder.CONCRETE_CONVERTER_TIER_5_CONTAINER_TYPE, id, playerInventoryIn, inventoryIn,
-				ConcreteConverterTier5TileEntity.TOTAL_SLOTS, ConcreteConverterTier5Screen.Y_SIZE, 0, 17, 107, 18, 3,
-				3);
-	}
+    public ConcreteConverterTier5Container(int id, PlayerInventory playerInventoryIn,
+            ConcreteConverterItemStackHandler inventoryIn)
+    {
+        super(ObjectHolder.CONCRETE_CONVERTER_TIER_5_CONTAINER_TYPE, id, playerInventoryIn, inventoryIn,
+                ConcreteConverterTier5Screen.Y_SIZE, 0, 17, 107, 18, 3, 3);
+    }
 }

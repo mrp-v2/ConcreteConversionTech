@@ -25,72 +25,81 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 import java.util.function.Supplier;
 
-public class ConcreteConverterBlock extends Block {
+public class ConcreteConverterBlock extends Block
+{
+    public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP =
+            new ItemGroup(ConcreteConversionTech.ID + ".main_item_group")
+            {
+                @OnlyIn(Dist.CLIENT) public ItemStack createIcon()
+                {
+                    return new ItemStack(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK);
+                }
+            };
+    protected static final String ID_STEM_PRE = "concrete_converter_tier_";
+    protected static final String ID_STEM_POST = "_block";
+    private final Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier;
 
-	protected static final String ID_STEM_PRE = "concrete_converter_tier_";
-	protected static final String ID_STEM_POST = "_block";
+    public ConcreteConverterBlock(Block base, int tier,
+            Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier)
+    {
+        super(Properties.from(base));
+        this.setRegistryName(new ResourceLocation(ConcreteConversionTech.ID, ID_STEM_PRE + tier + ID_STEM_POST));
+        this.tileEntitySupplier = tileEntitySupplier;
+    }
 
-	public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(
-			ConcreteConversionTech.ID + ".main_item_group") {
-		@OnlyIn(Dist.CLIENT)
-		public ItemStack createIcon() {
-			return new ItemStack(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK);
-		}
-	};
+    public BlockItem createBlockItem()
+    {
+        BlockState defaultState = this.getDefaultState();
+        BlockItem bi = new BlockItem(this,
+                new Item.Properties().addToolType(this.getHarvestTool(defaultState), this.getHarvestLevel(defaultState))
+                        .group(CONCRETE_CONVERSION_TECH_ITEM_GROUP));
+        bi.setRegistryName(this.getRegistryName());
+        return bi;
+    }
 
-	private final Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier;
+    @Override public boolean hasTileEntity(BlockState state)
+    {
+        return true;
+    }
 
-	public ConcreteConverterBlock(Block base, int tier,
-			Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier) {
-		super(Properties.from(base));
-		this.setRegistryName(new ResourceLocation(ConcreteConversionTech.ID, ID_STEM_PRE + tier + ID_STEM_POST));
-		this.tileEntitySupplier = tileEntitySupplier;
-	}
+    @Override public TileEntity createTileEntity(BlockState state, IBlockReader world)
+    {
+        return tileEntitySupplier.get();
+    }
 
-	public BlockItem createBlockItem() {
-		BlockState defaultState = this.getDefaultState();
-		BlockItem bi = new BlockItem(this,
-				new Item.Properties().addToolType(this.getHarvestTool(defaultState), this.getHarvestLevel(defaultState))
-						.group(CONCRETE_CONVERSION_TECH_ITEM_GROUP));
-		bi.setRegistryName(this.getRegistryName());
-		return bi;
-	}
+    @SuppressWarnings("deprecation") @Override
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
+    {
+        if (state.hasTileEntity() && (state.getBlock() != newState.getBlock() || !newState.hasTileEntity()))
+        {
+            worldIn.getTileEntity(pos)
+                    .getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+                    .ifPresent(itemHandler ->
+                    {
+                        for (int i = 0; i < itemHandler.getSlots(); i++)
+                        {
+                            Block.spawnAsEntity(worldIn, pos, itemHandler.getStackInSlot(i));
+                        }
+                    });
+        }
+        super.onReplaced(state, worldIn, pos, newState, isMoving);
+    }
 
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return tileEntitySupplier.get();
-	}
-
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
-	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
-			Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isRemote) {
-			return ActionResultType.SUCCESS;
-		} else {
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
-			if (tileEntity instanceof AbstractConcreteConverterTileEntity) {
-				player.openContainer((INamedContainerProvider) tileEntity);
-			}
-			return ActionResultType.CONSUME;
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.hasTileEntity() && (state.getBlock() != newState.getBlock() || !newState.hasTileEntity())) {
-			worldIn.getTileEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-					.ifPresent(itemHandler -> {
-						for (int i = 0; i < itemHandler.getSlots(); i++) {
-							Block.spawnAsEntity(worldIn, pos, itemHandler.getStackInSlot(i));
-						}
-					});
-		}
-		super.onReplaced(state, worldIn, pos, newState, isMoving);
-	}
+    @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+            Hand handIn, BlockRayTraceResult hit)
+    {
+        if (worldIn.isRemote)
+        {
+            return ActionResultType.SUCCESS;
+        } else
+        {
+            TileEntity tileEntity = worldIn.getTileEntity(pos);
+            if (tileEntity instanceof AbstractConcreteConverterTileEntity)
+            {
+                player.openContainer((INamedContainerProvider) tileEntity);
+            }
+            return ActionResultType.CONSUME;
+        }
+    }
 }
