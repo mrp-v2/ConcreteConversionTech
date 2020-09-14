@@ -68,7 +68,7 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mcVersion}-${forgeVersion}"
-    compile "mrp_v2.configurablerecipeslibrary:ConfigurableRecipesLibrary:${mcVersion}-1.0.0.0:dev"
+    compile "mrp_v2.configurablerecipeslibrary:ConfigurableRecipesLibrary:${mcVersion}-2.0.0.0:dev"
 }
 
 jar {
