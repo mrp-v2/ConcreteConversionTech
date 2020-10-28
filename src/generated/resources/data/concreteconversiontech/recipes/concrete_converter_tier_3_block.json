@@ -24,19 +24,6 @@
   },
   "overrides": [
     {
-      "condition": "concreteconversiontech:harder_crafting",
-      "overrides": [
-        {
-          "original": {
-            "tag": "forge:ingots/iron"
-          },
-          "replacement": {
-            "tag": "forge:storage_blocks/iron"
-          }
-        }
-      ]
-    },
-    {
       "condition": "!concreteconversiontech:progressive_crafting",
       "overrides": [
         {
@@ -45,6 +32,18 @@
           },
           "replacement": {
             "tag": "forge:glass"
+          }
+        }
+      ]
+    }, {
+      "condition": "concreteconversiontech:harder_crafting",
+      "overrides": [
+        {
+          "original": {
+            "tag": "forge:ingots/iron"
+          },
+          "replacement": {
+            "tag": "forge:storage_blocks/iron"
           }
         }
       ]
