@@ -30,6 +30,6 @@ public class ConcreteConverterTier2Container extends AbstractConcreteConverterCo
             ConcreteConverterItemStackHandler inventoryIn)
     {
         super(ObjectHolder.CONCRETE_CONVERTER_TIER_2_CONTAINER_TYPE, id, playerInventoryIn, inventoryIn,
-                ConcreteConverterTier2Screen.Y_SIZE, 0, 35, 107, 18, 2, 1);
+                ConcreteConverterTier2Screen.Y_SIZE, 0, 35, 107, 2, 1);
     }
 }

@@ -16,17 +16,18 @@ public abstract class AbstractConcreteConverterContainer extends Container
 
     protected AbstractConcreteConverterContainer(ContainerType<?> type, int id, PlayerInventory playerInventoryIn,
             ConcreteConverterItemStackHandler inventoryIn, int ySize, int playerInventoryXOffset, int inputSlotsXStart,
-            int outputSlotsXStart, int slotsYStart, int slotsWidth, int slotsHeight)
+            int outputSlotsXStart, int slotsWidth, int slotsHeight)
     {
         super(type, id);
         this.inventory = inventoryIn;
-        addSlots(inputSlotsXStart, outputSlotsXStart, slotsYStart, slotsWidth, slotsHeight, playerInventoryIn,
+        addSlots(inputSlotsXStart, outputSlotsXStart, slotsWidth, slotsHeight, playerInventoryIn,
                 playerInventoryXOffset, ySize);
     }
 
-    protected void addSlots(int inputSlotsXStart, int outputSlotsXStart, int slotsYStart, int width, int height,
+    protected void addSlots(int inputSlotsXStart, int outputSlotsXStart, int width, int height,
             PlayerInventory playerInventory, int playerInventoryXOffset, int ySize)
     {
+        int slotsYStart = 40;
         // converter input slots
         for (int i = 0; i < height; i++)
         {

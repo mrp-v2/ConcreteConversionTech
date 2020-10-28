@@ -9,7 +9,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT) public class ConcreteConverterTier6Screen
         extends AbstractConcreteConverterScreen<ConcreteConverterTier6Container>
 {
-    public static final int Y_SIZE = 203;
+    public static final int Y_SIZE = 225;
 
     public ConcreteConverterTier6Screen(ConcreteConverterTier6Container screenContainer, PlayerInventory inv,
             ITextComponent titleIn)
