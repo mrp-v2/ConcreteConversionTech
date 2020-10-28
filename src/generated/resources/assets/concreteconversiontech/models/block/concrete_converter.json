@@ -450,27 +450,33 @@
       "faces": {
         "down": {
           "texture": "#water",
-          "cullface": "down"
+          "cullface": "down",
+          "tintindex": 0
         },
         "up": {
           "texture": "#water",
-          "cullface": "up"
+          "cullface": "up",
+          "tintindex": 0
         },
         "north": {
           "texture": "#water",
-          "cullface": "north"
+          "cullface": "north",
+          "tintindex": 0
         },
         "south": {
           "texture": "#water",
-          "cullface": "south"
+          "cullface": "south",
+          "tintindex": 0
         },
         "west": {
           "texture": "#water",
-          "cullface": "west"
+          "cullface": "west",
+          "tintindex": 0
         },
         "east": {
           "texture": "#water",
-          "cullface": "east"
+          "cullface": "east",
+          "tintindex": 0
         }
       }
     }

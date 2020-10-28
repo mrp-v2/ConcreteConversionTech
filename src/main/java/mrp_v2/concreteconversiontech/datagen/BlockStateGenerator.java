@@ -81,13 +81,14 @@ public class BlockStateGenerator extends BlockStateProvider
                 Direction.SOUTH,
                 Direction.WEST,
                 Direction.UP,
-                Direction.DOWN}, "#water");
+                Direction.DOWN}, "#water").faces((face, elementBuilder) -> elementBuilder.tintindex(0));
         return builder;
     }
 
     @SafeVarargs
-    private final void makeElement(ModelBuilder<BlockModelBuilder> builder, int x1, int y1, int z1, int x2, int y2,
-            int z2, Direction[] normalFaces, String texture, Pair<Direction, Direction>... abnormalFaces)
+    private final ModelBuilder<BlockModelBuilder>.ElementBuilder makeElement(ModelBuilder<BlockModelBuilder> builder,
+            int x1, int y1, int z1, int x2, int y2, int z2, Direction[] normalFaces, String texture,
+            Pair<Direction, Direction>... abnormalFaces)
     {
         ModelBuilder<BlockModelBuilder>.ElementBuilder elementBuilder =
                 builder.element().from(x1, y1, z1).to(x2, y2, z2);
@@ -99,6 +100,7 @@ public class BlockStateGenerator extends BlockStateProvider
         {
             makeFace(elementBuilder, face.getLeft(), face.getRight(), texture);
         }
+        return elementBuilder;
     }
 
     private void makeFace(ModelBuilder<BlockModelBuilder>.ElementBuilder builder, Direction face, String texture)
