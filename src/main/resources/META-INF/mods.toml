@@ -23,3 +23,15 @@ license="All rights reserved"
     versionRange="[${mcVersion}]"
     ordering="NONE"
     side="BOTH"
+[[dependencies.${modId}]]
+    modId="configurablerecipeslibrary"
+    mandatory=true
+    versionRange="[${mcVersion}-${crlAPI},)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.${modId}]]
+    modId="mrp_v2datagenlibrary"
+    mandatory=true
+    versionRange="[${mcVersion}-${dglAPI},)"
+    ordering="NONE"
+    side="BOTH"

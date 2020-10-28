@@ -25,12 +25,21 @@ group = "${author}.${archivesBaseName}"
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' +
         System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+sourceSets {
+    main {
+        resources {
+            srcDirs 'src/generated/resources'
+        }
+    }
+}
+
 minecraft {
     mappings channel: mappingsChannel, version: mappingsVersion
     runs {
         client {
             workingDirectory project.file('run')
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             mods {
                 concreteconversiontech {
@@ -40,7 +49,7 @@ minecraft {
         }
         server {
             workingDirectory project.file('run')
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             mods {
                 concreteconversiontech {
@@ -50,9 +59,10 @@ minecraft {
         }
         data {
             workingDirectory project.file('run')
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', modId, '--all', '--output', file('src/generated/resources/')
+            args '--mod', modId, '--all', '--output', file('src/generated/resources/'), '--existing',
+                    sourceSets.main.output.resourcesDir
             mods {
                 concreteconversiontech {
                     source sourceSets.main
@@ -68,7 +78,9 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mcVersion}-${forgeVersion}"
-    compile "mrp_v2.configurablerecipeslibrary:ConfigurableRecipesLibrary:${mcVersion}-2.0.0.0:dev"
+    compile fg.
+            deobf("mrp_v2.configurablerecipeslibrary:ConfigurableRecipesLibrary:${mcVersion}-${crlAPI}.${crlPatch}:dev")
+    compile fg.deobf("mrp_v2.mrp_v2datagenlibrary:MRP_V2DataGenLibrary:${mcVersion}-${dglAPI}.${dglPatch}")
 }
 
 jar {
@@ -98,13 +110,15 @@ processResources {
     inputs.property 'updateURL', updateURL
     inputs.property 'issuesURL', issuesURL
     inputs.property 'logo', logo
+    inputs.property 'crlAPI', crlAPI
+    inputs.property 'dglAPI', dglAPI
     from(sourceSets.main.resources.srcDirs) {
         include '**/*'
         exclude '**/*.png'
         expand 'version': project.version, 'modId': modId, 'forgeMajor': forgeMajor, 'mcVersion': mcVersion,
                 'homepageURL': homepageURL, 'modDisplayName': modDisplayName, 'capitalizedModId': capitalizedModId,
                 'modDescription': modDescription, 'author': author, 'updateURL': updateURL, 'issuesURL': issuesURL,
-                'logo': logo
+                'logo': logo, 'crlAPI': crlAPI, 'dglAPI': dglAPI
     }
     from(sourceSets.main.resources.srcDirs) {
         exclude '**/*'

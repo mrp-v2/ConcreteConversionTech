@@ -27,14 +27,13 @@ import java.util.function.Supplier;
 
 public class ConcreteConverterBlock extends Block
 {
-    public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP =
-            new ItemGroup(ConcreteConversionTech.ID + ".main_item_group")
-            {
-                @OnlyIn(Dist.CLIENT) public ItemStack createIcon()
-                {
-                    return new ItemStack(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK);
-                }
-            };
+    public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(ConcreteConversionTech.ID)
+    {
+        @OnlyIn(Dist.CLIENT) public ItemStack createIcon()
+        {
+            return new ItemStack(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK);
+        }
+    };
     protected static final String ID_STEM_PRE = "concrete_converter_tier_";
     protected static final String ID_STEM_POST = "_block";
     private final Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier;
