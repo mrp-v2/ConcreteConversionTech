@@ -45,6 +45,11 @@ public abstract class AbstractConcreteConverterContainer extends Container
                         outputSlotsXStart + j * 18, slotsYStart + i * 18));
             }
         }
+        // converter efficiency slots
+        for (int i = 0; i < 3; i++)
+        {
+            this.addSlot(new ConcreteConverterEfficiencySlot(this.inventory, width * height * 2 + i, 62 + i * 18, 18));
+        }
         // player inventory slots
         for (int i = 0; i < 3; ++i)
         {
@@ -76,7 +81,10 @@ public abstract class AbstractConcreteConverterContainer extends Container
                 }
             } else if (!this.mergeItemStack(itemStack1, 0, this.inventory.getSlots() / 2, false))
             {
-                return ItemStack.EMPTY;
+                if (!this.mergeItemStack(itemStack1, this.inventory.getSlots() - 3, this.inventory.getSlots(), false))
+                {
+                    return ItemStack.EMPTY;
+                }
             }
             if (itemStack1.isEmpty())
             {

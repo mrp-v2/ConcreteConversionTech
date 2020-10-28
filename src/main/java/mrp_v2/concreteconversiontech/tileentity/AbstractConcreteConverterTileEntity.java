@@ -44,7 +44,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
     {
         super(tileEntityTypeIn);
         this.ticksSpentConverting = 0;
-        this.inventory = new ConcreteConverterItemStackHandler(ioSlots * 2, this);
+        this.inventory = new ConcreteConverterItemStackHandler(ioSlots * 2);
         this.inventoryLazyOptional = LazyOptional.of(() -> inventory);
         this.id = id;
     }
