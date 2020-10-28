@@ -38,7 +38,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
     {
         this.renderBackground(matrix);
         super.render(matrix, mouseX, mouseY, partialTicks);
-        this.func_230459_a_(matrix, mouseX, mouseY);
+        this.renderHoveredTooltip(matrix, mouseX, mouseY);
     }
 
     @SuppressWarnings("deprecation") @Override

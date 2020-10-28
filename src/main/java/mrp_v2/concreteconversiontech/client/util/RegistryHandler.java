@@ -41,7 +41,7 @@ public class RegistryHandler
         event.getBlockColors()
                 .register((state, reader, pos, tint) -> reader != null && pos != null ?
                                 BiomeColors.getWaterColor(reader, pos) :
-                                BiomeRegistry.field_244200_a.getWaterColor(), ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK,
+                                BiomeRegistry.PLAINS.getWaterColor(), ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK,
                         ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK, ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK,
                         ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK, ObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK,
                         ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK, ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK,

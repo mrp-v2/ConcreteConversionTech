@@ -27,30 +27,29 @@
   },
   "overrides": [
     {
-      "condition": "concreteconversiontech:harder_crafting",
-      "overrides": [
-        {
-          "original": {
-            "tag": "forge:ingots/netherite"
-          },
-          "replacement": {
-            "tag": "forge:storage_blocks/netherite"
-          }
-        }
-      ]
-    },
-    {
       "condition": "!concreteconversiontech:progressive_crafting",
-      "overrides": [
-        {
-          "original": {
-            "item": "concreteconversiontech:concrete_converter_tier_7_block"
-          },
-          "replacement": {
-            "tag": "forge:glass"
-          }
-        }
-      ]
-    }
+        "overrides": [
+            {
+                "original": {
+                    "item": "concreteconversiontech:concrete_converter_tier_7_block"
+                },
+                "replacement": {
+                    "tag": "forge:glass"
+                }
+            }
+        ]
+    }, {
+          "condition": "concreteconversiontech:harder_crafting",
+          "overrides": [
+              {
+                  "original": {
+                      "tag": "forge:ingots/netherite"
+                  },
+                  "replacement": {
+                      "tag": "forge:storage_blocks/netherite"
+                  }
+              }
+          ]
+      }
   ]
 }

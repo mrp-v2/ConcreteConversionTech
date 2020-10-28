@@ -79,8 +79,7 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mcVersion}-${forgeVersion}"
-    compile fg.
-            deobf("mrp_v2.configurablerecipeslibrary:ConfigurableRecipesLibrary:${mcVersion}-${crlAPI}.${crlPatch}:dev")
+    compile fg.deobf("mrp_v2.configurablerecipeslibrary:ConfigurableRecipesLibrary:${mcVersion}-${crlAPI}.${crlPatch}")
     compile fg.deobf("mrp_v2.mrp_v2datagenlibrary:MRP_V2DataGenLibrary:${mcVersion}-${dglAPI}.${dglPatch}")
 }
 
