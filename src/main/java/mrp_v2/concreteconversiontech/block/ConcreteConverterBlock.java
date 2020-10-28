@@ -86,6 +86,11 @@ public class ConcreteConverterBlock extends Block
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 
+    @Override public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos)
+    {
+        return super.getComparatorInputOverride(blockState, worldIn, pos);
+    }
+
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
             Hand handIn, BlockRayTraceResult hit)

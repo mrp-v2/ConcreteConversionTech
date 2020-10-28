@@ -30,6 +30,6 @@ public class ConcreteConverterTier2TileEntity extends AbstractConcreteConverterT
 
     @Override public Container createMenu(int id, PlayerInventory playerInventoryIn, PlayerEntity playerIn)
     {
-        return new ConcreteConverterTier2Container(id, playerInventoryIn, this.inventory);
+        return new ConcreteConverterTier2Container(id, playerInventoryIn, this.inventory.parent);
     }
 }
