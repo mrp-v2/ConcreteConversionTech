@@ -49,7 +49,8 @@ public abstract class AbstractConcreteConverterContainer extends Container
         // converter efficiency slots
         for (int i = 0; i < 3; i++)
         {
-            this.addSlot(new ConcreteConverterEfficiencySlot(this.inventory, width * height * 2 + i, 62 + i * 18, 18));
+            this.addSlot(new ConcreteConverterEfficiencySlot(this.inventory, width * height * 2 + i,
+                    62 + i * 18 + playerInventoryXOffset, 18));
         }
         // player inventory slots
         for (int i = 0; i < 3; ++i)
