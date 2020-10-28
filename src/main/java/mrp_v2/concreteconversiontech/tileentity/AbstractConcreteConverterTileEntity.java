@@ -1,7 +1,7 @@
 package mrp_v2.concreteconversiontech.tileentity;
 
+import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.inventory.ConcreteConverterItemStackHandler;
-import mrp_v2.concreteconversiontech.util.Util;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ConcretePowderBlock;
@@ -17,13 +17,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
-import java.lang.reflect.Field;
 import java.util.HashMap;
 
 abstract public class AbstractConcreteConverterTileEntity extends TileEntity
@@ -33,25 +33,8 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
     protected static final String ID_STEM_POST = "_tile_entity";
     private static final int TICKS_PER_ITEM = 16;
     private static final HashMap<Item, Item> POWDER_TO_CONCRETE = new HashMap<>();
-    private static final Field solidifiedStateField;
     private static final String INVENTORY_NBT_ID = "Inventory";
     private static final String TICKS_SPENT_CONVERTING_NBT_ID = "TicksSpentConverting";
-
-    static
-    {
-        Field foundField = null;
-        for (Field field : net.minecraft.block.ConcretePowderBlock.class.getDeclaredFields())
-        {
-            if (field.getType() == BlockState.class)
-            {
-                foundField = field;
-                foundField.setAccessible(true);
-                break;
-            }
-        }
-        solidifiedStateField = foundField;
-    }
-
     protected final ConcreteConverterItemStackHandler inventory;
     private final LazyOptional<ConcreteConverterItemStackHandler> inventoryLazyOptional;
     private final String id;
@@ -105,7 +88,8 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 
     @Override public ITextComponent getDisplayName()
     {
-        return Util.makeTranslation(this.id, "display_name");
+        return new TranslationTextComponent(
+                "block." + ConcreteConversionTech.ID + "." + this.id.replace("tile_entity", "block"));
     }
 
     @Override public void tick()
@@ -165,22 +149,18 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
     private void convertItem(int sourceIndex, int destinationIndex)
     {
         Item sourceItem = inventory.getStackInSlot(sourceIndex).getItem();
-        inventory.extractItem(sourceIndex, 1);
         if (!POWDER_TO_CONCRETE.containsKey(sourceItem))
         {
             Block block = Block.getBlockFromItem(sourceItem);
             if (block instanceof ConcretePowderBlock)
             {
-                try
-                {
-                    POWDER_TO_CONCRETE.put(sourceItem,
-                            ((BlockState) solidifiedStateField.get(block)).getBlock().asItem());
-                } catch (IllegalAccessException e)
-                {
-                    e.printStackTrace();
-                }
+                POWDER_TO_CONCRETE.put(sourceItem, ((ConcretePowderBlock) block).solidifiedState.getBlock().asItem());
+            } else
+            {
+                return;
             }
         }
+        inventory.extractItem(sourceIndex, 1);
         inventory.insertItem(destinationIndex, new ItemStack(POWDER_TO_CONCRETE.get(sourceItem), 1));
     }
 }

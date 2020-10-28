@@ -1,6 +1,0 @@
-{
-	"parent": "concreteconversiontech:block/concrete_converter",
-	"textures": {
-		"base": "minecraft:block/diamond_block"
-	}
-}

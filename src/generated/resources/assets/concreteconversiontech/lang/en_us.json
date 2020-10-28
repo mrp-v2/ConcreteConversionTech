@@ -1,0 +1,11 @@
+{
+  "block.concreteconversiontech.concrete_converter_tier_1_block": "Wooden Concrete Converter",
+  "block.concreteconversiontech.concrete_converter_tier_2_block": "Stone Concrete Converter",
+  "block.concreteconversiontech.concrete_converter_tier_3_block": "Iron Concrete Converter",
+  "block.concreteconversiontech.concrete_converter_tier_4_block": "Gold Concrete Converter",
+  "block.concreteconversiontech.concrete_converter_tier_5_block": "Diamond Concrete Converter",
+  "block.concreteconversiontech.concrete_converter_tier_6_block": "Emerald Concrete Converter",
+  "block.concreteconversiontech.concrete_converter_tier_7_block": "Quartz Concrete Converter",
+  "block.concreteconversiontech.concrete_converter_tier_8_block": "Netherite Concrete Converter",
+  "itemGroup.concreteconversiontech": "Concrete Conversion Tech"
+}

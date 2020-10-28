@@ -36,12 +36,14 @@ public class ConcreteConverterBlock extends Block
     };
     protected static final String ID_STEM_PRE = "concrete_converter_tier_";
     protected static final String ID_STEM_POST = "_block";
+    public final Block base;
     private final Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier;
 
     public ConcreteConverterBlock(Block base, int tier,
             Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier)
     {
         super(Properties.from(base));
+        this.base = base;
         this.setRegistryName(new ResourceLocation(ConcreteConversionTech.ID, ID_STEM_PRE + tier + ID_STEM_POST));
         this.tileEntitySupplier = tileEntitySupplier;
     }

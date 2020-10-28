@@ -19,6 +19,8 @@ public class DataGenHandler
         }
         if (event.includeClient())
         {
+            helper.addBlockStateProvider(BlockStateGenerator::new);
+            helper.addLanguageProvider(EN_USTranslationGenerator::new);
         }
     }
 }
