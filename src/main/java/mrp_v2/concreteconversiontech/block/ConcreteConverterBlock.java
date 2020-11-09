@@ -5,6 +5,7 @@ import mrp_v2.concreteconversiontech.tileentity.AbstractConcreteConverterTileEnt
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItem;
@@ -23,6 +24,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.CapabilityItemHandler;
 
+import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class ConcreteConverterBlock extends Block
@@ -86,11 +88,6 @@ public class ConcreteConverterBlock extends Block
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 
-    @Override public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos)
-    {
-        return super.getComparatorInputOverride(blockState, worldIn, pos);
-    }
-
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
             Hand handIn, BlockRayTraceResult hit)
@@ -106,6 +103,26 @@ public class ConcreteConverterBlock extends Block
                 player.openContainer((INamedContainerProvider) tileEntity);
             }
             return ActionResultType.CONSUME;
+        }
+    }
+
+    @Override public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos)
+    {
+        return super.getComparatorInputOverride(blockState, worldIn, pos);
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer,
+            ItemStack stack)
+    {
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        if (stack.hasDisplayName())
+        {
+            TileEntity tileEntity = worldIn.getTileEntity(pos);
+            if (tileEntity instanceof AbstractConcreteConverterTileEntity)
+            {
+                ((AbstractConcreteConverterTileEntity) tileEntity).setCustomName(stack.getDisplayName());
+            }
         }
     }
 }

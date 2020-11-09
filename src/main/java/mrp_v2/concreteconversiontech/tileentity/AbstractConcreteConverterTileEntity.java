@@ -1,8 +1,10 @@
 package mrp_v2.concreteconversiontech.tileentity;
 
+import com.mojang.serialization.DataResult;
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.inventory.AutomationConcreteConverterItemStackHandler;
 import mrp_v2.concreteconversiontech.inventory.ConcreteConverterItemStackHandler;
+import mrp_v2.concreteconversiontech.tileentity.util.ConcreteConverterData;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ConcretePowderBlock;
@@ -17,10 +19,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.NBTDynamicOps;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.INameable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -33,19 +37,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 abstract public class AbstractConcreteConverterTileEntity extends TileEntity
-        implements ICapabilityProvider, ITickableTileEntity, INamedContainerProvider
+        implements ICapabilityProvider, ITickableTileEntity, INamedContainerProvider, INameable
 {
     public static final int BASE_TICKS_PER_ITEM = 16;
     public static final String ID_STEM_PRE = "concrete_converter_";
     public static final String ID_STEM_POST = "_tile_entity";
     public static final HashMap<Item, Item> POWDER_TO_CONCRETE = new HashMap<>();
-    public static final String INVENTORY_NBT_ID = "Inventory";
-    public static final String TICKS_SPENT_CONVERTING_NBT_ID = "TicksSpentConverting";
+    private static final String DATA_NBT_ID = "ConcreteConverterData";
     protected final AutomationConcreteConverterItemStackHandler inventory;
     protected final LazyOptional<AutomationConcreteConverterItemStackHandler> inventoryLazyOptional;
     protected final String id;
     protected int ticksSpentConverting;
     protected int ticksPerItem;
+    @Nullable private ITextComponent customName;
 
     public AbstractConcreteConverterTileEntity(TileEntityType<?> tileEntityTypeIn, int ioSlots, String id)
     {
@@ -63,20 +67,47 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
         return Block.getBlockFromItem(stack.getItem()) instanceof ConcretePowderBlock;
     }
 
+    public AutomationConcreteConverterItemStackHandler getInventory()
+    {
+        return this.inventory;
+    }
+
+    public int getTicksSpentConverting()
+    {
+        return ticksSpentConverting;
+    }
+
+    public int getTicksPerItem()
+    {
+        return ticksPerItem;
+    }
+
     @Override public abstract Container createMenu(int id, PlayerInventory playerInventoryIn, PlayerEntity playerIn);
 
-    @Override public void read(BlockState state, CompoundNBT nbt)
+    @Override public void read(BlockState state, CompoundNBT compound)
     {
-        super.read(state, nbt);
-        this.inventory.parent.deserializeNBT(nbt.getCompound(INVENTORY_NBT_ID));
-        this.ticksSpentConverting = nbt.getInt(TICKS_SPENT_CONVERTING_NBT_ID);
+        super.read(state, compound);
+        if (compound.contains(DATA_NBT_ID, 10))
+        {
+            CompoundNBT dataNBT = compound.getCompound(DATA_NBT_ID);
+            DataResult<ConcreteConverterData> dataResult =
+                    ConcreteConverterData.CODEC.parse(NBTDynamicOps.INSTANCE, dataNBT);
+            dataResult.resultOrPartial(ConcreteConversionTech.LOGGER::error).ifPresent((data) ->
+            {
+                this.ticksSpentConverting = data.getTicksSpentConverting();
+                this.ticksPerItem = data.getTicksPerConversion();
+                this.inventory.parent.deserializeNBT(data.getInventoryData());
+                this.customName = data.getCustomName();
+            });
+        }
     }
 
     @Override public CompoundNBT write(CompoundNBT compound)
     {
         super.write(compound);
-        compound.put(INVENTORY_NBT_ID, this.inventory.parent.serializeNBT());
-        compound.putInt(TICKS_SPENT_CONVERTING_NBT_ID, this.ticksSpentConverting);
+        ConcreteConverterData.CODEC.encodeStart(NBTDynamicOps.INSTANCE, new ConcreteConverterData(this))
+                .resultOrPartial(ConcreteConversionTech.LOGGER::error)
+                .ifPresent((data) -> compound.put(DATA_NBT_ID, data));
         return compound;
     }
 
@@ -95,7 +126,22 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
         return super.getCapability(cap, side);
     }
 
-    @Override public ITextComponent getDisplayName()
+    @Override public ITextComponent getName()
+    {
+        return hasCustomName() ? getCustomName() : getDefaultName();
+    }
+
+    @Nullable @Override public ITextComponent getCustomName()
+    {
+        return this.customName;
+    }
+
+    public void setCustomName(@Nullable ITextComponent customName)
+    {
+        this.customName = customName;
+    }
+
+    private ITextComponent getDefaultName()
     {
         return new TranslationTextComponent(
                 "block." + ConcreteConversionTech.ID + "." + this.id.replace("tile_entity", "block"));
@@ -194,5 +240,10 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
         }
         this.inventory.parent.extractItem(sourceIndex, 1);
         this.inventory.parent.insertItem(destinationIndex, new ItemStack(POWDER_TO_CONCRETE.get(sourceItem), 1));
+    }
+
+    @Override public ITextComponent getDisplayName()
+    {
+        return INameable.super.getDisplayName();
     }
 }
