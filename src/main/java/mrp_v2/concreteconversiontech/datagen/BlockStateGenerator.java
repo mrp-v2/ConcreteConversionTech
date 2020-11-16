@@ -24,15 +24,15 @@ public class BlockStateGenerator extends BlockStateProvider
     @Override protected void registerStatesAndModels()
     {
         ModelFile converterBaseModel = makeConverterBaseModel();
-        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK, converterBaseModel);
-        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK, converterBaseModel);
-        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK, converterBaseModel);
-        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK, converterBaseModel);
-        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK, converterBaseModel);
-        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK, converterBaseModel);
-        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK, converterBaseModel,
+        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get(), converterBaseModel);
+        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get(), converterBaseModel);
+        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get(), converterBaseModel);
+        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK.get(), converterBaseModel);
+        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK.get(), converterBaseModel);
+        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK.get(), converterBaseModel);
+        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK.get(), converterBaseModel,
                 mcLoc("block/quartz_block_side"));
-        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK, converterBaseModel);
+        makeConcreteConverterModel(ObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK.get(), converterBaseModel);
     }
 
     private ModelFile makeConverterBaseModel()

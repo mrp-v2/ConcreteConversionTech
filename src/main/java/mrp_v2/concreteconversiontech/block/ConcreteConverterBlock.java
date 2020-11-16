@@ -1,27 +1,19 @@
 package mrp_v2.concreteconversiontech.block;
 
-import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.tileentity.AbstractConcreteConverterTileEntity;
-import mrp_v2.concreteconversiontech.util.ObjectHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
@@ -29,35 +21,15 @@ import java.util.function.Supplier;
 
 public class ConcreteConverterBlock extends Block
 {
-    public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(ConcreteConversionTech.ID)
-    {
-        @OnlyIn(Dist.CLIENT) public ItemStack createIcon()
-        {
-            return new ItemStack(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK);
-        }
-    };
     protected static final String ID_STEM_PRE = "concrete_converter_tier_";
-    protected static final String ID_STEM_POST = "_block";
     public final Block base;
     private final Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier;
 
-    public ConcreteConverterBlock(Block base, int tier,
-            Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier)
+    public ConcreteConverterBlock(Block base, Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier)
     {
         super(Properties.from(base));
         this.base = base;
-        this.setRegistryName(new ResourceLocation(ConcreteConversionTech.ID, ID_STEM_PRE + tier + ID_STEM_POST));
         this.tileEntitySupplier = tileEntitySupplier;
-    }
-
-    public BlockItem createBlockItem()
-    {
-        BlockState defaultState = this.getDefaultState();
-        BlockItem bi = new BlockItem(this,
-                new Item.Properties().addToolType(this.getHarvestTool(defaultState), this.getHarvestLevel(defaultState))
-                        .group(CONCRETE_CONVERSION_TECH_ITEM_GROUP));
-        bi.setRegistryName(this.getRegistryName());
-        return bi;
     }
 
     @Override public boolean hasTileEntity(BlockState state)

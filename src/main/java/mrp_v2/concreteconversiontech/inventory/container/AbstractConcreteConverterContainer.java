@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 public abstract class AbstractConcreteConverterContainer extends Container
 {
     protected static final String ID_STEM_PRE = "concrete_converter_";
-    protected static final String ID_STEM_POST = "_container";
     protected final ConcreteConverterItemStackHandler inventory;
 
     protected AbstractConcreteConverterContainer(ContainerType<?> type, int id, PlayerInventory playerInventoryIn,

@@ -1,6 +1,5 @@
 package mrp_v2.concreteconversiontech.inventory.container;
 
-import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConverterTier1Screen;
 import mrp_v2.concreteconversiontech.inventory.ConcreteConverterItemStackHandler;
 import mrp_v2.concreteconversiontech.tileentity.ConcreteConverterTier1TileEntity;
@@ -10,14 +9,11 @@ import net.minecraft.inventory.container.ContainerType;
 
 public class ConcreteConverterTier1Container extends AbstractConcreteConverterContainer
 {
-    public static final String ID = ID_STEM_PRE + "tier_1" + ID_STEM_POST;
-
-    public static ContainerType<ConcreteConverterTier1Container> createContainerType()
+    public ConcreteConverterTier1Container(int id, PlayerInventory playerInventoryIn,
+            ConcreteConverterItemStackHandler inventoryIn)
     {
-        ContainerType<ConcreteConverterTier1Container> containerType =
-                new ContainerType<>(ConcreteConverterTier1Container::new);
-        containerType.setRegistryName(ConcreteConversionTech.ID, ID);
-        return containerType;
+        super(ObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE.get(), id, playerInventoryIn, inventoryIn,
+                ConcreteConverterTier1Screen.Y_SIZE, 0, 53, 107, 1, 1);
     }
 
     public ConcreteConverterTier1Container(int id, PlayerInventory playerInventoryIn)
@@ -26,10 +22,8 @@ public class ConcreteConverterTier1Container extends AbstractConcreteConverterCo
                 new ConcreteConverterItemStackHandler(ConcreteConverterTier1TileEntity.TOTAL_SLOTS));
     }
 
-    public ConcreteConverterTier1Container(int id, PlayerInventory playerInventoryIn,
-            ConcreteConverterItemStackHandler inventoryIn)
+    public static ContainerType<ConcreteConverterTier1Container> createContainerType()
     {
-        super(ObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE, id, playerInventoryIn, inventoryIn,
-                ConcreteConverterTier1Screen.Y_SIZE, 0, 53, 107, 1, 1);
+        return new ContainerType<>(ConcreteConverterTier1Container::new);
     }
 }

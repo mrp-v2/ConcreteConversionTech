@@ -1,6 +1,5 @@
 package mrp_v2.concreteconversiontech.tileentity;
 
-import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.inventory.container.ConcreteConverterTier7Container;
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,22 +9,19 @@ import net.minecraft.tileentity.TileEntityType;
 
 public class ConcreteConverterTier7TileEntity extends AbstractConcreteConverterTileEntity
 {
-    public static final String ID = ID_STEM_PRE + "tier_7" + ID_STEM_POST;
+    public static final String ID = ID_STEM_PRE + "tier_7";
     public static final int IO_SLOTS = 20;
     public static final int TOTAL_SLOTS = IO_SLOTS * 2;
 
     public static TileEntityType<ConcreteConverterTier7TileEntity> createTileEntityType()
     {
-        TileEntityType<ConcreteConverterTier7TileEntity> tileEntityType =
-                TileEntityType.Builder.create(ConcreteConverterTier7TileEntity::new,
-                        ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK).build(null);
-        tileEntityType.setRegistryName(ConcreteConversionTech.ID, ID);
-        return tileEntityType;
+        return TileEntityType.Builder.create(ConcreteConverterTier7TileEntity::new,
+                ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK.get()).build(null);
     }
 
     public ConcreteConverterTier7TileEntity()
     {
-        super(ObjectHolder.CONCRETE_CONVERTER_TIER_7_TILE_ENTITY_TYPE, IO_SLOTS, ID);
+        super(ObjectHolder.CONCRETE_CONVERTER_TIER_7_TILE_ENTITY_TYPE.get(), IO_SLOTS, ID);
     }
 
     @Override public Container createMenu(int id, PlayerInventory playerInventoryIn, PlayerEntity playerIn)

@@ -28,7 +28,7 @@ public class RecipeGenerator extends mrp_v2.mrp_v2datagenlibrary.datagen.RecipeG
 
     @Override protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
     {
-        ShapedRecipeBuilder.shapedRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK)
+        ShapedRecipeBuilder.shapedRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get())
                 .patternLine("BPB")
                 .patternLine("WCW")
                 .patternLine("BPB")
@@ -38,47 +38,47 @@ public class RecipeGenerator extends mrp_v2.mrp_v2datagenlibrary.datagen.RecipeG
                 .key('P', Items.WOODEN_PICKAXE)
                 .addCriterion("has_planks", hasItem(ItemTags.PLANKS))
                 .build(consumer);
-        ConfigurableShapedRecipeBuilder.configurableShapedRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK)
+        ConfigurableShapedRecipeBuilder.configurableShapedRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get())
                 .patternLine("BPB")
                 .patternLine("WCW")
                 .patternLine("BPB")
-                .key('C', ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK)
+                .key('C', ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get())
                 .key('W', Items.WATER_BUCKET)
                 .key('B', Tags.Items.STONE)
                 .key('P', Items.STONE_PICKAXE)
                 .addCriterion("has_stone", hasItem(Tags.Items.STONE))
                 .addOverride("!" + PROGRESSIVE_CRAFTING_ID)
-                .override(Ingredient.fromItems(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK),
+                .override(Ingredient.fromItems(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get()),
                         Ingredient.fromTag(Tags.Items.GLASS))
                 .end()
                 .build(consumer);
-        makeNormalConcreteConverterRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK,
-                ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK, Tags.Items.INGOTS_IRON, Items.IRON_PICKAXE, "iron",
+        makeNormalConcreteConverterRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get(),
+                ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get(), Tags.Items.INGOTS_IRON, Items.IRON_PICKAXE, "iron",
                 Tags.Items.STORAGE_BLOCKS_IRON, consumer);
-        makeNormalConcreteConverterRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK,
-                ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK, Tags.Items.INGOTS_GOLD, Items.GOLDEN_PICKAXE, "gold",
-                Tags.Items.STORAGE_BLOCKS_GOLD, consumer);
-        makeNormalConcreteConverterRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK,
-                ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK, Tags.Items.GEMS_DIAMOND, Items.DIAMOND_PICKAXE, "diamond",
-                Tags.Items.STORAGE_BLOCKS_DIAMOND, consumer);
-        makeNormalConcreteConverterRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK,
-                ObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK, Tags.Items.GEMS_EMERALD, Items.DIAMOND_PICKAXE, "emerald",
-                Tags.Items.STORAGE_BLOCKS_EMERALD, consumer);
-        makeNormalConcreteConverterRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK,
-                ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK, Tags.Items.GEMS_QUARTZ, Items.DIAMOND_PICKAXE, "quartz",
-                Tags.Items.STORAGE_BLOCKS_QUARTZ, consumer);
-        ConfigurableShapedRecipeBuilder.configurableShapedRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK)
+        makeNormalConcreteConverterRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK.get(),
+                ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get(), Tags.Items.INGOTS_GOLD, Items.GOLDEN_PICKAXE,
+                "gold", Tags.Items.STORAGE_BLOCKS_GOLD, consumer);
+        makeNormalConcreteConverterRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK.get(),
+                ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK.get(), Tags.Items.GEMS_DIAMOND, Items.DIAMOND_PICKAXE,
+                "diamond", Tags.Items.STORAGE_BLOCKS_DIAMOND, consumer);
+        makeNormalConcreteConverterRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK.get(),
+                ObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK.get(), Tags.Items.GEMS_EMERALD, Items.DIAMOND_PICKAXE,
+                "emerald", Tags.Items.STORAGE_BLOCKS_EMERALD, consumer);
+        makeNormalConcreteConverterRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK.get(),
+                ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK.get(), Tags.Items.GEMS_QUARTZ, Items.DIAMOND_PICKAXE,
+                "quartz", Tags.Items.STORAGE_BLOCKS_QUARTZ, consumer);
+        ConfigurableShapedRecipeBuilder.configurableShapedRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK.get())
                 .patternLine("BPB")
                 .patternLine("WCW")
                 .patternLine("BQB")
-                .key('C', ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK)
+                .key('C', ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK.get())
                 .key('W', Items.WATER_BUCKET)
                 .key('B', Tags.Items.INGOTS_NETHERITE)
                 .key('P', Items.NETHERITE_PICKAXE)
                 .key('Q', Tags.Items.NETHER_STARS)
                 .addCriterion("has_netherite", hasItem(Tags.Items.INGOTS_NETHERITE))
                 .addOverride("!" + PROGRESSIVE_CRAFTING_ID)
-                .override(Ingredient.fromItems(ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK),
+                .override(Ingredient.fromItems(ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK.get()),
                         Ingredient.fromTag(Tags.Items.GLASS))
                 .end()
                 .addOverride(HARDER_CRAFTING_ID)

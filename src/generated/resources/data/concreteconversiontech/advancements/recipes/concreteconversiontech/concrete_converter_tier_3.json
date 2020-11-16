@@ -1,0 +1,31 @@
+{
+    "parent": "minecraft:recipes/root",
+    "rewards": {
+        "recipes": [
+            "concreteconversiontech:concrete_converter_tier_3"
+        ]
+    },
+    "criteria": {
+        "has_iron": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "tag": "forge:ingots/iron"
+                    }
+                ]
+            }
+        },
+        "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+                "recipe": "concreteconversiontech:concrete_converter_tier_3"
+            }
+        }
+    },
+    "requirements": [
+        [
+            "has_iron", "has_the_recipe"
+        ]
+    ]
+}

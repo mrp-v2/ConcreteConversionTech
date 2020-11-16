@@ -41,7 +41,6 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 {
     public static final int BASE_TICKS_PER_ITEM = 16;
     public static final String ID_STEM_PRE = "concrete_converter_";
-    public static final String ID_STEM_POST = "_tile_entity";
     public static final HashMap<Item, Item> POWDER_TO_CONCRETE = new HashMap<>();
     private static final String DATA_NBT_ID = "ConcreteConverterData";
     protected final AutomationConcreteConverterItemStackHandler inventory;
