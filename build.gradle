@@ -91,13 +91,20 @@ minecraft {
 }
 
 repositories {
-    mavenLocal()
+    maven {
+        name = 'GitHubPackages'
+        url = uri('https://maven.pkg.github.com/mrp-v2/ConfigurableRecipesLibrary')
+        credentials {
+            username = 'mrp-v2'
+            password = new JsonSlurper().parse(new File('../../secrets.json')).get('github-packages-token')
+        }
+    }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mcVersion}-${forgeVersion}"
-    compile fg.deobf("mrp_v2.configurablerecipeslibrary:ConfigurableRecipesLibrary:${mcVersion}-${crlAPI}.${crlPatch}")
-    compile fg.deobf("mrp_v2.mrp_v2datagenlibrary:mrp_v2DataGenLibrary:${mcVersion}-${dglAPI}.${dglPatch}")
+    compile fg.deobf("mrp_v2.configurablerecipeslibrary-forge:configurablerecipeslibrary:${mcVersion}-${crlAPI}.${crlPatch}")
+    compile fg.deobf("mrp_v2.mrp_v2datagenlibrary-forge:mrp_v2datagenlibrary:${mcVersion}-${dglAPI}.${dglPatch}")
 }
 
 jar {
