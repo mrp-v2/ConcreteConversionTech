@@ -1,29 +1,27 @@
 package mrp_v2.concreteconversiontech.inventory;
 
-import net.minecraft.item.ItemStack;
+import mrp_v2.concreteconversiontech.tileentity.AbstractConcreteConverterTileEntity;
 import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nullable;
 
 public class ConcreteConverterItemStackHandler extends ItemStackHandler
 {
-    public ConcreteConverterItemStackHandler(int slots)
+    @Nullable private final AbstractConcreteConverterTileEntity concreteConverter;
+
+    public ConcreteConverterItemStackHandler(int slots, @Nullable AbstractConcreteConverterTileEntity concreteConverter)
     {
         super(slots + 3);
+        this.concreteConverter = concreteConverter;
     }
 
-    /**
-     * Ignores slot limitations
-     */
-    public ItemStack extractItem(int slot, int amount)
+    @Override protected void onContentsChanged(int slot)
     {
-        return super.extractItem(slot, amount, false);
-    }
-
-    /**
-     * Ignores slot limitations
-     */
-    public ItemStack insertItem(int slot, ItemStack stack)
-    {
-        return super.insertItem(slot, stack, false);
+        super.onContentsChanged(slot);
+        if (concreteConverter != null)
+        {
+            concreteConverter.markDirty();
+        }
     }
 
     public boolean isInputEmpty()

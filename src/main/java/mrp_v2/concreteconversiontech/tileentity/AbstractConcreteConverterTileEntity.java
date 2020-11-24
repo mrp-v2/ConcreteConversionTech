@@ -54,8 +54,8 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
     {
         super(tileEntityTypeIn);
         this.ticksSpentConverting = 0;
-        this.inventory =
-                new AutomationConcreteConverterItemStackHandler(new ConcreteConverterItemStackHandler(ioSlots * 2));
+        this.inventory = new AutomationConcreteConverterItemStackHandler(
+                new ConcreteConverterItemStackHandler(ioSlots * 2, this));
         this.inventoryLazyOptional = LazyOptional.of(() -> this.inventory);
         this.id = id;
         this.ticksPerItem = BASE_TICKS_PER_ITEM;
@@ -237,8 +237,8 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
                 return;
             }
         }
-        this.inventory.parent.extractItem(sourceIndex, 1);
-        this.inventory.parent.insertItem(destinationIndex, new ItemStack(POWDER_TO_CONCRETE.get(sourceItem), 1));
+        this.inventory.parent.extractItem(sourceIndex, 1, false);
+        this.inventory.parent.insertItem(destinationIndex, new ItemStack(POWDER_TO_CONCRETE.get(sourceItem), 1), false);
     }
 
     @Override public ITextComponent getDisplayName()

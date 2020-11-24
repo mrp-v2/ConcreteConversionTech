@@ -19,7 +19,7 @@ public class ConcreteConverterTier5Container extends AbstractConcreteConverterCo
     public ConcreteConverterTier5Container(int id, PlayerInventory playerInventoryIn)
     {
         this(id, playerInventoryIn,
-                new ConcreteConverterItemStackHandler(ConcreteConverterTier5TileEntity.TOTAL_SLOTS));
+                new ConcreteConverterItemStackHandler(ConcreteConverterTier5TileEntity.TOTAL_SLOTS, null));
     }
 
     public static ContainerType<ConcreteConverterTier5Container> createContainerType()
