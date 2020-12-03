@@ -1,50 +1,25 @@
 {
-    "type": "configurablerecipeslibrary:crafting_shaped_configurable",
-    "pattern": [
-        "BPB", "WCW", "BPB"
-    ],
-    "key": {
-        "C": {
-            "item": "concreteconversiontech:concrete_converter_tier_3"
-        },
-        "W": {
-            "item": "minecraft:water_bucket"
-        },
-        "B": {
-            "tag": "forge:ingots/gold"
-        },
-        "P": {
-            "item": "minecraft:golden_pickaxe"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BPB",
+    "WCW",
+    "BPB"
+  ],
+  "key": {
+    "C": {
+      "item": "concreteconversiontech:concrete_converter_tier_3"
     },
-    "result": {
-        "item": "concreteconversiontech:concrete_converter_tier_4"
+    "W": {
+      "item": "minecraft:water_bucket"
     },
-    "overrides": [
-        {
-            "condition": "concreteconversiontech:harder_crafting",
-            "overrides": [
-                {
-                    "original": {
-                        "tag": "forge:ingots/gold"
-                    },
-                    "replacement": {
-                        "tag": "forge:storage_blocks/gold"
-                    }
-                }
-            ]
-        }, {
-            "condition": "!concreteconversiontech:progressive_crafting",
-            "overrides": [
-                {
-                    "original": {
-                        "item": "concreteconversiontech:concrete_converter_tier_3"
-                    },
-                    "replacement": {
-                        "tag": "forge:glass"
-                    }
-                }
-            ]
-        }
-    ]
+    "B": {
+      "tag": "forge:ingots/gold"
+    },
+    "P": {
+      "item": "minecraft:golden_pickaxe"
+    }
+  },
+  "result": {
+    "item": "concreteconversiontech:concrete_converter_tier_4"
+  }
 }

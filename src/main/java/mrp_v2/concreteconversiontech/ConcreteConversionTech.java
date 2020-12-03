@@ -1,10 +1,7 @@
 package mrp_v2.concreteconversiontech;
 
-import mrp_v2.concreteconversiontech.config.ServerConfig;
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +15,5 @@ import org.apache.logging.log4j.Logger;
     public ConcreteConversionTech()
     {
         ObjectHolder.registerListeners(FMLJavaModLoadingContext.get().getModEventBus());
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SERVER_SPEC);
     }
 }

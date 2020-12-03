@@ -2,10 +2,10 @@ package mrp_v2.concreteconversiontech.datagen;
 
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
-import mrp_v2.mrp_v2datagenlibrary.datagen.TranslationGenerator;
+import mrp_v2.mrplibrary.datagen.providers.LanguageProvider;
 import net.minecraft.data.DataGenerator;
 
-public class EN_USTranslationGenerator extends TranslationGenerator
+public class EN_USTranslationGenerator extends LanguageProvider
 {
     public EN_USTranslationGenerator(DataGenerator gen, String modid)
     {
