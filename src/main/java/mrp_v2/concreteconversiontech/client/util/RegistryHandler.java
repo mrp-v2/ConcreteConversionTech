@@ -21,29 +21,29 @@ public class RegistryHandler
 {
     @SubscribeEvent public static void clientSetup(final FMLClientSetupEvent event)
     {
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK.get(), RenderType.getCutout());
-        ScreenManager.registerFactory(ObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE.get(),
+        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK.get(), RenderType.cutout());
+        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE.get(),
                 ConcreteConverterTier1Screen::new);
-        ScreenManager.registerFactory(ObjectHolder.CONCRETE_CONVERTER_TIER_2_CONTAINER_TYPE.get(),
+        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_2_CONTAINER_TYPE.get(),
                 ConcreteConverterTier2Screen::new);
-        ScreenManager.registerFactory(ObjectHolder.CONCRETE_CONVERTER_TIER_3_CONTAINER_TYPE.get(),
+        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_3_CONTAINER_TYPE.get(),
                 ConcreteConverterTier3Screen::new);
-        ScreenManager.registerFactory(ObjectHolder.CONCRETE_CONVERTER_TIER_4_CONTAINER_TYPE.get(),
+        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_4_CONTAINER_TYPE.get(),
                 ConcreteConverterTier4Screen::new);
-        ScreenManager.registerFactory(ObjectHolder.CONCRETE_CONVERTER_TIER_5_CONTAINER_TYPE.get(),
+        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_5_CONTAINER_TYPE.get(),
                 ConcreteConverterTier5Screen::new);
-        ScreenManager.registerFactory(ObjectHolder.CONCRETE_CONVERTER_TIER_6_CONTAINER_TYPE.get(),
+        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_6_CONTAINER_TYPE.get(),
                 ConcreteConverterTier6Screen::new);
-        ScreenManager.registerFactory(ObjectHolder.CONCRETE_CONVERTER_TIER_7_CONTAINER_TYPE.get(),
+        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_7_CONTAINER_TYPE.get(),
                 ConcreteConverterTier7Screen::new);
-        ScreenManager.registerFactory(ObjectHolder.CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE.get(),
+        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE.get(),
                 ConcreteConverterTier8Screen::new);
     }
 
@@ -51,8 +51,7 @@ public class RegistryHandler
     {
         event.getBlockColors()
                 .register((state, reader, pos, tint) -> reader != null && pos != null ?
-                                BiomeColors.getWaterColor(reader, pos) :
-                                BiomeRegistry.PLAINS.getWaterColor(), ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get(),
+                                BiomeColors.getAverageWaterColor(reader, pos) : BiomeRegistry.PLAINS.getWaterColor(), ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get(),
                         ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get(),
                         ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get(),
                         ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK.get(),
@@ -66,7 +65,7 @@ public class RegistryHandler
     {
         event.getItemColors().register((itemStack, tint) ->
                 {
-                    BlockState blockstate = ((BlockItem) itemStack.getItem()).getBlock().getDefaultState();
+                    BlockState blockstate = ((BlockItem) itemStack.getItem()).getBlock().defaultBlockState();
                     return event.getBlockColors().getColor(blockstate, null, null, tint);
                 }, ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK_ITEM.get(),
                 ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK_ITEM.get(),

@@ -15,8 +15,9 @@ public class ConcreteConverterTier6TileEntity extends AbstractConcreteConverterT
 
     public static TileEntityType<ConcreteConverterTier6TileEntity> createTileEntityType()
     {
-        return TileEntityType.Builder.create(ConcreteConverterTier6TileEntity::new,
-                ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK.get()).build(null);
+        return TileEntityType.Builder
+                .of(ConcreteConverterTier6TileEntity::new, ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK.get())
+                .build(null);
     }
 
     public ConcreteConverterTier6TileEntity()

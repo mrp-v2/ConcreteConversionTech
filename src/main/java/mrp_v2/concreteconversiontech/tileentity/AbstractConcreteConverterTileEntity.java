@@ -63,7 +63,7 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 
     public static boolean isConcretePowder(ItemStack stack)
     {
-        return Block.getBlockFromItem(stack.getItem()) instanceof ConcretePowderBlock;
+        return Block.byItem(stack.getItem()) instanceof ConcretePowderBlock;
     }
 
     public AutomationConcreteConverterItemStackHandler getInventory()
@@ -83,9 +83,9 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
 
     @Override public abstract Container createMenu(int id, PlayerInventory playerInventoryIn, PlayerEntity playerIn);
 
-    @Override public void read(BlockState state, CompoundNBT compound)
+    @Override public void load(BlockState state, CompoundNBT compound)
     {
-        super.read(state, compound);
+        super.load(state, compound);
         if (compound.contains(DATA_NBT_ID, 10))
         {
             CompoundNBT dataNBT = compound.getCompound(DATA_NBT_ID);
@@ -101,18 +101,18 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
         }
     }
 
-    @Override public CompoundNBT write(CompoundNBT compound)
+    @Override public CompoundNBT save(CompoundNBT compound)
     {
-        super.write(compound);
+        super.save(compound);
         ConcreteConverterData.CODEC.encodeStart(NBTDynamicOps.INSTANCE, new ConcreteConverterData(this))
                 .resultOrPartial(ConcreteConversionTech.LOGGER::error)
                 .ifPresent((data) -> compound.put(DATA_NBT_ID, data));
         return compound;
     }
 
-    @Override public void remove()
+    @Override public void setRemoved()
     {
-        super.remove();
+        super.setRemoved();
         this.inventoryLazyOptional.invalidate();
     }
 
@@ -160,11 +160,11 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
                 this.ticksSpentConverting = 0;
                 attemptConversions();
             }
-            this.markDirty();
+            this.setChanged();
         } else if (this.ticksSpentConverting != 0)
         {
             this.ticksSpentConverting = 0;
-            this.markDirty();
+            this.setChanged();
         }
     }
 
@@ -177,9 +177,9 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
             if (stack.getItem() == Items.ENCHANTED_BOOK)
             {
                 Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-                if (enchantments.containsKey(Enchantments.EFFICIENCY))
+                if (enchantments.containsKey(Enchantments.BLOCK_EFFICIENCY))
                 {
-                    level += enchantments.get(Enchantments.EFFICIENCY);
+                    level += enchantments.get(Enchantments.BLOCK_EFFICIENCY);
                 }
             }
         }
@@ -228,10 +228,10 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
         Item sourceItem = this.inventory.parent.getStackInSlot(sourceIndex).getItem();
         if (!POWDER_TO_CONCRETE.containsKey(sourceItem))
         {
-            Block block = Block.getBlockFromItem(sourceItem);
+            Block block = Block.byItem(sourceItem);
             if (block instanceof ConcretePowderBlock)
             {
-                POWDER_TO_CONCRETE.put(sourceItem, ((ConcretePowderBlock) block).solidifiedState.getBlock().asItem());
+                POWDER_TO_CONCRETE.put(sourceItem, ((ConcretePowderBlock) block).concrete.getBlock().asItem());
             } else
             {
                 return;

@@ -20,7 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
             int ySize, int playerInventoryXShift)
     {
         this(screenContainer, inv, titleIn, tier, ySize);
-        this.playerInventoryTitleX += playerInventoryXShift;
+        this.inventoryLabelX += playerInventoryXShift;
     }
 
     protected AbstractConcreteConverterScreen(T screenContainer, PlayerInventory inv, ITextComponent titleIn, int tier,
@@ -30,24 +30,24 @@ import net.minecraftforge.api.distmarker.OnlyIn;
         this.guiTexture = new ResourceLocation(ConcreteConversionTech.ID,
                 "textures/gui/container/concrete_converter_tier_" + tier + ".png");
         this.passEvents = false;
-        this.ySize = ySize;
-        this.playerInventoryTitleY = this.ySize - 94;
+        this.imageHeight = ySize;
+        this.inventoryLabelY = this.imageHeight - 94;
     }
 
     @Override public void render(MatrixStack matrix, int mouseX, int mouseY, float partialTicks)
     {
         this.renderBackground(matrix);
         super.render(matrix, mouseX, mouseY, partialTicks);
-        this.renderHoveredTooltip(matrix, mouseX, mouseY);
+        this.renderTooltip(matrix, mouseX, mouseY);
     }
 
     @SuppressWarnings("deprecation") @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrix, float partialTicks, int x, int y)
+    protected void renderBg(MatrixStack matrix, float partialTicks, int x, int y)
     {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bindTexture(guiTexture);
-        int i = (this.width - this.xSize) / 2;
-        int j = (this.height - this.ySize) / 2;
-        this.blit(matrix, i, j, 0, 0, this.xSize, this.ySize);
+        this.minecraft.getTextureManager().bind(guiTexture);
+        int i = (this.width - this.imageWidth) / 2;
+        int j = (this.height - this.imageHeight) / 2;
+        this.blit(matrix, i, j, 0, 0, this.imageWidth, this.imageHeight);
     }
 }

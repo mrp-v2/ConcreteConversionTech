@@ -20,7 +20,7 @@ public class ConcreteConverterItemStackHandler extends ItemStackHandler
         super.onContentsChanged(slot);
         if (concreteConverter != null)
         {
-            concreteConverter.markDirty();
+            concreteConverter.setChanged();
         }
     }
 

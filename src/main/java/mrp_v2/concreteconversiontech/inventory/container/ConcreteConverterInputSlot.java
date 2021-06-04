@@ -13,7 +13,7 @@ public class ConcreteConverterInputSlot extends SlotItemHandler
         super(inventoryIn, index, xPosition, yPosition);
     }
 
-    @Override public boolean isItemValid(ItemStack stack)
+    @Override public boolean mayPlace(ItemStack stack)
     {
         return AbstractConcreteConverterTileEntity.isConcretePowder(stack);
     }

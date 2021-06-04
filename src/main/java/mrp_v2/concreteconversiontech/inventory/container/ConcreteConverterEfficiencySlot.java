@@ -18,15 +18,12 @@ public class ConcreteConverterEfficiencySlot extends SlotItemHandler
         super(itemHandler, index, xPosition, yPosition);
     }
 
-    @Override public boolean isItemValid(ItemStack stack)
+    @Override public boolean mayPlace(ItemStack stack)
     {
         if (stack.getItem() == Items.ENCHANTED_BOOK)
         {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-            if (enchantments.containsKey(Enchantments.EFFICIENCY))
-            {
-                return true;
-            }
+            return enchantments.containsKey(Enchantments.BLOCK_EFFICIENCY);
         }
         return false;
     }

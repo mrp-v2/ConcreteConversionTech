@@ -16,6 +16,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
             ITextComponent titleIn)
     {
         super(screenContainer, inv, titleIn, 8, Y_SIZE, PLAYER_INVENTORY_X_OFFSET);
-        this.xSize += 18 * 2;
+        this.imageWidth += 18 * 2;
     }
 }

@@ -80,7 +80,7 @@ public class ObjectHolder
             CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE;
     public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(ConcreteConversionTech.ID)
     {
-        @OnlyIn(Dist.CLIENT) public ItemStack createIcon()
+        @OnlyIn(Dist.CLIENT) public ItemStack makeIcon()
         {
             return new ItemStack(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get());
         }
@@ -165,9 +165,9 @@ public class ObjectHolder
     public static <T extends Block> BlockItem createBlockItem(RegistryObject<T> blockObject)
     {
         T block = blockObject.get();
-        BlockState state = block.getDefaultState();
+        BlockState state = block.defaultBlockState();
         return new BlockItem(block,
                 new Item.Properties().addToolType(block.getHarvestTool(state), block.getHarvestLevel(state))
-                        .group(CONCRETE_CONVERSION_TECH_ITEM_GROUP));
+                        .tab(CONCRETE_CONVERSION_TECH_ITEM_GROUP));
     }
 }

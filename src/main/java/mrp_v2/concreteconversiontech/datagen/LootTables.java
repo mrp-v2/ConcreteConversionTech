@@ -11,7 +11,7 @@ public class LootTables extends mrp_v2.mrplibrary.datagen.BlockLootTables
     public LootTables()
     {
         Consumer<Block> dropWithNameFunction =
-                (block) -> this.registerLootTable(block, BlockLootTables::droppingWithName);
+                (block) -> this.add(block, BlockLootTables::createNameableBlockEntityTable);
         this.addLootTable(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get(), dropWithNameFunction);
         this.addLootTable(ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get(), dropWithNameFunction);
         this.addLootTable(ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get(), dropWithNameFunction);

@@ -27,7 +27,7 @@ public class ConcreteConverterBlock extends Block
 
     public ConcreteConverterBlock(Block base, Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier)
     {
-        super(Properties.from(base));
+        super(Properties.copy(base));
         this.base = base;
         this.tileEntitySupplier = tileEntitySupplier;
     }
@@ -43,57 +43,55 @@ public class ConcreteConverterBlock extends Block
     }
 
     @SuppressWarnings("deprecation") @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
+    public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
     {
         if (state.hasTileEntity() && (state.getBlock() != newState.getBlock() || !newState.hasTileEntity()))
         {
-            worldIn.getTileEntity(pos)
-                    .getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+            worldIn.getBlockEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
                     .ifPresent(itemHandler ->
                     {
                         for (int i = 0; i < itemHandler.getSlots(); i++)
                         {
-                            Block.spawnAsEntity(worldIn, pos, itemHandler.getStackInSlot(i));
+                            Block.popResource(worldIn, pos, itemHandler.getStackInSlot(i));
                         }
                     });
         }
-        super.onReplaced(state, worldIn, pos, newState, isMoving);
+        super.onRemove(state, worldIn, pos, newState, isMoving);
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
-            Hand handIn, BlockRayTraceResult hit)
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn,
+            BlockRayTraceResult hit)
     {
-        if (worldIn.isRemote)
+        if (worldIn.isClientSide)
         {
             return ActionResultType.SUCCESS;
         } else
         {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
+            TileEntity tileEntity = worldIn.getBlockEntity(pos);
             if (tileEntity instanceof AbstractConcreteConverterTileEntity)
             {
-                player.openContainer((INamedContainerProvider) tileEntity);
+                player.openMenu((INamedContainerProvider) tileEntity);
             }
             return ActionResultType.CONSUME;
         }
     }
 
-    @Override public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos)
+    @Override public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos)
     {
-        return super.getComparatorInputOverride(blockState, worldIn, pos);
+        return super.getAnalogOutputSignal(blockState, worldIn, pos);
     }
 
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer,
+    @Override public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer,
             ItemStack stack)
     {
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-        if (stack.hasDisplayName())
+        super.setPlacedBy(worldIn, pos, state, placer, stack);
+        if (stack.hasCustomHoverName())
         {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
+            TileEntity tileEntity = worldIn.getBlockEntity(pos);
             if (tileEntity instanceof AbstractConcreteConverterTileEntity)
             {
-                ((AbstractConcreteConverterTileEntity) tileEntity).setCustomName(stack.getDisplayName());
+                ((AbstractConcreteConverterTileEntity) tileEntity).setCustomName(stack.getHoverName());
             }
         }
     }

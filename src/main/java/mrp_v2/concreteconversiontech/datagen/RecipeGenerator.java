@@ -24,16 +24,16 @@ public class RecipeGenerator extends mrp_v2.mrplibrary.datagen.providers.RecipeP
         super(dataGeneratorIn, modId);
     }
 
-    @Override protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
+    @Override protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer)
     {
-        ShapedRecipeBuilder.shapedRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get()).patternLine("BPB")
-                .patternLine("WCW").patternLine("BPB").key('C', Tags.Items.GLASS).key('W', Items.WATER_BUCKET)
-                .key('B', ItemTags.PLANKS).key('P', Items.WOODEN_PICKAXE)
-                .addCriterion("has_planks", hasItem(ItemTags.PLANKS)).build(consumer);
-        ShapedRecipeBuilder.shapedRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get()).patternLine("BPB")
-                .patternLine("WCW").patternLine("BPB").key('C', ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get())
-                .key('W', Items.WATER_BUCKET).key('B', Tags.Items.STONE).key('P', Items.STONE_PICKAXE)
-                .addCriterion("has_stone", hasItem(Tags.Items.STONE)).build(consumer);
+        ShapedRecipeBuilder.shaped(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get()).pattern("BPB").pattern("WCW")
+                .pattern("BPB").define('C', Tags.Items.GLASS).define('W', Items.WATER_BUCKET)
+                .define('B', ItemTags.PLANKS).define('P', Items.WOODEN_PICKAXE)
+                .unlockedBy("has_planks", has(ItemTags.PLANKS)).save(consumer);
+        ShapedRecipeBuilder.shaped(ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get()).pattern("BPB").pattern("WCW")
+                .pattern("BPB").define('C', ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get())
+                .define('W', Items.WATER_BUCKET).define('B', Tags.Items.STONE).define('P', Items.STONE_PICKAXE)
+                .unlockedBy("has_stone", has(Tags.Items.STONE)).save(consumer);
         makeNormalConcreteConverterRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get(),
                 ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get(), Tags.Items.INGOTS_IRON, Items.IRON_PICKAXE, "iron",
                 consumer);
@@ -49,18 +49,18 @@ public class RecipeGenerator extends mrp_v2.mrplibrary.datagen.providers.RecipeP
         makeNormalConcreteConverterRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK.get(),
                 ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK.get(), Tags.Items.GEMS_QUARTZ, Items.DIAMOND_PICKAXE,
                 "quartz", consumer);
-        ShapedRecipeBuilder.shapedRecipe(ObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK.get()).patternLine("BPB")
-                .patternLine("WCW").patternLine("BQB").key('C', ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK.get())
-                .key('W', Items.WATER_BUCKET).key('B', Tags.Items.INGOTS_NETHERITE).key('P', Items.NETHERITE_PICKAXE)
-                .key('Q', Tags.Items.NETHER_STARS).addCriterion("has_netherite", hasItem(Tags.Items.INGOTS_NETHERITE))
-                .build(consumer);
+        ShapedRecipeBuilder.shaped(ObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK.get()).pattern("BPB").pattern("WCW")
+                .pattern("BQB").define('C', ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK.get())
+                .define('W', Items.WATER_BUCKET).define('B', Tags.Items.INGOTS_NETHERITE)
+                .define('P', Items.NETHERITE_PICKAXE).define('Q', Tags.Items.NETHER_STARS)
+                .unlockedBy("has_netherite", has(Tags.Items.INGOTS_NETHERITE)).save(consumer);
     }
 
     private void makeNormalConcreteConverterRecipe(Block converter, Block previousTier, ITag<Item> craftingBase,
             Item pickaxe, String tierName, Consumer<IFinishedRecipe> consumer)
     {
-        ShapedRecipeBuilder.shapedRecipe(converter).patternLine("BPB").patternLine("WCW").patternLine("BPB")
-                .key('C', previousTier).key('W', Items.WATER_BUCKET).key('B', craftingBase).key('P', pickaxe)
-                .addCriterion("has_" + tierName, hasItem(craftingBase)).build(consumer);
+        ShapedRecipeBuilder.shaped(converter).pattern("BPB").pattern("WCW").pattern("BPB").define('C', previousTier)
+                .define('W', Items.WATER_BUCKET).define('B', craftingBase).define('P', pickaxe)
+                .unlockedBy("has_" + tierName, has(craftingBase)).save(consumer);
     }
 }
