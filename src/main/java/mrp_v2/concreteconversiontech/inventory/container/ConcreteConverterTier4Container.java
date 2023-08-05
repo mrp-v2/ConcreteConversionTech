@@ -4,26 +4,26 @@ import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConvert
 import mrp_v2.concreteconversiontech.inventory.ConcreteConverterItemStackHandler;
 import mrp_v2.concreteconversiontech.tileentity.ConcreteConverterTier4TileEntity;
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.MenuType;
 
 public class ConcreteConverterTier4Container extends AbstractConcreteConverterContainer
 {
-    public ConcreteConverterTier4Container(int id, PlayerInventory playerInventoryIn,
+    public ConcreteConverterTier4Container(int id, Inventory playerInventoryIn,
             ConcreteConverterItemStackHandler inventoryIn)
     {
         super(ObjectHolder.CONCRETE_CONVERTER_TIER_4_CONTAINER_TYPE.get(), id, playerInventoryIn, inventoryIn,
                 ConcreteConverterTier4Screen.Y_SIZE, 0, 35, 107, 2, 3);
     }
 
-    public ConcreteConverterTier4Container(int id, PlayerInventory playerInventoryIn)
+    public ConcreteConverterTier4Container(int id, Inventory playerInventoryIn)
     {
         this(id, playerInventoryIn,
                 new ConcreteConverterItemStackHandler(ConcreteConverterTier4TileEntity.TOTAL_SLOTS, null));
     }
 
-    public static ContainerType<ConcreteConverterTier4Container> createContainerType()
+    public static MenuType<ConcreteConverterTier4Container> createContainerType()
     {
-        return new ContainerType<>(ConcreteConverterTier4Container::new);
+        return new MenuType<>(ConcreteConverterTier4Container::new);
     }
 }

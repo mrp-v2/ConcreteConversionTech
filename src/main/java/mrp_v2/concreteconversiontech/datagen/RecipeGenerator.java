@@ -2,13 +2,13 @@ package mrp_v2.concreteconversiontech.datagen;
 
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.tags.ITag;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
 
@@ -24,7 +24,7 @@ public class RecipeGenerator extends mrp_v2.mrplibrary.datagen.providers.RecipeP
         super(dataGeneratorIn, modId);
     }
 
-    @Override protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer)
+    @Override protected void buildShapelessRecipes(Consumer<FinishedRecipe> consumer)
     {
         ShapedRecipeBuilder.shaped(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get()).pattern("BPB").pattern("WCW")
                 .pattern("BPB").define('C', Tags.Items.GLASS).define('W', Items.WATER_BUCKET)
@@ -56,8 +56,8 @@ public class RecipeGenerator extends mrp_v2.mrplibrary.datagen.providers.RecipeP
                 .unlockedBy("has_netherite", has(Tags.Items.INGOTS_NETHERITE)).save(consumer);
     }
 
-    private void makeNormalConcreteConverterRecipe(Block converter, Block previousTier, ITag<Item> craftingBase,
-            Item pickaxe, String tierName, Consumer<IFinishedRecipe> consumer)
+    private void makeNormalConcreteConverterRecipe(Block converter, Block previousTier, Tag<Item> craftingBase,
+            Item pickaxe, String tierName, Consumer<FinishedRecipe> consumer)
     {
         ShapedRecipeBuilder.shaped(converter).pattern("BPB").pattern("WCW").pattern("BPB").define('C', previousTier)
                 .define('W', Items.WATER_BUCKET).define('B', craftingBase).define('P', pickaxe)

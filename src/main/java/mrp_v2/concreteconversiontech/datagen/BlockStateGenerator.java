@@ -3,14 +3,16 @@ package mrp_v2.concreteconversiontech.datagen;
 import mrp_v2.concreteconversiontech.block.ConcreteConverterBlock;
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.commons.lang3.tuple.Pair;
+
+import net.minecraftforge.client.model.generators.ModelBuilder.ElementBuilder;
 
 public class BlockStateGenerator extends BlockStateProvider
 {

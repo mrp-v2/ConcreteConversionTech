@@ -4,15 +4,15 @@ import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.block.ConcreteConverterBlock;
 import mrp_v2.concreteconversiontech.inventory.container.*;
 import mrp_v2.concreteconversiontech.tileentity.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,9 +26,9 @@ public class ObjectHolder
             DeferredRegister.create(ForgeRegistries.BLOCKS, ConcreteConversionTech.ID);
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, ConcreteConversionTech.ID);
-    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES =
+    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ConcreteConversionTech.ID);
-    public static final DeferredRegister<ContainerType<?>> CONTAINERS =
+    public static final DeferredRegister<MenuType<?>> CONTAINERS =
             DeferredRegister.create(ForgeRegistries.CONTAINERS, ConcreteConversionTech.ID);
     public static final RegistryObject<ConcreteConverterBlock> CONCRETE_CONVERTER_TIER_1_BLOCK;
     public static final RegistryObject<ConcreteConverterBlock> CONCRETE_CONVERTER_TIER_2_BLOCK;
@@ -46,39 +46,39 @@ public class ObjectHolder
     public static final RegistryObject<BlockItem> CONCRETE_CONVERTER_TIER_6_BLOCK_ITEM;
     public static final RegistryObject<BlockItem> CONCRETE_CONVERTER_TIER_7_BLOCK_ITEM;
     public static final RegistryObject<BlockItem> CONCRETE_CONVERTER_TIER_8_BLOCK_ITEM;
-    public static final RegistryObject<TileEntityType<ConcreteConverterTier1TileEntity>>
+    public static final RegistryObject<BlockEntityType<ConcreteConverterTier1TileEntity>>
             CONCRETE_CONVERTER_TIER_1_TILE_ENTITY_TYPE;
-    public static final RegistryObject<TileEntityType<ConcreteConverterTier2TileEntity>>
+    public static final RegistryObject<BlockEntityType<ConcreteConverterTier2TileEntity>>
             CONCRETE_CONVERTER_TIER_2_TILE_ENTITY_TYPE;
-    public static final RegistryObject<TileEntityType<ConcreteConverterTier3TileEntity>>
+    public static final RegistryObject<BlockEntityType<ConcreteConverterTier3TileEntity>>
             CONCRETE_CONVERTER_TIER_3_TILE_ENTITY_TYPE;
-    public static final RegistryObject<TileEntityType<ConcreteConverterTier4TileEntity>>
+    public static final RegistryObject<BlockEntityType<ConcreteConverterTier4TileEntity>>
             CONCRETE_CONVERTER_TIER_4_TILE_ENTITY_TYPE;
-    public static final RegistryObject<TileEntityType<ConcreteConverterTier5TileEntity>>
+    public static final RegistryObject<BlockEntityType<ConcreteConverterTier5TileEntity>>
             CONCRETE_CONVERTER_TIER_5_TILE_ENTITY_TYPE;
-    public static final RegistryObject<TileEntityType<ConcreteConverterTier6TileEntity>>
+    public static final RegistryObject<BlockEntityType<ConcreteConverterTier6TileEntity>>
             CONCRETE_CONVERTER_TIER_6_TILE_ENTITY_TYPE;
-    public static final RegistryObject<TileEntityType<ConcreteConverterTier7TileEntity>>
+    public static final RegistryObject<BlockEntityType<ConcreteConverterTier7TileEntity>>
             CONCRETE_CONVERTER_TIER_7_TILE_ENTITY_TYPE;
-    public static final RegistryObject<TileEntityType<ConcreteConverterTier8TileEntity>>
+    public static final RegistryObject<BlockEntityType<ConcreteConverterTier8TileEntity>>
             CONCRETE_CONVERTER_TIER_8_TILE_ENTITY_TYPE;
-    public static final RegistryObject<ContainerType<ConcreteConverterTier1Container>>
+    public static final RegistryObject<MenuType<ConcreteConverterTier1Container>>
             CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE;
-    public static final RegistryObject<ContainerType<ConcreteConverterTier2Container>>
+    public static final RegistryObject<MenuType<ConcreteConverterTier2Container>>
             CONCRETE_CONVERTER_TIER_2_CONTAINER_TYPE;
-    public static final RegistryObject<ContainerType<ConcreteConverterTier3Container>>
+    public static final RegistryObject<MenuType<ConcreteConverterTier3Container>>
             CONCRETE_CONVERTER_TIER_3_CONTAINER_TYPE;
-    public static final RegistryObject<ContainerType<ConcreteConverterTier4Container>>
+    public static final RegistryObject<MenuType<ConcreteConverterTier4Container>>
             CONCRETE_CONVERTER_TIER_4_CONTAINER_TYPE;
-    public static final RegistryObject<ContainerType<ConcreteConverterTier5Container>>
+    public static final RegistryObject<MenuType<ConcreteConverterTier5Container>>
             CONCRETE_CONVERTER_TIER_5_CONTAINER_TYPE;
-    public static final RegistryObject<ContainerType<ConcreteConverterTier6Container>>
+    public static final RegistryObject<MenuType<ConcreteConverterTier6Container>>
             CONCRETE_CONVERTER_TIER_6_CONTAINER_TYPE;
-    public static final RegistryObject<ContainerType<ConcreteConverterTier7Container>>
+    public static final RegistryObject<MenuType<ConcreteConverterTier7Container>>
             CONCRETE_CONVERTER_TIER_7_CONTAINER_TYPE;
-    public static final RegistryObject<ContainerType<ConcreteConverterTier8Container>>
+    public static final RegistryObject<MenuType<ConcreteConverterTier8Container>>
             CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE;
-    public static final ItemGroup CONCRETE_CONVERSION_TECH_ITEM_GROUP = new ItemGroup(ConcreteConversionTech.ID)
+    public static final CreativeModeTab CONCRETE_CONVERSION_TECH_ITEM_GROUP = new CreativeModeTab(ConcreteConversionTech.ID)
     {
         @OnlyIn(Dist.CLIENT) public ItemStack makeIcon()
         {

@@ -1,11 +1,11 @@
 package mrp_v2.concreteconversiontech.inventory.container;
 
 import mrp_v2.concreteconversiontech.inventory.ConcreteConverterItemStackHandler;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.items.SlotItemHandler;
 
 import java.util.Map;

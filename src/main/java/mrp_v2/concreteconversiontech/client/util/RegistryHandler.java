@@ -3,13 +3,13 @@ package mrp_v2.concreteconversiontech.client.util;
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.client.gui.screen.inventory.*;
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.item.BlockItem;
-import net.minecraft.world.biome.BiomeColors;
-import net.minecraft.world.biome.BiomeRegistry;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.data.worldgen.biome.Biomes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,29 +21,29 @@ public class RegistryHandler
 {
     @SubscribeEvent public static void clientSetup(final FMLClientSetupEvent event)
     {
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK.get(), RenderType.cutout());
-        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE.get(),
+        ItemBlockRenderTypes.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_5_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_6_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_7_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK.get(), RenderType.cutout());
+        MenuScreens.register(ObjectHolder.CONCRETE_CONVERTER_TIER_1_CONTAINER_TYPE.get(),
                 ConcreteConverterTier1Screen::new);
-        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_2_CONTAINER_TYPE.get(),
+        MenuScreens.register(ObjectHolder.CONCRETE_CONVERTER_TIER_2_CONTAINER_TYPE.get(),
                 ConcreteConverterTier2Screen::new);
-        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_3_CONTAINER_TYPE.get(),
+        MenuScreens.register(ObjectHolder.CONCRETE_CONVERTER_TIER_3_CONTAINER_TYPE.get(),
                 ConcreteConverterTier3Screen::new);
-        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_4_CONTAINER_TYPE.get(),
+        MenuScreens.register(ObjectHolder.CONCRETE_CONVERTER_TIER_4_CONTAINER_TYPE.get(),
                 ConcreteConverterTier4Screen::new);
-        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_5_CONTAINER_TYPE.get(),
+        MenuScreens.register(ObjectHolder.CONCRETE_CONVERTER_TIER_5_CONTAINER_TYPE.get(),
                 ConcreteConverterTier5Screen::new);
-        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_6_CONTAINER_TYPE.get(),
+        MenuScreens.register(ObjectHolder.CONCRETE_CONVERTER_TIER_6_CONTAINER_TYPE.get(),
                 ConcreteConverterTier6Screen::new);
-        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_7_CONTAINER_TYPE.get(),
+        MenuScreens.register(ObjectHolder.CONCRETE_CONVERTER_TIER_7_CONTAINER_TYPE.get(),
                 ConcreteConverterTier7Screen::new);
-        ScreenManager.register(ObjectHolder.CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE.get(),
+        MenuScreens.register(ObjectHolder.CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE.get(),
                 ConcreteConverterTier8Screen::new);
     }
 
@@ -51,7 +51,7 @@ public class RegistryHandler
     {
         event.getBlockColors()
                 .register((state, reader, pos, tint) -> reader != null && pos != null ?
-                                BiomeColors.getAverageWaterColor(reader, pos) : BiomeRegistry.PLAINS.getWaterColor(), ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get(),
+                                BiomeColors.getAverageWaterColor(reader, pos) : Biomes.PLAINS.getWaterColor(), ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get(),
                         ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get(),
                         ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get(),
                         ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK.get(),

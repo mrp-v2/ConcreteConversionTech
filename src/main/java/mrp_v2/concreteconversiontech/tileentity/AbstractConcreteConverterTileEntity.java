@@ -5,28 +5,28 @@ import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.inventory.AutomationConcreteConverterItemStackHandler;
 import mrp_v2.concreteconversiontech.inventory.ConcreteConverterItemStackHandler;
 import mrp_v2.concreteconversiontech.tileentity.util.ConcreteConverterData;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ConcretePowderBlock;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.NBTDynamicOps;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.INameable;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.ConcretePowderBlock;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.core.Direction;
+import net.minecraft.world.Nameable;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -36,8 +36,8 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-abstract public class AbstractConcreteConverterTileEntity extends TileEntity
-        implements ICapabilityProvider, ITickableTileEntity, INamedContainerProvider, INameable
+abstract public class AbstractConcreteConverterTileEntity extends BlockEntity
+        implements ICapabilityProvider, TickableBlockEntity, MenuProvider, Nameable
 {
     public static final int BASE_TICKS_PER_ITEM = 16;
     public static final String ID_STEM_PRE = "concrete_converter_";
@@ -48,9 +48,9 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
     protected final String id;
     protected int ticksSpentConverting;
     protected int ticksPerItem;
-    @Nullable private ITextComponent customName;
+    @Nullable private Component customName;
 
-    public AbstractConcreteConverterTileEntity(TileEntityType<?> tileEntityTypeIn, int ioSlots, String id)
+    public AbstractConcreteConverterTileEntity(BlockEntityType<?> tileEntityTypeIn, int ioSlots, String id)
     {
         super(tileEntityTypeIn);
         this.ticksSpentConverting = 0;
@@ -81,16 +81,16 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
         return ticksPerItem;
     }
 
-    @Override public abstract Container createMenu(int id, PlayerInventory playerInventoryIn, PlayerEntity playerIn);
+    @Override public abstract AbstractContainerMenu createMenu(int id, Inventory playerInventoryIn, Player playerIn);
 
-    @Override public void load(BlockState state, CompoundNBT compound)
+    @Override public void load(BlockState state, CompoundTag compound)
     {
         super.load(state, compound);
         if (compound.contains(DATA_NBT_ID, 10))
         {
-            CompoundNBT dataNBT = compound.getCompound(DATA_NBT_ID);
+            CompoundTag dataNBT = compound.getCompound(DATA_NBT_ID);
             DataResult<ConcreteConverterData> dataResult =
-                    ConcreteConverterData.CODEC.parse(NBTDynamicOps.INSTANCE, dataNBT);
+                    ConcreteConverterData.CODEC.parse(NbtOps.INSTANCE, dataNBT);
             dataResult.resultOrPartial(ConcreteConversionTech.LOGGER::error).ifPresent((data) ->
             {
                 this.ticksSpentConverting = data.getTicksSpentConverting();
@@ -101,10 +101,10 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
         }
     }
 
-    @Override public CompoundNBT save(CompoundNBT compound)
+    @Override public CompoundTag save(CompoundTag compound)
     {
         super.save(compound);
-        ConcreteConverterData.CODEC.encodeStart(NBTDynamicOps.INSTANCE, new ConcreteConverterData(this))
+        ConcreteConverterData.CODEC.encodeStart(NbtOps.INSTANCE, new ConcreteConverterData(this))
                 .resultOrPartial(ConcreteConversionTech.LOGGER::error)
                 .ifPresent((data) -> compound.put(DATA_NBT_ID, data));
         return compound;
@@ -125,24 +125,24 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
         return super.getCapability(cap, side);
     }
 
-    @Override public ITextComponent getName()
+    @Override public Component getName()
     {
         return hasCustomName() ? getCustomName() : getDefaultName();
     }
 
-    @Nullable @Override public ITextComponent getCustomName()
+    @Nullable @Override public Component getCustomName()
     {
         return this.customName;
     }
 
-    public void setCustomName(@Nullable ITextComponent customName)
+    public void setCustomName(@Nullable Component customName)
     {
         this.customName = customName;
     }
 
-    private ITextComponent getDefaultName()
+    private Component getDefaultName()
     {
-        return new TranslationTextComponent(
+        return new TranslatableComponent(
                 "block." + ConcreteConversionTech.ID + "." + this.id.replace("tile_entity", "block"));
     }
 
@@ -241,8 +241,8 @@ abstract public class AbstractConcreteConverterTileEntity extends TileEntity
         this.inventory.parent.insertItem(destinationIndex, new ItemStack(POWDER_TO_CONCRETE.get(sourceItem), 1), false);
     }
 
-    @Override public ITextComponent getDisplayName()
+    @Override public Component getDisplayName()
     {
-        return INameable.super.getDisplayName();
+        return Nameable.super.getDisplayName();
     }
 }

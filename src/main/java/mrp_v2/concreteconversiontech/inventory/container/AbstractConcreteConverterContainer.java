@@ -1,19 +1,19 @@
 package mrp_v2.concreteconversiontech.inventory.container;
 
 import mrp_v2.concreteconversiontech.inventory.ConcreteConverterItemStackHandler;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
-public abstract class AbstractConcreteConverterContainer extends Container
+public abstract class AbstractConcreteConverterContainer extends AbstractContainerMenu
 {
     protected static final String ID_STEM_PRE = "concrete_converter_";
     protected final ConcreteConverterItemStackHandler inventory;
 
-    protected AbstractConcreteConverterContainer(ContainerType<?> type, int id, PlayerInventory playerInventoryIn,
+    protected AbstractConcreteConverterContainer(MenuType<?> type, int id, Inventory playerInventoryIn,
             ConcreteConverterItemStackHandler inventoryIn, int ySize, int playerInventoryXOffset, int inputSlotsXStart,
             int outputSlotsXStart, int slotsWidth, int slotsHeight)
     {
@@ -24,7 +24,7 @@ public abstract class AbstractConcreteConverterContainer extends Container
     }
 
     protected void addSlots(int inputSlotsXStart, int outputSlotsXStart, int width, int height,
-            PlayerInventory playerInventory, int playerInventoryXOffset, int ySize)
+            Inventory playerInventory, int playerInventoryXOffset, int ySize)
     {
         int slotsYStart = 40;
         // converter input slots
@@ -66,7 +66,7 @@ public abstract class AbstractConcreteConverterContainer extends Container
         }
     }
 
-    @Override public ItemStack quickMoveStack(PlayerEntity playerIn, int index)
+    @Override public ItemStack quickMoveStack(Player playerIn, int index)
     {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
@@ -98,7 +98,7 @@ public abstract class AbstractConcreteConverterContainer extends Container
         return itemStack;
     }
 
-    @Override public boolean stillValid(PlayerEntity playerIn)
+    @Override public boolean stillValid(Player playerIn)
     {
         return true;
     }

@@ -3,8 +3,8 @@ package mrp_v2.concreteconversiontech.tileentity.util;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mrp_v2.concreteconversiontech.tileentity.AbstractConcreteConverterTileEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 
 import javax.annotation.Nullable;
 
@@ -14,13 +14,13 @@ public class ConcreteConverterData
     public static final Codec<ConcreteConverterData> CODEC = RecordCodecBuilder.create((builder) -> builder.group(
             Codec.INT.fieldOf("TicksSpentConverting").forGetter(ConcreteConverterData::getTicksSpentConverting),
             Codec.INT.fieldOf("TicksPerConversion").forGetter(ConcreteConverterData::getTicksPerConversion),
-            CompoundNBT.CODEC.fieldOf("Inventory").forGetter(ConcreteConverterData::getInventoryData),
+            CompoundTag.CODEC.fieldOf("Inventory").forGetter(ConcreteConverterData::getInventoryData),
             Codec.STRING.fieldOf("CustomName").forGetter(ConcreteConverterData::getCustomNameString))
             .apply(builder, ConcreteConverterData::new));
     private final int ticksSpentConverting;
     private final int ticksPerConversion;
-    private final CompoundNBT inventoryData;
-    @Nullable private final ITextComponent customName;
+    private final CompoundTag inventoryData;
+    @Nullable private final Component customName;
 
     public ConcreteConverterData(AbstractConcreteConverterTileEntity concreteConverter)
     {
@@ -28,8 +28,8 @@ public class ConcreteConverterData
                 concreteConverter.getInventory().parent.serializeNBT(), concreteConverter.getCustomName());
     }
 
-    private ConcreteConverterData(int ticksSpentConverting, int ticksPerConversion, CompoundNBT inventoryData,
-            @Nullable ITextComponent customName)
+    private ConcreteConverterData(int ticksSpentConverting, int ticksPerConversion, CompoundTag inventoryData,
+            @Nullable Component customName)
     {
         this.ticksSpentConverting = ticksSpentConverting;
         this.ticksPerConversion = ticksPerConversion;
@@ -37,15 +37,15 @@ public class ConcreteConverterData
         this.customName = customName;
     }
 
-    private ConcreteConverterData(int ticksSpentConverting, int ticksPerConversion, CompoundNBT inventoryData,
+    private ConcreteConverterData(int ticksSpentConverting, int ticksPerConversion, CompoundTag inventoryData,
             String customName)
     {
         this(ticksSpentConverting, ticksPerConversion, inventoryData, makeITextComponent(customName));
     }
 
-    @Nullable private static ITextComponent makeITextComponent(String str)
+    @Nullable private static Component makeITextComponent(String str)
     {
-        return str.equals(NULL_STRING) ? null : ITextComponent.Serializer.fromJson(str);
+        return str.equals(NULL_STRING) ? null : Component.Serializer.fromJson(str);
     }
 
     public int getTicksSpentConverting()
@@ -53,7 +53,7 @@ public class ConcreteConverterData
         return this.ticksSpentConverting;
     }
 
-    public ITextComponent getCustomName()
+    public Component getCustomName()
     {
         return this.customName;
     }
@@ -63,13 +63,13 @@ public class ConcreteConverterData
         return this.ticksPerConversion;
     }
 
-    public CompoundNBT getInventoryData()
+    public CompoundTag getInventoryData()
     {
         return this.inventoryData;
     }
 
     private String getCustomNameString()
     {
-        return this.customName == null ? NULL_STRING : ITextComponent.Serializer.toJson(this.customName);
+        return this.customName == null ? NULL_STRING : Component.Serializer.toJson(this.customName);
     }
 }

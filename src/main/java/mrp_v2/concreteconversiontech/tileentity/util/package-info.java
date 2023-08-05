@@ -1,6 +1,0 @@
-@MethodsReturnNonnullByDefault @ParametersAreNonnullByDefault
-package mrp_v2.concreteconversiontech.tileentity.util;
-
-import mcp.MethodsReturnNonnullByDefault;
-
-import javax.annotation.ParametersAreNonnullByDefault;
