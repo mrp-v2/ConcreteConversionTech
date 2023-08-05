@@ -1,32 +1,33 @@
-package mrp_v2.concreteconversiontech.tileentity;
+package mrp_v2.concreteconversiontech.blockentity;
 
 import com.mojang.serialization.DataResult;
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
+import mrp_v2.concreteconversiontech.blockentity.util.ConcreteConverterData;
 import mrp_v2.concreteconversiontech.inventory.AutomationConcreteConverterItemStackHandler;
 import mrp_v2.concreteconversiontech.inventory.ConcreteConverterItemStackHandler;
-import mrp_v2.concreteconversiontech.tileentity.util.ConcreteConverterData;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.ConcretePowderBlock;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.Nameable;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ConcretePowderBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.core.Direction;
-import net.minecraft.world.Nameable;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -36,9 +37,8 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-abstract public class AbstractConcreteConverterTileEntity extends BlockEntity
-        implements ICapabilityProvider, TickableBlockEntity, MenuProvider, Nameable
-{
+abstract public class AbstractConcreteConverterBlockEntity extends BlockEntity
+        implements ICapabilityProvider, MenuProvider, Nameable {
     public static final int BASE_TICKS_PER_ITEM = 16;
     public static final String ID_STEM_PRE = "concrete_converter_";
     public static final HashMap<Item, Item> POWDER_TO_CONCRETE = new HashMap<>();
@@ -48,11 +48,11 @@ abstract public class AbstractConcreteConverterTileEntity extends BlockEntity
     protected final String id;
     protected int ticksSpentConverting;
     protected int ticksPerItem;
-    @Nullable private Component customName;
+    @Nullable
+    private Component customName;
 
-    public AbstractConcreteConverterTileEntity(BlockEntityType<?> tileEntityTypeIn, int ioSlots, String id)
-    {
-        super(tileEntityTypeIn);
+    public AbstractConcreteConverterBlockEntity(BlockEntityType<?> tileEntityTypeIn, int ioSlots, String id, BlockPos pos, BlockState state) {
+        super(tileEntityTypeIn, pos, state);
         this.ticksSpentConverting = 0;
         this.inventory = new AutomationConcreteConverterItemStackHandler(
                 new ConcreteConverterItemStackHandler(ioSlots * 2, this));
@@ -61,34 +61,47 @@ abstract public class AbstractConcreteConverterTileEntity extends BlockEntity
         this.ticksPerItem = BASE_TICKS_PER_ITEM;
     }
 
-    public static boolean isConcretePowder(ItemStack stack)
-    {
+    public static boolean isConcretePowder(ItemStack stack) {
         return Block.byItem(stack.getItem()) instanceof ConcretePowderBlock;
     }
 
-    public AutomationConcreteConverterItemStackHandler getInventory()
-    {
+    public static void tick(Level level, BlockPos pos, BlockState state, AbstractConcreteConverterBlockEntity concreteConverter) {
+        if (!concreteConverter.inventory.parent.isInputEmpty()) {
+            if (concreteConverter.ticksSpentConverting == 0) {
+                concreteConverter.ticksPerItem = Math.max(BASE_TICKS_PER_ITEM - concreteConverter.getEfficiencyLevel(), 1);
+            }
+            concreteConverter.ticksSpentConverting++;
+            if (concreteConverter.ticksSpentConverting >= concreteConverter.ticksPerItem) {
+                concreteConverter.ticksSpentConverting = 0;
+                concreteConverter.attemptConversions();
+            }
+            concreteConverter.setChanged();
+        } else if (concreteConverter.ticksSpentConverting != 0) {
+            concreteConverter.ticksSpentConverting = 0;
+            concreteConverter.setChanged();
+        }
+    }
+
+    public AutomationConcreteConverterItemStackHandler getInventory() {
         return this.inventory;
     }
 
-    public int getTicksSpentConverting()
-    {
+    public int getTicksSpentConverting() {
         return ticksSpentConverting;
     }
 
-    public int getTicksPerItem()
-    {
+    public int getTicksPerItem() {
         return ticksPerItem;
     }
 
-    @Override public abstract AbstractContainerMenu createMenu(int id, Inventory playerInventoryIn, Player playerIn);
+    @Override
+    public abstract AbstractContainerMenu createMenu(int id, Inventory playerInventoryIn, Player playerIn);
 
-    @Override public void load(BlockState state, CompoundTag compound)
-    {
-        super.load(state, compound);
-        if (compound.contains(DATA_NBT_ID, 10))
-        {
-            CompoundTag dataNBT = compound.getCompound(DATA_NBT_ID);
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        if (tag.contains(DATA_NBT_ID, 10)) {
+            CompoundTag dataNBT = tag.getCompound(DATA_NBT_ID);
             DataResult<ConcreteConverterData> dataResult =
                     ConcreteConverterData.CODEC.parse(NbtOps.INSTANCE, dataNBT);
             dataResult.resultOrPartial(ConcreteConversionTech.LOGGER::error).ifPresent((data) ->
@@ -101,84 +114,55 @@ abstract public class AbstractConcreteConverterTileEntity extends BlockEntity
         }
     }
 
-    @Override public CompoundTag save(CompoundTag compound)
-    {
-        super.save(compound);
+    @Override
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         ConcreteConverterData.CODEC.encodeStart(NbtOps.INSTANCE, new ConcreteConverterData(this))
                 .resultOrPartial(ConcreteConversionTech.LOGGER::error)
-                .ifPresent((data) -> compound.put(DATA_NBT_ID, data));
-        return compound;
+                .ifPresent((data) -> tag.put(DATA_NBT_ID, data));
     }
 
-    @Override public void setRemoved()
-    {
+    @Override
+    public void setRemoved() {
         super.setRemoved();
         this.inventoryLazyOptional.invalidate();
     }
 
-    @Override public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side)
-    {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-        {
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
+        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return this.inventoryLazyOptional.cast();
         }
         return super.getCapability(cap, side);
     }
 
-    @Override public Component getName()
-    {
+    @Override
+    public Component getName() {
         return hasCustomName() ? getCustomName() : getDefaultName();
     }
 
-    @Nullable @Override public Component getCustomName()
-    {
+    @Nullable
+    @Override
+    public Component getCustomName() {
         return this.customName;
     }
 
-    public void setCustomName(@Nullable Component customName)
-    {
+    public void setCustomName(@Nullable Component customName) {
         this.customName = customName;
     }
 
-    private Component getDefaultName()
-    {
+    private Component getDefaultName() {
         return new TranslatableComponent(
                 "block." + ConcreteConversionTech.ID + "." + this.id.replace("tile_entity", "block"));
     }
 
-    @Override public void tick()
-    {
-        if (!this.inventory.parent.isInputEmpty())
-        {
-            if (this.ticksSpentConverting == 0)
-            {
-                this.ticksPerItem = Math.max(BASE_TICKS_PER_ITEM - getEfficiencyLevel(), 1);
-            }
-            this.ticksSpentConverting++;
-            if (this.ticksSpentConverting >= ticksPerItem)
-            {
-                this.ticksSpentConverting = 0;
-                attemptConversions();
-            }
-            this.setChanged();
-        } else if (this.ticksSpentConverting != 0)
-        {
-            this.ticksSpentConverting = 0;
-            this.setChanged();
-        }
-    }
-
-    private int getEfficiencyLevel()
-    {
+    private int getEfficiencyLevel() {
         int level = 0;
-        for (int i = this.inventory.parent.getSlots() - 4; i < this.inventory.parent.getSlots(); i++)
-        {
+        for (int i = this.inventory.parent.getSlots() - 4; i < this.inventory.parent.getSlots(); i++) {
             ItemStack stack = this.inventory.parent.getStackInSlot(i);
-            if (stack.getItem() == Items.ENCHANTED_BOOK)
-            {
+            if (stack.getItem() == Items.ENCHANTED_BOOK) {
                 Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-                if (enchantments.containsKey(Enchantments.BLOCK_EFFICIENCY))
-                {
+                if (enchantments.containsKey(Enchantments.BLOCK_EFFICIENCY)) {
                     level += enchantments.get(Enchantments.BLOCK_EFFICIENCY);
                 }
             }
@@ -186,54 +170,41 @@ abstract public class AbstractConcreteConverterTileEntity extends BlockEntity
         return level;
     }
 
-    private void attemptConversions()
-    {
-        for (int i = 0; i < (this.inventory.parent.getSlots() - 3) / 2; i++)
-        {
+    private void attemptConversions() {
+        for (int i = 0; i < (this.inventory.parent.getSlots() - 3) / 2; i++) {
             int destination = this.calculateDestinationSlot(i);
-            if (destination < 0)
-            {
+            if (destination < 0) {
                 continue;
             }
             convertItem(i, destination);
         }
     }
 
-    private int calculateDestinationSlot(int slot)
-    {
+    private int calculateDestinationSlot(int slot) {
         Item powderItem = this.inventory.parent.getStackInSlot(slot).getItem();
-        for (int i = (this.inventory.parent.getSlots() - 3) / 2; i < (this.inventory.parent.getSlots() - 3); i++)
-        {
+        for (int i = (this.inventory.parent.getSlots() - 3) / 2; i < (this.inventory.parent.getSlots() - 3); i++) {
             if (this.inventory.parent.getStackInSlot(i).getCount() <
-                    this.inventory.parent.getStackInSlot(i).getMaxStackSize())
-            {
-                if (this.inventory.parent.getStackInSlot(i).getItem() == POWDER_TO_CONCRETE.get(powderItem))
-                {
+                    this.inventory.parent.getStackInSlot(i).getMaxStackSize()) {
+                if (this.inventory.parent.getStackInSlot(i).getItem() == POWDER_TO_CONCRETE.get(powderItem)) {
                     return i;
                 }
             }
         }
-        for (int i = (this.inventory.parent.getSlots() - 3) / 2; i < (this.inventory.parent.getSlots() - 3); i++)
-        {
-            if (this.inventory.parent.getStackInSlot(i).isEmpty())
-            {
+        for (int i = (this.inventory.parent.getSlots() - 3) / 2; i < (this.inventory.parent.getSlots() - 3); i++) {
+            if (this.inventory.parent.getStackInSlot(i).isEmpty()) {
                 return i;
             }
         }
         return -1;
     }
 
-    private void convertItem(int sourceIndex, int destinationIndex)
-    {
+    private void convertItem(int sourceIndex, int destinationIndex) {
         Item sourceItem = this.inventory.parent.getStackInSlot(sourceIndex).getItem();
-        if (!POWDER_TO_CONCRETE.containsKey(sourceItem))
-        {
+        if (!POWDER_TO_CONCRETE.containsKey(sourceItem)) {
             Block block = Block.byItem(sourceItem);
-            if (block instanceof ConcretePowderBlock)
-            {
+            if (block instanceof ConcretePowderBlock) {
                 POWDER_TO_CONCRETE.put(sourceItem, ((ConcretePowderBlock) block).concrete.getBlock().asItem());
-            } else
-            {
+            } else {
                 return;
             }
         }
@@ -241,8 +212,8 @@ abstract public class AbstractConcreteConverterTileEntity extends BlockEntity
         this.inventory.parent.insertItem(destinationIndex, new ItemStack(POWDER_TO_CONCRETE.get(sourceItem), 1), false);
     }
 
-    @Override public Component getDisplayName()
-    {
+    @Override
+    public Component getDisplayName() {
         return Nameable.super.getDisplayName();
     }
 }

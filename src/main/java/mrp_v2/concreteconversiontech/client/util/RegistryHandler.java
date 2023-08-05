@@ -3,13 +3,12 @@ package mrp_v2.concreteconversiontech.client.util;
 import mrp_v2.concreteconversiontech.ConcreteConversionTech;
 import mrp_v2.concreteconversiontech.client.gui.screen.inventory.*;
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.client.renderer.BiomeColors;
-import net.minecraft.data.worldgen.biome.Biomes;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -49,9 +48,10 @@ public class RegistryHandler
 
     @SubscribeEvent public static void registerBlockColors(final ColorHandlerEvent.Block event)
     {
+
         event.getBlockColors()
                 .register((state, reader, pos, tint) -> reader != null && pos != null ?
-                                BiomeColors.getAverageWaterColor(reader, pos) : Biomes.PLAINS.getWaterColor(), ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get(),
+                                BiomeColors.getAverageWaterColor(reader, pos) : -1, ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get(),
                         ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get(),
                         ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get(),
                         ObjectHolder.CONCRETE_CONVERTER_TIER_4_BLOCK.get(),

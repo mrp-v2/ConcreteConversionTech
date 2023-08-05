@@ -1,8 +1,8 @@
-package mrp_v2.concreteconversiontech.tileentity.util;
+package mrp_v2.concreteconversiontech.blockentity.util;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import mrp_v2.concreteconversiontech.tileentity.AbstractConcreteConverterTileEntity;
+import mrp_v2.concreteconversiontech.blockentity.AbstractConcreteConverterBlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 
@@ -22,7 +22,7 @@ public class ConcreteConverterData
     private final CompoundTag inventoryData;
     @Nullable private final Component customName;
 
-    public ConcreteConverterData(AbstractConcreteConverterTileEntity concreteConverter)
+    public ConcreteConverterData(AbstractConcreteConverterBlockEntity concreteConverter)
     {
         this(concreteConverter.getTicksSpentConverting(), concreteConverter.getTicksPerItem(),
                 concreteConverter.getInventory().parent.serializeNBT(), concreteConverter.getCustomName());

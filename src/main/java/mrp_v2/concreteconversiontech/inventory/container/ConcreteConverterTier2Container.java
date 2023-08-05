@@ -1,8 +1,8 @@
 package mrp_v2.concreteconversiontech.inventory.container;
 
+import mrp_v2.concreteconversiontech.blockentity.ConcreteConverterTier2BlockEntity;
 import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConverterTier2Screen;
 import mrp_v2.concreteconversiontech.inventory.ConcreteConverterItemStackHandler;
-import mrp_v2.concreteconversiontech.tileentity.ConcreteConverterTier2TileEntity;
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
@@ -19,7 +19,7 @@ public class ConcreteConverterTier2Container extends AbstractConcreteConverterCo
     public ConcreteConverterTier2Container(int id, Inventory playerInventoryIn)
     {
         this(id, playerInventoryIn,
-                new ConcreteConverterItemStackHandler(ConcreteConverterTier2TileEntity.TOTAL_SLOTS, null));
+                new ConcreteConverterItemStackHandler(ConcreteConverterTier2BlockEntity.TOTAL_SLOTS, null));
     }
 
     public static MenuType<ConcreteConverterTier2Container> createContainerType()

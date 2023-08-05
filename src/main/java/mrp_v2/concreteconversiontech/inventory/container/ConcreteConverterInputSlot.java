@@ -1,7 +1,7 @@
 package mrp_v2.concreteconversiontech.inventory.container;
 
+import mrp_v2.concreteconversiontech.blockentity.AbstractConcreteConverterBlockEntity;
 import mrp_v2.concreteconversiontech.inventory.ConcreteConverterItemStackHandler;
-import mrp_v2.concreteconversiontech.tileentity.AbstractConcreteConverterTileEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -15,6 +15,6 @@ public class ConcreteConverterInputSlot extends SlotItemHandler
 
     @Override public boolean mayPlace(ItemStack stack)
     {
-        return AbstractConcreteConverterTileEntity.isConcretePowder(stack);
+        return AbstractConcreteConverterBlockEntity.isConcretePowder(stack);
     }
 }

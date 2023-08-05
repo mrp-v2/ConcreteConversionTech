@@ -1,59 +1,53 @@
 package mrp_v2.concreteconversiontech.block;
 
-import mrp_v2.concreteconversiontech.tileentity.AbstractConcreteConverterTileEntity;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
+import mrp_v2.concreteconversiontech.blockentity.AbstractConcreteConverterBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
-public class ConcreteConverterBlock extends Block
-{
+public class ConcreteConverterBlock extends Block implements EntityBlock {
     protected static final String ID_STEM_PRE = "concrete_converter_tier_";
     public final Block base;
-    private final Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier;
+    private final BiFunction<BlockPos, BlockState, AbstractConcreteConverterBlockEntity> blockEntitySupplier;
+    private final Supplier<BlockEntityType<? extends AbstractConcreteConverterBlockEntity>> blockEntityTypeSupplier;
 
-    public ConcreteConverterBlock(Block base, Supplier<AbstractConcreteConverterTileEntity> tileEntitySupplier)
-    {
+    public ConcreteConverterBlock(Block base, BiFunction<BlockPos, BlockState, AbstractConcreteConverterBlockEntity> blockEntitySupplier, Supplier<BlockEntityType<? extends AbstractConcreteConverterBlockEntity>> blockEntityTypeSupplier) {
         super(Properties.copy(base));
         this.base = base;
-        this.tileEntitySupplier = tileEntitySupplier;
+        this.blockEntitySupplier = blockEntitySupplier;
+        this.blockEntityTypeSupplier = blockEntityTypeSupplier;
     }
 
-    @Override public boolean hasTileEntity(BlockState state)
-    {
-        return true;
+    @Nullable
+    private static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTicker(BlockEntityType<A> a, BlockEntityType<E> b, BlockEntityTicker<? super E> ticker) {
+        return b == a ? (BlockEntityTicker<A>) ticker : null;
     }
 
-    @Override public BlockEntity createTileEntity(BlockState state, BlockGetter world)
-    {
-        return tileEntitySupplier.get();
-    }
-
-    @SuppressWarnings("deprecation") @Override
-    public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving)
-    {
-        if (state.hasTileEntity() && (state.getBlock() != newState.getBlock() || !newState.hasTileEntity()))
-        {
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (state.hasBlockEntity() && (state.getBlock() != newState.getBlock() || !newState.hasBlockEntity())) {
             worldIn.getBlockEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
                     .ifPresent(itemHandler ->
                     {
-                        for (int i = 0; i < itemHandler.getSlots(); i++)
-                        {
+                        for (int i = 0; i < itemHandler.getSlots(); i++) {
                             Block.popResource(worldIn, pos, itemHandler.getStackInSlot(i));
                         }
                     });
@@ -63,38 +57,44 @@ public class ConcreteConverterBlock extends Block
 
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
-            BlockHitResult hit)
-    {
-        if (worldIn.isClientSide)
-        {
+                                 BlockHitResult hit) {
+        if (worldIn.isClientSide) {
             return InteractionResult.SUCCESS;
-        } else
-        {
+        } else {
             BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-            if (tileEntity instanceof AbstractConcreteConverterTileEntity)
-            {
+            if (tileEntity instanceof AbstractConcreteConverterBlockEntity) {
                 player.openMenu((MenuProvider) tileEntity);
             }
             return InteractionResult.CONSUME;
         }
     }
 
-    @Override public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos)
-    {
+    @Override
+    public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
         return super.getAnalogOutputSignal(blockState, worldIn, pos);
     }
 
-    @Override public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer,
-            ItemStack stack)
-    {
+    @Override
+    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer,
+                            ItemStack stack) {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
-        if (stack.hasCustomHoverName())
-        {
+        if (stack.hasCustomHoverName()) {
             BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-            if (tileEntity instanceof AbstractConcreteConverterTileEntity)
-            {
-                ((AbstractConcreteConverterTileEntity) tileEntity).setCustomName(stack.getHoverName());
+            if (tileEntity instanceof AbstractConcreteConverterBlockEntity) {
+                ((AbstractConcreteConverterBlockEntity) tileEntity).setCustomName(stack.getHoverName());
             }
         }
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return blockEntitySupplier.apply(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return createTicker(blockEntityType, blockEntityTypeSupplier.get(), AbstractConcreteConverterBlockEntity::tick);
     }
 }

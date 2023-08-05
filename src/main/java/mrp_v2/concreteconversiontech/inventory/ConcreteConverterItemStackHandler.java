@@ -1,15 +1,16 @@
 package mrp_v2.concreteconversiontech.inventory;
 
-import mrp_v2.concreteconversiontech.tileentity.AbstractConcreteConverterTileEntity;
+import mrp_v2.concreteconversiontech.blockentity.AbstractConcreteConverterBlockEntity;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
 public class ConcreteConverterItemStackHandler extends ItemStackHandler
 {
-    @Nullable private final AbstractConcreteConverterTileEntity concreteConverter;
+    @Nullable
+    private final AbstractConcreteConverterBlockEntity concreteConverter;
 
-    public ConcreteConverterItemStackHandler(int slots, @Nullable AbstractConcreteConverterTileEntity concreteConverter)
+    public ConcreteConverterItemStackHandler(int slots, @Nullable AbstractConcreteConverterBlockEntity concreteConverter)
     {
         super(slots + 3);
         this.concreteConverter = concreteConverter;
