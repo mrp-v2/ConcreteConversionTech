@@ -15,5 +15,6 @@ public class DataGenHandler {
         helper.addLootTables(new LootTables());
         helper.addBlockStateProvider(BlockStateGenerator::new);
         helper.addLanguageProvider(EN_USTranslationGenerator::new);
+        helper.addBlockTagsProvider(BlockTagsGenerator::new);
     }
 }

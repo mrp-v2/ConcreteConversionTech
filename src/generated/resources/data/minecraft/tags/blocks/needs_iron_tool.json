@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "concreteconversiontech:concrete_converter_tier_4",
+    "concreteconversiontech:concrete_converter_tier_5",
+    "concreteconversiontech:concrete_converter_tier_6"
+  ]
+}
