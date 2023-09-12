@@ -29,9 +29,9 @@ public class ObjectHolder {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, ConcreteConversionTech.ID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
-            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, ConcreteConversionTech.ID);
+            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ConcreteConversionTech.ID);
     public static final DeferredRegister<MenuType<?>> CONTAINERS =
-            DeferredRegister.create(ForgeRegistries.CONTAINERS, ConcreteConversionTech.ID);
+            DeferredRegister.create(ForgeRegistries.MENU_TYPES, ConcreteConversionTech.ID);
     public static final RegistryObject<ConcreteConverterBlock> CONCRETE_CONVERTER_TIER_1_BLOCK;
     public static final RegistryObject<ConcreteConverterBlock> CONCRETE_CONVERTER_TIER_2_BLOCK;
     public static final RegistryObject<ConcreteConverterBlock> CONCRETE_CONVERTER_TIER_3_BLOCK;

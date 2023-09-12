@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -46,7 +46,8 @@ public class RegistryHandler
                 ConcreteConverterTier8Screen::new);
     }
 
-    @SubscribeEvent public static void registerBlockColors(final ColorHandlerEvent.Block event)
+    @SubscribeEvent
+    public static void registerBlockColors(final RegisterColorHandlersEvent.Block event)
     {
 
         event.getBlockColors()
@@ -61,7 +62,8 @@ public class RegistryHandler
                         ObjectHolder.CONCRETE_CONVERTER_TIER_8_BLOCK.get());
     }
 
-    @SubscribeEvent public static void registerItemColors(final ColorHandlerEvent.Item event)
+    @SubscribeEvent
+    public static void registerItemColors(final RegisterColorHandlersEvent.Item event)
     {
         event.getItemColors().register((itemStack, tint) ->
                 {
