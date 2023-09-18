@@ -10,7 +10,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.Nameable;
 import net.minecraft.world.entity.player.Inventory;
@@ -29,9 +30,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -130,7 +131,7 @@ abstract public class AbstractConcreteConverterBlockEntity extends BlockEntity
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if (cap == ForgeCapabilities.ITEM_HANDLER) {
             return this.inventoryLazyOptional.cast();
         }
         return super.getCapability(cap, side);
@@ -152,8 +153,8 @@ abstract public class AbstractConcreteConverterBlockEntity extends BlockEntity
     }
 
     private Component getDefaultName() {
-        return new TranslatableComponent(
-                "block." + ConcreteConversionTech.ID + "." + this.id.replace("tile_entity", "block"));
+        return MutableComponent.create(new TranslatableContents(
+                "block." + ConcreteConversionTech.ID + "." + this.id.replace("tile_entity", "block"), null, new Object[0]));
     }
 
     private int getEfficiencyLevel() {

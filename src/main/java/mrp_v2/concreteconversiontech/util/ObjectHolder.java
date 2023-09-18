@@ -6,19 +6,14 @@ import mrp_v2.concreteconversiontech.blockentity.*;
 import mrp_v2.concreteconversiontech.inventory.container.*;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -80,12 +75,6 @@ public class ObjectHolder {
             CONCRETE_CONVERTER_TIER_7_CONTAINER_TYPE;
     public static final RegistryObject<MenuType<ConcreteConverterTier8Container>>
             CONCRETE_CONVERTER_TIER_8_CONTAINER_TYPE;
-    public static final CreativeModeTab CONCRETE_CONVERSION_TECH_ITEM_GROUP = new CreativeModeTab(ConcreteConversionTech.ID) {
-        @OnlyIn(Dist.CLIENT)
-        public @NotNull ItemStack makeIcon() {
-            return new ItemStack(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get());
-        }
-    };
 
     public static final Map<Integer, RegistryObject<BlockEntityType<? extends AbstractConcreteConverterBlockEntity>>> ENTITY_TYPE_MAP;
 
@@ -174,6 +163,6 @@ public class ObjectHolder {
 
     public static <T extends Block> BlockItem createBlockItem(RegistryObject<T> blockObject) {
         T block = blockObject.get();
-        return new BlockItem(block, new Item.Properties().tab(CONCRETE_CONVERSION_TECH_ITEM_GROUP));
+        return new BlockItem(block, new Item.Properties());
     }
 }

@@ -1,6 +1,6 @@
 {
-    "parent": "concreteconversiontech:block/concrete_converter",
-    "textures": {
-        "base": "minecraft:block/iron_block"
-    }
+  "parent": "concreteconversiontech:block/concrete_converter",
+  "textures": {
+    "base": "minecraft:block/iron_block"
+  }
 }

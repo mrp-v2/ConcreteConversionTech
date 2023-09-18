@@ -5,6 +5,7 @@ import mrp_v2.concreteconversiontech.client.gui.screen.inventory.ConcreteConvert
 import mrp_v2.concreteconversiontech.inventory.ConcreteConverterItemStackHandler;
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 
 public class ConcreteConverterTier5Container extends AbstractConcreteConverterContainer
@@ -24,6 +25,6 @@ public class ConcreteConverterTier5Container extends AbstractConcreteConverterCo
 
     public static MenuType<ConcreteConverterTier5Container> createContainerType()
     {
-        return new MenuType<>(ConcreteConverterTier5Container::new);
+        return new MenuType<>(ConcreteConverterTier5Container::new, FeatureFlags.DEFAULT_FLAGS);
     }
 }

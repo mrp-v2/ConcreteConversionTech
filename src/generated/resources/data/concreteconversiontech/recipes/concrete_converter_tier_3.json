@@ -1,25 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": {
+      "tag": "forge:ingots/iron"
+    },
+    "C": {
+      "item": "concreteconversiontech:concrete_converter_tier_2"
+    },
+    "P": {
+      "item": "minecraft:iron_pickaxe"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
   "pattern": [
     "BPB",
     "WCW",
     "BPB"
   ],
-  "key": {
-    "C": {
-      "item": "concreteconversiontech:concrete_converter_tier_2"
-    },
-    "W": {
-      "item": "minecraft:water_bucket"
-    },
-    "B": {
-      "tag": "forge:ingots/iron"
-    },
-    "P": {
-      "item": "minecraft:iron_pickaxe"
-    }
-  },
   "result": {
     "item": "concreteconversiontech:concrete_converter_tier_3"
-  }
+  },
+  "show_notification": true
 }

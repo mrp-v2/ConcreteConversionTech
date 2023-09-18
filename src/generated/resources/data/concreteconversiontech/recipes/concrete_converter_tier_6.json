@@ -1,25 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": {
+      "tag": "forge:gems/emerald"
+    },
+    "C": {
+      "item": "concreteconversiontech:concrete_converter_tier_5"
+    },
+    "P": {
+      "item": "minecraft:diamond_pickaxe"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
   "pattern": [
     "BPB",
     "WCW",
     "BPB"
   ],
-  "key": {
-    "C": {
-      "item": "concreteconversiontech:concrete_converter_tier_5"
-    },
-    "W": {
-      "item": "minecraft:water_bucket"
-    },
-    "B": {
-      "tag": "forge:gems/emerald"
-    },
-    "P": {
-      "item": "minecraft:diamond_pickaxe"
-    }
-  },
   "result": {
     "item": "concreteconversiontech:concrete_converter_tier_6"
-  }
+  },
+  "show_notification": true
 }

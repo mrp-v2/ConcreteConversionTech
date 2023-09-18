@@ -1,28 +1,30 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "BPB",
-    "WCW",
-    "BQB"
-  ],
+  "category": "redstone",
   "key": {
-    "C": {
-      "item": "concreteconversiontech:concrete_converter_tier_7"
-    },
-    "W": {
-      "item": "minecraft:water_bucket"
-    },
     "B": {
       "tag": "forge:ingots/netherite"
+    },
+    "C": {
+      "item": "concreteconversiontech:concrete_converter_tier_7"
     },
     "P": {
       "item": "minecraft:netherite_pickaxe"
     },
     "Q": {
       "tag": "forge:nether_stars"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
     }
   },
+  "pattern": [
+    "BPB",
+    "WCW",
+    "BQB"
+  ],
   "result": {
     "item": "concreteconversiontech:concrete_converter_tier_8"
-  }
+  },
+  "show_notification": true
 }

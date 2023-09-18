@@ -2,19 +2,21 @@ package mrp_v2.concreteconversiontech.datagen;
 
 import mrp_v2.concreteconversiontech.util.ObjectHolder;
 import mrp_v2.mrplibrary.datagen.providers.BlockTagsProvider;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
+import java.util.concurrent.CompletableFuture;
 
 public class BlockTagsGenerator extends BlockTagsProvider {
-    public BlockTagsGenerator(DataGenerator generatorIn, String modId, @Nullable ExistingFileHelper existingFileHelper) {
-        super(generatorIn, modId, existingFileHelper);
+    public BlockTagsGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupHolder, String modId, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupHolder, modId, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider lookupHolder) {
         tag(BlockTags.MINEABLE_WITH_AXE).add(ObjectHolder.CONCRETE_CONVERTER_TIER_1_BLOCK.get());
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ObjectHolder.CONCRETE_CONVERTER_TIER_2_BLOCK.get())
                 .add(ObjectHolder.CONCRETE_CONVERTER_TIER_3_BLOCK.get())

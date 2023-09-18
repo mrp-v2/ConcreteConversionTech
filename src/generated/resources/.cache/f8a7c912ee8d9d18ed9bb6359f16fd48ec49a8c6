@@ -1,0 +1,6 @@
+// 1.19.4	2023-09-13T18:37:16.7914213	Tags for minecraft:block mod id concreteconversiontech: concreteconversiontech
+9bec558cda0fad5e066207be0dc5faad46939282 data/minecraft/tags/blocks/mineable/axe.json
+3f4d040e26ab5481741f33560342dbfcc30b37f7 data/minecraft/tags/blocks/mineable/pickaxe.json
+9f490b9da89bdc88a7337a2440af13eae36ad23e data/minecraft/tags/blocks/needs_diamond_tool.json
+2c2ce77486964cff0b71d20fa5edacf1987bc243 data/minecraft/tags/blocks/needs_iron_tool.json
+ff0a95774408e15532c852ddbaceff3f4b663fc6 data/minecraft/tags/blocks/needs_stone_tool.json

@@ -1,23 +1,27 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "BPB", "WCW", "BPB"
-    ],
-    "key": {
-        "C": {
-            "tag": "forge:glass"
-        },
-        "W": {
-            "item": "minecraft:water_bucket"
-        },
-        "B": {
-            "tag": "minecraft:planks"
-        },
-        "P": {
-            "item": "minecraft:wooden_pickaxe"
-        }
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": {
+      "tag": "minecraft:planks"
     },
-    "result": {
-        "item": "concreteconversiontech:concrete_converter_tier_1"
+    "C": {
+      "tag": "forge:glass"
+    },
+    "P": {
+      "item": "minecraft:wooden_pickaxe"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
     }
+  },
+  "pattern": [
+    "BPB",
+    "WCW",
+    "BPB"
+  ],
+  "result": {
+    "item": "concreteconversiontech:concrete_converter_tier_1"
+  },
+  "show_notification": true
 }

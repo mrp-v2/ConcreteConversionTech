@@ -1,25 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": {
+      "tag": "forge:gems/quartz"
+    },
+    "C": {
+      "item": "concreteconversiontech:concrete_converter_tier_6"
+    },
+    "P": {
+      "item": "minecraft:diamond_pickaxe"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
   "pattern": [
     "BPB",
     "WCW",
     "BPB"
   ],
-  "key": {
-    "C": {
-      "item": "concreteconversiontech:concrete_converter_tier_6"
-    },
-    "W": {
-      "item": "minecraft:water_bucket"
-    },
-    "B": {
-      "tag": "forge:gems/quartz"
-    },
-    "P": {
-      "item": "minecraft:diamond_pickaxe"
-    }
-  },
   "result": {
     "item": "concreteconversiontech:concrete_converter_tier_7"
-  }
+  },
+  "show_notification": true
 }
